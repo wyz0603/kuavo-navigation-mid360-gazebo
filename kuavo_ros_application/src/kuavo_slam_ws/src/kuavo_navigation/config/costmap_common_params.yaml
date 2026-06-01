@@ -1,0 +1,48 @@
+# Common params shared by global_costmap and local_costmap (loaded under both
+# namespaces via <rosparam ns="..."> in the launch file).
+#
+# Each costmap_2d plugin reads its parameters from its OWN sub-namespace, NOT
+# from the parent costmap namespace. So observation_sources, obstacle_range,
+# raytrace_range, point_cloud_sensor MUST live under `obstacle_layer:` —
+# otherwise obstacle_layer doesn't see any sources and the costmap stays
+# blank no matter how strong the lidar return is.
+
+robot_radius: 0.3
+transform_tolerance: 1.0
+
+inflation_layer:
+  # inflation_radius was 1.2 m which (with robot_radius 0.3) eats 0.9 m of free
+  # space around every obstacle. In a room with several obstacles their
+  # inflation zones overlap and the planner ends up squeezing through narrow
+  # high-cost corridors -> exactly the "dead zone / stuck" symptom you saw.
+  # 0.5 m gives a sensible safety buffer without saturating passages.
+  inflation_radius: 0.5
+  # cost_scaling_factor 8 made the cost gradient very steep right next to the
+  # obstacle (cost ~= 252 at distance 0, dropping to ~50 at 0.5 m). 3 gives a
+  # softer slope so MPC's gradient-based optimizer can actually feel the cost
+  # gradient and curve away early instead of hugging the inflation edge.
+  cost_scaling_factor: 3
+
+obstacle_layer:
+  # marking / clearing distances live with the layer so they apply to every
+  # source defined below.
+  obstacle_range: 5.0
+  raytrace_range: 6.0
+
+  # laser_scan_sensor (real-robot) is intentionally omitted: in sim /livox/scan
+  # has no publisher. Re-add it if you ever bridge pointcloud_to_laserscan.
+  observation_sources: point_cloud_sensor
+
+  point_cloud_sensor:
+    sensor_frame: livox_frame
+    data_type: PointCloud2
+    topic: /livox/cloud
+    marking: true
+    clearing: true
+    # Height band matches the kuavo_navigation_sim cloud pipeline:
+    #   bridge applies cloud_z_offset=1.5, so /livox/cloud has floor at z=0
+    #   and obstacles extending up to ceiling (~3 m). Keep the lower bound just
+    #   above the floor (so the floor isn't marked occupied) and the upper
+    #   bound high enough to catch robot-height objects.
+    min_obstacle_height: 0.05
+    max_obstacle_height: 2.0

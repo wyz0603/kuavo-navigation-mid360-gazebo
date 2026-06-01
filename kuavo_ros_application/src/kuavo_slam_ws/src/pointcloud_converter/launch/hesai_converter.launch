@@ -1,0 +1,26 @@
+<launch>
+  <!-- Hesai to Velodyne Point Cloud Converter -->
+  
+  <arg name="config_file" default="$(find pointcloud_converter)/config/hesai_converter.yaml" />
+  <arg name="input_topic" default="/lidar_points" />
+  <arg name="output_topic" default="/lidar_points_converted" />
+  <arg name="imu_topic" default="/lidar_imu" />
+  <arg name="imu_output_topic" default="/lidar_imu_converted" />
+  <arg name="input_frame" default="hesai_lidar" />
+  <arg name="output_frame" default="livox_frame" />
+  
+  <!-- 启动转换节点 -->
+  <node pkg="pointcloud_converter" type="hesai_to_velodyne_converter" name="hesai_to_velodyne_converter" output="screen">
+    <!-- 加载配置文件 -->
+    <rosparam file="$(arg config_file)" command="load" />
+    
+    <!-- 覆盖参数（如果通过命令行指定） -->
+    <param name="input_topic" value="$(arg input_topic)" />
+    <param name="output_topic" value="$(arg output_topic)" />
+    <param name="input_frame" value="$(arg input_frame)" />
+    <param name="output_frame" value="$(arg output_frame)" />
+    <param name="imu_topic" value="$(arg imu_topic)" />
+    <param name="imu_output_topic" value="$(arg imu_output_topic)" />
+  </node>
+  
+</launch>

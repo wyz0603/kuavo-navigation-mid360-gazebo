@@ -1,0 +1,17 @@
+<launch>  
+    <!-- Add robot version argument -->
+    <arg name="isaac_robot_version"        default="$(optenv ROBOT_VERSION 45)"/>
+    <arg name="use_camera_ros_topic_flag"  default="0"/>
+    <arg name="use_point_cloud_flag"       default="0"/>
+    <arg name="scene_index"                default="2"/>
+    <arg name="robot_scene_point_index"    default="1"/>
+    
+    <param name="isaac_robot_version" value="$(arg isaac_robot_version)"/>
+    <param name="use_camera_ros_topic_flag" value="$(arg use_camera_ros_topic_flag)"/>
+    <param name="use_point_cloud_flag" value="$(arg use_point_cloud_flag)"/>
+    <param name="robot_scene_point_index" value="$(arg robot_scene_point_index)"/>
+    <param name="scene_index" value="$(arg scene_index)"/>
+
+    <node pkg="isaac_sim" name="isaac_sim_launcher" type="launch.py" output="screen">
+    </node>
+</launch>  

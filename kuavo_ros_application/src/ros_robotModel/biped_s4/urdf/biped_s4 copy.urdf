@@ -1,0 +1,2162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="biped_s4">
+    <link name="torso">
+        <inertial>
+            <origin xyz="-0.0131642143292668 -0.00101855461920045 0.120968817067497" rpy="0 0 0" />
+            <mass value="17.7538790248349" />
+            <inertia ixx="0.109513413578877" ixy="-3.84263402967609E-06" ixz="0.002072229236261" iyy="0.0639718644540955" iyz="5.94596039793819E-06" izz="0.0796086142464887" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/torso.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/torso.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="l_arm_pitch">
+        <inertial>
+            <origin xyz="0.0146835191418715 -0.0166604103758634 -6.82857133369463E-05" rpy="0 0 0" />
+            <mass value="0.165847319965906" />
+            <inertia ixx="0.0002674432873971" ixy="-2.5654089149164E-05" ixz="-1.72966133127557E-07" iyy="0.000125796784291983" iyz="-1.66717296343014E-06" izz="0.000196186976742156" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_arm_pitch" type="continuous">
+        <origin xyz="-0.0175475823124921 0.254700000000031 0.324500000000024" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="l_arm_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_arm_roll">
+        <inertial>
+            <origin xyz="0.0222872651779294 0.0156945544195443 -0.0202262244341467" rpy="0 0 0" />
+            <mass value="0.14142658141305" />
+            <inertia ixx="0.000160370067223078" ixy="6.30811840859276E-06" ixz="-1.13259246453472E-05" iyy="0.000262365778589952" iyz="3.14941259087025E-05" izz="0.000236014036281963" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_arm_roll" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="l_arm_pitch" />
+        <child link="l_arm_roll" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="l_arm_yaw">
+        <inertial>
+            <origin xyz="6.16940440653045E-05 0.00525815062787316 -0.12882194485465" rpy="0 0 0" />
+            <mass value="0.147794102819133" />
+            <inertia ixx="7.00575957554695E-05" ixy="-6.81658230071221E-10" ixz="2.6942707856767E-10" iyy="8.53612265336774E-05" iyz="6.95899873075697E-06" izz="8.82223899453282E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_arm_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_arm_yaw" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="l_arm_roll" />
+        <child link="l_arm_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="l_forearm_pitch">
+        <inertial>
+            <origin xyz="-1.42819297162602E-05 0.00938313949963104 -0.0522687552263907" rpy="0 0 0" />
+            <mass value="0.170164726102014" />
+            <inertia ixx="9.55808447606964E-05" ixy="-4.53863489155473E-08" ixz="5.39342118114986E-08" iyy="0.000126326373178401" iyz="-9.58160032696802E-06" izz="0.000121032474884244" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_forearm_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_forearm_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_forearm_pitch" type="continuous">
+        <origin xyz="0 0 -0.163599999999996" rpy="0 0 0" />
+        <parent link="l_arm_yaw" />
+        <child link="l_forearm_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_hand_yaw">
+        <inertial>
+            <origin xyz="0.000113131262875685 0.00969728110559553 0.0227960708688583" rpy="0 0 0" />
+            <mass value="0.157336277379834" />
+            <inertia ixx="7.64923971357921E-05" ixy="8.51207618055666E-09" ixz="-1.40676645868301E-08" iyy="0.000122231121933325" iyz="1.11226992393513E-06" izz="8.44934959384744E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_hand_yaw" type="continuous">
+        <origin xyz="0 0 -0.132050000118071" rpy="0 0 0" />
+        <parent link="l_forearm_pitch" />
+        <child link="l_hand_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="l_hand_pitch">
+        <inertial>
+            <origin xyz="0.00810609772930763 0.00490163171050539 -0.0527751110917489" rpy="0 0 0" />
+            <mass value="0.0853891779246004" />
+            <inertia ixx="4.77321490368476E-05" ixy="3.05261917457108E-06" ixz="4.77827164947653E-06" iyy="3.43814769749137E-05" iyz="-4.59311499587152E-06" izz="2.49955336560133E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_hand_pitch" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="l_hand_yaw" />
+        <child link="l_hand_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_hand_roll">
+        <inertial>
+            <origin xyz="0.00396050555698803 0.00946265387749012 -0.066602176591173" rpy="0 0 0" />
+            <mass value="0.151352919071109" />
+            <inertia ixx="9.13246737942629E-05" ixy="3.25649345932988E-07" ixz="-4.78728976781085E-06" iyy="0.000139866613946359" iyz="1.1925397914412E-05" izz="0.000125082116428502" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_hand_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_hand_roll" type="continuous">
+        <origin xyz="0 0 -0.058999997180792" rpy="0 0 0" />
+        <parent link="l_hand_pitch" />
+        <child link="l_hand_roll" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="l_thumb_proximal_yaw">
+        <inertial>
+            <origin xyz="0.00590166593878135 -0.00373751061980748 0.000119122170746666" rpy="0 0 0" />
+            <mass value="0.00177457706476174" />
+            <inertia ixx="5.5194777085443E-08" ixy="3.05430802968252E-08" ixz="8.99312903596649E-10" iyy="7.93062784538195E-08" iyz="-4.09905263561327E-10" izz="9.86616855273954E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_thumb_proximal_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 0.25" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_thumb_proximal_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_thumb_proximal_yaw" type="continuous">
+        <origin xyz="0.0250000027597683 -0.0216278329431251 -0.110700000402975" rpy="0 0 0" />
+        <parent link="l_hand_roll" />
+        <child link="l_thumb_proximal_yaw" />
+        <axis xyz="0 0 -1" />
+    </joint>
+    <link name="l_thumb_distal_pitch">
+        <inertial>
+            <origin xyz="0.00835400575954671 -1.54980826169715E-06 -0.0372051471727699" rpy="0 0 0" />
+            <mass value="0.0143594964918226" />
+            <inertia ixx="7.15388390483937E-06" ixy="-6.69701976384447E-11" ixz="-2.03395115704228E-07" iyy="6.87910901050402E-06" iyz="5.38324327216661E-12" izz="9.1475596956079E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_thumb_distal_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_thumb_distal_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_thumb_distal_pitch" type="continuous">
+        <origin xyz="0.0120000000000023 -0.00649999999999773 0" rpy="0 0 0" />
+        <parent link="l_thumb_proximal_yaw" />
+        <child link="l_thumb_distal_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_index_proximal_finger">
+        <inertial>
+            <origin xyz="0.000112677527646918 0.00210468432487104 -0.0171028451759692" rpy="0 0 0" />
+            <mass value="0.00213736998836043" />
+            <inertia ixx="3.18607074297438E-07" ixy="1.30056260562274E-09" ixz="2.05323306383889E-09" iyy="3.41865494200988E-07" iyz="3.87251682723715E-08" izz="9.68025640372966E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_index_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_index_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_index_proximal_finger" type="continuous">
+        <origin xyz="0.0295025377507617 0.0039487923396046 -0.174730558860478" rpy="0 -0.0311675978215656 0" />
+        <parent link="l_hand_roll" />
+        <child link="l_index_proximal_finger" />
+        <axis xyz="-0.998506141360648 0.0546395979585239 0" />
+    </joint>
+    <link name="l_index_distal_finger">
+        <inertial>
+            <origin xyz="-8.80400428074002E-05 -0.00161951020344181 -0.0254571889170825" rpy="0 0 0" />
+            <mass value="0.0050446595604151" />
+            <inertia ixx="7.63510729443016E-07" ixy="9.29795250634311E-10" ixz="-1.77723934932869E-09" iyy="7.80114728886836E-07" iyz="-3.23075401001615E-08" izz="1.15370765338784E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_index_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_index_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_index_distal_finger" type="continuous">
+        <origin xyz="0.00013351949359549 0.00243998929947531 -0.0349145904281216" rpy="0 0 0" />
+        <parent link="l_index_proximal_finger" />
+        <child link="l_index_distal_finger" />
+        <axis xyz="0.998506141360648 -0.0546395979585221 0" />
+    </joint>
+    <link name="l_middle_proximal_finger">
+        <inertial>
+            <origin xyz="-8.42681364791875E-08 0.00270210130078863 -0.0207829689336636" rpy="0 0 0" />
+            <mass value="0.00260456391453855" />
+            <inertia ixx="5.09608185934252E-07" ixy="-1.75213111801256E-12" ixz="-1.78265353217213E-12" iyy="5.36695797641851E-07" iyz="5.70433108286832E-08" izz="1.25808947550621E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_middle_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_middle_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_middle_proximal_finger" type="continuous">
+        <origin xyz="0.00850000275976636 0.00820381922686209 -0.178435376742696" rpy="0 0 0" />
+        <parent link="l_hand_roll" />
+        <child link="l_middle_proximal_finger" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="l_middle_distal_finger">
+        <inertial>
+            <origin xyz="6.04648922300846E-07 -0.00162350982455478 -0.0254571915129888" rpy="0 0 0" />
+            <mass value="0.00504466861649399" />
+            <inertia ixx="7.63455312842206E-07" ixy="1.85533672652204E-11" ixz="-1.04806627113088E-11" iyy="7.80159394341909E-07" iyz="-3.23975147926483E-08" izz="1.15374581207705E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_middle_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_middle_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_middle_distal_finger" type="continuous">
+        <origin xyz="0 0.00292977189725752 -0.0418976901109154" rpy="0 0 0" />
+        <parent link="l_middle_proximal_finger" />
+        <child link="l_middle_distal_finger" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="l_ring_proximal_finger">
+        <inertial>
+            <origin xyz="-0.000147796548979496 0.00269934539278621 -0.0207828033089016" rpy="0 0 0" />
+            <mass value="0.00260456483338844" />
+            <inertia ixx="5.09689336813819E-07" ixy="-1.47916431111907E-09" ixz="-3.12001764447105E-09" iyy="5.36607842012435E-07" iyz="5.69834083724575E-08" izz="1.25816049307563E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_ring_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_ring_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_ring_proximal_finger" type="continuous">
+        <origin xyz="-0.0126025322312212 0.0080785614881318 -0.176446661066021" rpy="0 0.0311675978215913 0" />
+        <parent link="l_hand_roll" />
+        <child link="l_ring_proximal_finger" />
+        <axis xyz="-0.998506141360648 -0.0546395979585319 0" />
+    </joint>
+    <link name="l_ring_distal_finger">
+        <inertial>
+            <origin xyz="-2.97819768621012E-05 0.000551723183689734 -0.0145820959398313" rpy="0 0 0" />
+            <mass value="0.00182871318152307" />
+            <inertia ixx="2.63516580484025E-07" ixy="-6.83151710625831E-10" ixz="3.36133845950725E-10" iyy="2.75945893486764E-07" iyz="-6.18248894827772E-09" izz="4.69859277660983E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_ring_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_ring_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_ring_distal_finger" type="continuous">
+        <origin xyz="-0.000160223392310654 0.0029279871592986 -0.0418975085137674" rpy="0 0 0" />
+        <parent link="l_ring_proximal_finger" />
+        <child link="l_ring_distal_finger" />
+        <axis xyz="0.998506141360637 0.0546395979587272 0" />
+    </joint>
+    <link name="l_pinky_proximal_finger">
+        <inertial>
+            <origin xyz="-0.000122637015400211 0.00210212976760699 -0.0171030805340099" rpy="0 0 0" />
+            <mass value="0.00213737962233864" />
+            <inertia ixx="3.18608415490598E-07" ixy="-1.31059762777735E-09" ixz="-2.27735464077079E-09" iyy="3.41873917256528E-07" iyz="3.868353887277E-08" izz="9.67938996220609E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_pinky_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_pinky_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_pinky_proximal_finger" type="continuous">
+        <origin xyz="-0.0332309186593585 0.00363387338808113 -0.170227008036839" rpy="0 0.0659957839625552 0" />
+        <parent link="l_hand_roll" />
+        <child link="l_pinky_proximal_finger" />
+        <axis xyz="-0.998370307122329 -0.0570677654763681 0" />
+    </joint>
+    <link name="l_pinky_distal_finger">
+        <inertial>
+            <origin xyz="-2.37672426811816E-05 0.000794235285774603 -0.012715032786375" rpy="0 0 0" />
+            <mass value="0.00162997770027121" />
+            <inertia ixx="1.83851165948758E-07" ixy="-6.07372921831439E-10" ixz="5.80097687729223E-10" iyy="1.94700358156753E-07" iyz="-1.32219889788332E-09" izz="3.94697814103924E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_pinky_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_pinky_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_pinky_distal_finger" type="continuous">
+        <origin xyz="-0.000139217094110203 0.00243552926671115 -0.0349148795758059" rpy="0 0 0" />
+        <parent link="l_pinky_proximal_finger" />
+        <child link="l_pinky_distal_finger" />
+        <axis xyz="0.998370307122341 0.0570677654761637 0" />
+    </joint>
+    <link name="r_arm_pitch">
+        <inertial>
+            <origin xyz="0.0146743511434554 0.016829800822405 -8.16711977455475E-05" rpy="0 0 0" />
+            <mass value="0.165729466195453" />
+            <inertia ixx="0.000267364314112701" ixy="2.58822573731612E-05" ixz="-1.74450019197639E-07" iyy="0.000125724274127356" iyz="1.71810516637517E-06" izz="0.000196179895851995" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_arm_pitch" type="continuous">
+        <origin xyz="-0.0175475823119764 -0.254700000000003 0.324500000000024" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="r_arm_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_arm_roll">
+        <inertial>
+            <origin xyz="0.0223009070371899 -0.0156950170222252 -0.0202307747728591" rpy="0 0 0" />
+            <mass value="0.141493827146865" />
+            <inertia ixx="0.000160588534065391" ixy="-6.25733640993197E-06" ixz="-1.13236198591127E-05" iyy="0.000262566981459999" iyz="-3.1493041488675E-05" izz="0.000236151535090871" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_arm_roll" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="r_arm_pitch" />
+        <child link="r_arm_roll" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="r_arm_yaw">
+        <inertial>
+            <origin xyz="-4.82749435399069E-05 -0.00525815062783946 -0.128821944854617" rpy="0 0 0" />
+            <mass value="0.147794102819133" />
+            <inertia ixx="7.005759575547E-05" ixy="-6.81658260959138E-10" ixz="-2.69427064536621E-10" iyy="8.53612265336777E-05" iyz="-6.95899873075701E-06" izz="8.82223899453284E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_arm_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_arm_yaw" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="r_arm_roll" />
+        <child link="r_arm_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="r_forearm_pitch">
+        <inertial>
+            <origin xyz="-0.000127232990745296 -0.00951602649232614 -0.052268755226349" rpy="0 0 0" />
+            <mass value="0.17016472610201" />
+            <inertia ixx="9.55808447606902E-05" ixy="-4.53863489771543E-08" ixz="-5.41060583435907E-08" iyy="0.000126326373178393" iyz="9.40982665987161E-06" izz="0.000121032474884238" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_forearm_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_forearm_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_forearm_pitch" type="continuous">
+        <origin xyz="0 0 -0.1636" rpy="0 0 0" />
+        <parent link="r_arm_yaw" />
+        <child link="r_forearm_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_hand_yaw">
+        <inertial>
+            <origin xyz="-0.000112955483967687 -0.00974449526683929 0.0227958280839014" rpy="0 0 0" />
+            <mass value="0.157334748658065" />
+            <inertia ixx="7.64922331363792E-05" ixy="8.75195261100849E-09" ixz="1.38703019538351E-08" iyy="0.000122230542206117" iyz="-1.1123944412365E-06" izz="8.44929064837534E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_hand_yaw" type="continuous">
+        <origin xyz="0 0 -0.132050000118069" rpy="0 0 0" />
+        <parent link="r_forearm_pitch" />
+        <child link="r_hand_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="r_hand_pitch">
+        <inertial>
+            <origin xyz="0.00735986990228201 -0.00475238307648407 -0.0529411193942666" rpy="0 0 0" />
+            <mass value="0.0853891534309893" />
+            <inertia ixx="4.77321358097823E-05" ixy="-2.99709432812987E-06" ixz="4.71488437974189E-06" iyy="3.42470226388499E-05" iyz="4.61094199971348E-06" izz="2.51299600072389E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_hand_pitch" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="r_hand_yaw" />
+        <child link="r_hand_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_hand_roll">
+        <inertial>
+            <origin xyz="0.00300067727381764 -0.00948299721849261 -0.0665274119439575" rpy="0 0 0" />
+            <mass value="0.151513451672293" />
+            <inertia ixx="9.14013694279149E-05" ixy="-3.00635383669835E-07" ixz="-4.88449841632957E-06" iyy="0.000140002484811824" iyz="-1.18898278478315E-05" izz="0.000125153253041102" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_hand_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_hand_roll" type="continuous">
+        <origin xyz="0 0 -0.0590000000076598" rpy="0 0 0" />
+        <parent link="r_hand_pitch" />
+        <child link="r_hand_roll" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="r_thumb_proximal_yaw">
+        <inertial>
+            <origin xyz="0.0059016659387813 0.00373751061983887 0.00028087782921854" rpy="0 0 0" />
+            <mass value="0.00177457706476174" />
+            <inertia ixx="5.51947770854431E-08" ixy="-3.05430802968252E-08" ixz="-8.9931290359755E-10" iyy="7.93062784538199E-08" iyz="-4.09905263561892E-10" izz="9.86616855273956E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_thumb_proximal_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 0.25" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_thumb_proximal_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_thumb_proximal_yaw" type="continuous">
+        <origin xyz="0.0240162583145044 0.0216278329431261 -0.110700000402968" rpy="0 0 0" />
+        <parent link="r_hand_roll" />
+        <child link="r_thumb_proximal_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="r_thumb_distal_pitch">
+        <inertial>
+            <origin xyz="0.00835400525904937 -1.55022040249087E-06 -0.037205152988654" rpy="0 0 0" />
+            <mass value="0.0143594976127551" />
+            <inertia ixx="7.15388296788212E-06" ixy="-6.69727355587774E-11" ixz="-2.03395160081791E-07" iyy="6.87910807838939E-06" iyz="5.44431164399722E-12" izz="9.14755969331916E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_thumb_distal_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_thumb_distal_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_thumb_distal_pitch" type="continuous">
+        <origin xyz="0.0120000000000024 0.00650000000000001 0.00039999999999929" rpy="0 0 0" />
+        <parent link="r_thumb_proximal_yaw" />
+        <child link="r_thumb_distal_pitch" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="r_index_proximal_finger">
+        <inertial>
+            <origin xyz="0.000117630091740083 -0.00210444255674574 -0.0171028308310166" rpy="0 0 0" />
+            <mass value="0.00213737899371432" />
+            <inertia ixx="3.18602101869156E-07" ixy="-1.25362698289955E-09" ixz="2.18478331808027E-09" iyy="3.41870944894183E-07" iyz="-3.87179337852981E-08" izz="9.68030538354866E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_index_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_index_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_index_proximal_finger" type="continuous">
+        <origin xyz="0.0285187933054979 -0.0039487923396026 -0.174730558860479" rpy="0 -0.0311675978215671 0" />
+        <parent link="r_hand_roll" />
+        <child link="r_index_proximal_finger" />
+        <axis xyz="0.998506141360647 0.0546395979585406 0" />
+    </joint>
+    <link name="r_index_distal_finger">
+        <inertial>
+            <origin xyz="-8.9232232394443E-05 0.00161946515080247 -0.0254573000709627" rpy="0 0 0" />
+            <mass value="0.00504466012184763" />
+            <inertia ixx="7.63500198005666E-07" ixy="-8.93025400014092E-10" ixz="-1.75721366263703E-09" iyy="7.80112979178675E-07" iyz="3.23088054385963E-08" izz="1.15370268537332E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_index_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_index_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_index_distal_finger" type="continuous">
+        <origin xyz="0.000133519493595612 -0.00243998929947775 -0.0349145904281185" rpy="0 0 0" />
+        <parent link="r_index_proximal_finger" />
+        <child link="r_index_distal_finger" />
+        <axis xyz="-0.998506141360649 -0.0546395979585212 0" />
+    </joint>
+    <link name="r_middle_proximal_finger">
+        <inertial>
+            <origin xyz="8.44813785091242E-08 -0.00270210141804927 -0.0207829698234612" rpy="0 0 0" />
+            <mass value="0.00260456401479316" />
+            <inertia ixx="5.09608239447983E-07" ixy="-1.75029152849441E-12" ixz="1.79637389141395E-12" iyy="5.36695856290199E-07" iyz="-5.70433154945367E-08" izz="1.25808948975584E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_middle_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_middle_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_middle_proximal_finger" type="continuous">
+        <origin xyz="0.00751625831450465 -0.00820381922686125 -0.178435376742697" rpy="0 0 0" />
+        <parent link="r_hand_roll" />
+        <child link="r_middle_proximal_finger" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <link name="r_middle_distal_finger">
+        <inertial>
+            <origin xyz="-6.04521225378366E-07 0.00162350982710252 -0.025457191512641" rpy="0 0 0" />
+            <mass value="0.00504466863846282" />
+            <inertia ixx="7.6345530976374E-07" ixy="1.85475490772791E-11" ixz="1.04892536633895E-11" iyy="7.80159403477418E-07" iyz="3.23975164550656E-08" izz="1.15374581204344E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_middle_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_middle_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_middle_distal_finger" type="continuous">
+        <origin xyz="0 -0.00292977189725413 -0.0418976901109125" rpy="0 0 0" />
+        <parent link="r_middle_proximal_finger" />
+        <child link="r_middle_distal_finger" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="r_ring_proximal_finger">
+        <inertial>
+            <origin xyz="-0.000147627677307374 -0.00269935568307084 -0.0207828027334272" rpy="0 0 0" />
+            <mass value="0.00260456442916689" />
+            <inertia ixx="5.09688869653555E-07" ixy="1.47567826577373E-09" ixz="-3.11642075126123E-09" iyy="5.36608130664138E-07" iyz="-5.69836124932145E-08" izz="1.25816010690367E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_ring_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_ring_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_ring_proximal_finger" type="continuous">
+        <origin xyz="-0.0135862766764854 -0.00807856148813096 -0.176446661066022" rpy="0 0.0311675978215922 0" />
+        <parent link="r_hand_roll" />
+        <child link="r_ring_proximal_finger" />
+        <axis xyz="0.998506141360648 -0.0546395979585354 0" />
+    </joint>
+    <link name="r_ring_distal_finger">
+        <inertial>
+            <origin xyz="-3.05447320099322E-05 -0.00055182982921842 -0.014581933967133" rpy="0 0 0" />
+            <mass value="0.00182869050551967" />
+            <inertia ixx="2.6351019026747E-07" ixy="6.80589443443767E-10" ixz="3.40598850881854E-10" iyy="2.75942607379873E-07" iyz="6.18066814960194E-09" izz="4.69846444924734E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_ring_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_ring_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_ring_distal_finger" type="continuous">
+        <origin xyz="-0.000160223392313565 -0.00292798715935183 -0.0418975085136676" rpy="0 0 0" />
+        <parent link="r_ring_proximal_finger" />
+        <child link="r_ring_distal_finger" />
+        <axis xyz="-0.996566833460806 -0.0546395979585212 -0.0622017747402293" />
+    </joint>
+    <link name="r_pinky_proximal_finger">
+        <inertial>
+            <origin xyz="-0.000117692942698921 -0.00210238254136691 -0.0171031038120715" rpy="0 0 0" />
+            <mass value="0.00213737106866596" />
+            <inertia ixx="3.18613658418781E-07" ixy="1.35743663351377E-09" ixz="-2.14595314636863E-09" iyy="3.4186844347216E-07" iyz="-3.86910999425676E-08" izz="9.67934520226222E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_pinky_proximal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_pinky_proximal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_pinky_proximal_finger" type="continuous">
+        <origin xyz="-0.0342146631046227 -0.0036338733880803 -0.17022700803684" rpy="0 0.0659957839625563 0" />
+        <parent link="r_hand_roll" />
+        <child link="r_pinky_proximal_finger" />
+        <axis xyz="0.998370307122331 -0.0570677654763477 0" />
+    </joint>
+    <link name="r_pinky_distal_finger">
+        <inertial>
+            <origin xyz="-6.68864174628164E-05 -0.00079192546781276 -0.0127151268014948" rpy="0 0 0" />
+            <mass value="0.00162993727561191" />
+            <inertia ixx="1.83853268460625E-07" ixy="6.36687597538947E-10" ixz="-4.24280859276174E-10" iyy="1.94697260253276E-07" iyz="1.38051635062388E-09" izz="3.94676279750627E-08" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_pinky_distal_finger.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_pinky_distal_finger.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_pinky_distal_finger" type="continuous">
+        <origin xyz="-0.00013921709411558 -0.0024355292668054 -0.0349148795757724" rpy="0 0 0" />
+        <parent link="r_pinky_proximal_finger" />
+        <child link="r_pinky_distal_finger" />
+        <axis xyz="-0.99837030712233 0.0570677654763578 0" />
+    </joint>
+    <link name="l_leg_roll">
+        <inertial>
+            <origin xyz="-0.0111795086275655 -0.000123216790510347 -0.00147074190276801" rpy="0 0 0" />
+            <mass value="0.379425755318659" />
+            <inertia ixx="0.000304743319113934" ixy="2.41328374541978E-09" ixz="-1.61296145176274E-05" iyy="0.000772105186246157" iyz="3.0907410093387E-07" izz="0.000961637403412868" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_leg_roll" type="continuous">
+        <origin xyz="-0.00254758231249262 0.0869999999999998 -0.0660000000049238" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="l_leg_roll" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="l_leg_yaw">
+        <inertial>
+            <origin xyz="-2.35778184911506E-05 0.0577682076207521 -0.10392916892987" rpy="0 0 0" />
+            <mass value="1.02872204905725" />
+            <inertia ixx="0.00147762234552319" ixy="3.48522021395906E-07" ixz="-1.02364548668284E-06" iyy="0.00221142702466258" iyz="3.53567926230776E-05" izz="0.00129984253622388" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_leg_yaw" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="l_leg_roll" />
+        <child link="l_leg_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="l_leg_pitch">
+        <inertial>
+            <origin xyz="-0.00116946246395767 -0.0111797511086746 -0.100922218695529" rpy="0 0 0" />
+            <mass value="2.07733552298511" />
+            <inertia ixx="0.00754206784620963" ixy="-6.36947831516095E-05" ixz="9.50196374296909E-05" iyy="0.0080254564240316" iyz="2.27150889792675E-05" izz="0.00365753546634271" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_leg_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_leg_pitch" type="continuous">
+        <origin xyz="0 0.025450000000002 -0.123449999999999" rpy="0 0 0" />
+        <parent link="l_leg_yaw" />
+        <child link="l_leg_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_knee">
+        <inertial>
+            <origin xyz="0.0083741600267864 -1.38260606949159E-05 -0.140326741872988" rpy="0 0 0" />
+            <mass value="1.44549322478963" />
+            <inertia ixx="0.0110280658461993" ixy="1.81936202585807E-05" ixz="-0.000324492332926834" iyy="0.0112829957777815" iyz="8.89496046204543E-05" izz="0.000857506229386697" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_knee.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_knee.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_knee" type="continuous">
+        <origin xyz="-0.010390161952608 0 -0.249783995753446" rpy="0 0 0" />
+        <parent link="l_leg_pitch" />
+        <child link="l_knee" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_foot_pitch">
+        <inertial>
+            <origin xyz="-1.81202114396539E-07 1.81203019034015E-07 2.55351295663786E-15" rpy="0 0 0" />
+            <mass value="0.00680556727254332" />
+            <inertia ixx="5.13627197456046E-07" ixy="-2.23455328690084E-16" ixz="-2.99517054441959E-11" iyy="5.13627197456051E-07" iyz="-2.9487151330203E-11" izz="9.09837232073045E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_foot_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_foot_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_foot_pitch" type="continuous">
+        <origin xyz="0 0 -0.346000000000004" rpy="0 0 0" />
+        <parent link="l_knee" />
+        <child link="l_foot_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_foot_roll">
+        <inertial>
+            <origin xyz="0.00986618796288023 -8.14594069974139E-06 -0.0323276518433993" rpy="0 0 0" />
+            <mass value="0.191216415778396" />
+            <inertia ixx="0.000129574142247561" ixy="1.87464188807015E-08" ixz="3.66139740707971E-06" iyy="0.00031519475110699" iyz="3.6373667328501E-09" izz="0.000418024913490438" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_foot_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_foot_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_foot_roll" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="l_foot_pitch" />
+        <child link="l_foot_roll" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="l_l_bar">
+        <inertial>
+            <origin xyz="-0.0172816853676534 0.00661593706645544 -2.76944701804727E-06" rpy="0 0 0" />
+            <mass value="0.0241949120124394" />
+            <inertia ixx="3.02750710314275E-06" ixy="-1.66046577410115E-06" ixz="-1.20318411485415E-09" iyy="1.63403804389531E-05" iyz="-1.6175299289979E-10" izz="1.40552885852523E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_l_bar.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_l_bar.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_l_bar" type="continuous">
+        <origin xyz="0 0.0260000000000038 -0.09" rpy="0 0 0" />
+        <parent link="l_knee" />
+        <child link="l_l_bar" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_l_tendon">
+        <inertial>
+            <origin xyz="0.000909568327568541 -0.00107382534052314 -0.116411596117355" rpy="0 0 0" />
+            <mass value="0.0723259128251804" />
+            <inertia ixx="0.00040704088500347" ixy="1.27056915128903E-09" ixz="3.16090323841034E-06" iyy="0.000405860828607296" iyz="-1.63249540748846E-07" izz="2.48972857907671E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_l_tendon.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_l_tendon.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_l_tendon" type="continuous">
+        <origin xyz="-0.0579999994738184 0 0" rpy="0 0 0" />
+        <parent link="l_l_bar" />
+        <child link="l_l_tendon" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="l_r_bar">
+        <inertial>
+            <origin xyz="-0.0172816853849475 -0.00661593706803836 -2.64615120038059E-06" rpy="0 0 0" />
+            <mass value="0.0241949120152251" />
+            <inertia ixx="3.02750743240102E-06" ixy="1.6604657435466E-06" ixz="-2.25261355073722E-09" iyy="1.63403804403762E-05" iyz="3.58590401955966E-10" izz="1.40552882575403E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_r_bar.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_r_bar.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_r_bar" type="continuous">
+        <origin xyz="0 -0.0259999999999997 -0.153" rpy="0 0 0" />
+        <parent link="l_knee" />
+        <child link="l_r_bar" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="l_r_tendon">
+        <inertial>
+            <origin xyz="0.000886522110566654 0.00109368372663839 -0.0855352996218761" rpy="0 0 0" />
+            <mass value="0.0569965302460466" />
+            <inertia ixx="0.000181298310457033" ixy="-1.2618085713137E-09" ixz="1.85864592856586E-06" iyy="0.000180444607519788" iyz="1.22245058012766E-07" izz="1.97355040670682E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_r_tendon.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/l_r_tendon.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="l_r_tendon" type="continuous">
+        <origin xyz="-0.0579999990742142 0 -1.03629629222279E-05" rpy="0 0 0" />
+        <parent link="l_r_bar" />
+        <child link="l_r_tendon" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_leg_roll">
+        <inertial>
+            <origin xyz="-0.0111795086275655 -0.00012321679051229 -0.00147074190276808" rpy="0 0 0" />
+            <mass value="0.379425755318659" />
+            <inertia ixx="0.000304743319113934" ixy="2.41328374498631E-09" ixz="-1.61296145176275E-05" iyy="0.000772105186246157" iyz="3.09074100933868E-07" izz="0.000961637403412867" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_leg_roll" type="continuous">
+        <origin xyz="-0.00254758231249268 -0.0870000000000003 -0.0660000000049238" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="r_leg_roll" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="r_leg_yaw">
+        <inertial>
+            <origin xyz="2.357781872672E-05 -0.0577682076211163 -0.103929168930567" rpy="0 0 0" />
+            <mass value="1.0287220490755" />
+            <inertia ixx="0.00147762234553187" ixy="3.48522018944965E-07" ixz="1.02364547910872E-06" iyy="0.00221142702467772" iyz="-3.53567926256051E-05" izz="0.0012998425362321" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_leg_yaw" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="r_leg_roll" />
+        <child link="r_leg_yaw" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="r_leg_pitch">
+        <inertial>
+            <origin xyz="-0.00107074781786857 0.0113653015494495 -0.100928316961028" rpy="0 0 0" />
+            <mass value="2.07085782779867" />
+            <inertia ixx="0.00754810936808965" ixy="6.16442740988069E-05" ixz="9.78194176173465E-05" iyy="0.00803347926141846" iyz="-1.93677766573902E-05" izz="0.00366288112623837" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_leg_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_leg_pitch" type="continuous">
+        <origin xyz="0 -0.0254500000000034 -0.123449999999998" rpy="0 0 0" />
+        <parent link="r_leg_yaw" />
+        <child link="r_leg_pitch" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="r_knee">
+        <inertial>
+            <origin xyz="0.00837373211182327 1.48731646985867E-05 -0.140326343912049" rpy="0 0 0" />
+            <mass value="1.44559496374997" />
+            <inertia ixx="0.0110283914420998" ixy="-1.8192089906164E-05" ixz="-0.000324488080960638" iyy="0.0112832978117942" iyz="-8.89800157972667E-05" izz="0.000857552225943839" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_knee.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_knee.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_knee" type="continuous">
+        <origin xyz="-0.0103901619526017 0 -0.249783995753447" rpy="0 0 0" />
+        <parent link="r_leg_pitch" />
+        <child link="r_knee" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_foot_pitch">
+        <inertial>
+            <origin xyz="-1.81202915693068E-07 -1.8120290991297E-07 -1.11022302462516E-16" rpy="0 0 0" />
+            <mass value="0.00680556727254334" />
+            <inertia ixx="5.1362719745605E-07" ixy="2.23455634819957E-16" ixz="2.94871513298561E-11" iyy="5.13627197456048E-07" iyz="-2.99517054444867E-11" izz="9.09837232073047E-07" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_foot_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_foot_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_foot_pitch" type="continuous">
+        <origin xyz="0 0 -0.346000000000011" rpy="0 0 0" />
+        <parent link="r_knee" />
+        <child link="r_foot_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="r_foot_roll">
+        <inertial>
+            <origin xyz="0.00986618796136205 -8.14593967402022E-06 -0.0323276518432604" rpy="0 0 0" />
+            <mass value="0.191216415784818" />
+            <inertia ixx="0.000129574142254521" ixy="1.87464121722709E-08" ixz="3.66139740707072E-06" iyy="0.000315194751113542" iyz="3.63736673340889E-09" izz="0.000418024913503948" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_foot_roll.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_foot_roll.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_foot_roll" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="r_foot_pitch" />
+        <child link="r_foot_roll" />
+        <axis xyz="-1 0 0" />
+    </joint>
+    <link name="r_l_bar">
+        <inertial>
+            <origin xyz="-0.0172817197891674 0.00661593007898401 -2.62659521566011E-06" rpy="0 0 0" />
+            <mass value="0.024194868521807" />
+            <inertia ixx="3.02750105000845E-06" ixy="-1.660462011957E-06" ixz="-2.26263763997994E-09" iyy="1.63403563617254E-05" iyz="-3.60623187499015E-10" izz="1.40552690387785E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_l_bar.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_l_bar.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_l_bar" type="continuous">
+        <origin xyz="0 0.0260000000000006 -0.153" rpy="0 0 0" />
+        <parent link="r_knee" />
+        <child link="r_l_bar" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="r_l_tendon">
+        <inertial>
+            <origin xyz="0.000886324976226871 -0.00109368357791272 -0.0855353050799796" rpy="0 0 0" />
+            <mass value="0.0569965408399269" />
+            <inertia ixx="0.000181298314199638" ixy="1.27188417098493E-09" ixz="1.85852673262209E-06" iyy="0.000180444608806018" iyz="-1.22244873486873E-07" izz="1.97354797583381E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_l_tendon.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_l_tendon.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_l_tendon" type="continuous">
+        <origin xyz="-0.0579999990740259 0 -1.03629629334412E-05" rpy="0 0 0" />
+        <parent link="r_l_bar" />
+        <child link="r_l_tendon" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="r_r_bar">
+        <inertial>
+            <origin xyz="-0.0172817197497915 -0.00661593008217129 -2.78900612493693E-06" rpy="0 0 0" />
+            <mass value="0.0241948685412603" />
+            <inertia ixx="3.02750071689725E-06" ixy="1.660462045007E-06" ixz="-1.19315999207711E-09" iyy="1.63403563701857E-05" iyz="1.5971995906495E-10" izz="1.40552693810574E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_r_bar.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_r_bar.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_r_bar" type="continuous">
+        <origin xyz="0 -0.0259999999999875 -0.09" rpy="0 0 0" />
+        <parent link="r_knee" />
+        <child link="r_r_bar" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="r_r_tendon">
+        <inertial>
+            <origin xyz="0.000909568646152159 0.00107382567784425 -0.116411590425347" rpy="0 0 0" />
+            <mass value="0.0723258922185488" />
+            <inertia ixx="0.000407040881611255" ixy="-1.27054222067275E-09" ixz="3.16090353002897E-06" iyy="0.000405860825202462" iyz="1.63249841460774E-07" izz="2.48972853360267E-06" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_r_tendon.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/r_r_tendon.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="r_r_tendon" type="continuous">
+        <origin xyz="-0.0579999994737613 0 0" rpy="0 0 0" />
+        <parent link="r_r_bar" />
+        <child link="r_r_tendon" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="head_yaw">
+        <inertial>
+            <origin xyz="-0.000116065796709811 0.00341283230689319 -0.00762227943283844" rpy="0 0 0" />
+            <mass value="0.0876587232040551" />
+            <inertia ixx="5.29184226374934E-05" ixy="-5.55749298909931E-08" ixz="2.93674313773846E-07" iyy="7.69981959753033E-05" iyz="-9.22993448844536E-06" izz="5.31017800814282E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="head_yaw" type="continuous">
+        <origin xyz="-0.0175475823124929 0 0.499400000000373" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="head_yaw" />
+        <axis xyz="0 0 -1" />
+    </joint>
+    <link name="head_pitch">
+        <inertial>
+            <origin xyz="0.0108076765997382 -0.00100494759438114 0.0523165975702757" rpy="0 0 0" />
+            <mass value="0.348142076778321" />
+            <inertia ixx="0.000904070873567589" ixy="1.57558780381555E-06" ixz="0.000295083531658369" iyy="0.000957585537827452" iyz="-9.61289176090918E-06" izz="0.00114051835139601" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="head_pitch" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="head_yaw" />
+        <child link="head_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <transmission name="trans_l_arm_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_arm_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_arm_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_arm_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_arm_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_arm_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_arm_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_arm_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_arm_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_forearm_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_forearm_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_forearm_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_hand_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_hand_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_hand_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_hand_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_hand_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_hand_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_hand_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_hand_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_hand_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_thumb_proximal_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_thumb_proximal_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_thumb_proximal_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_thumb_distal_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_thumb_distal_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_thumb_distal_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_index_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_index_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_index_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_index_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_index_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_index_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_middle_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_middle_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_middle_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_middle_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_middle_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_middle_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_ring_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_ring_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_ring_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_ring_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_ring_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_ring_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_pinky_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_pinky_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_pinky_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_pinky_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_pinky_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_pinky_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_arm_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_arm_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_arm_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_arm_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_arm_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_arm_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_arm_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_arm_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_arm_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_forearm_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_forearm_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_forearm_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_hand_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_hand_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_hand_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_hand_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_hand_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_hand_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_hand_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_hand_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_hand_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_thumb_proximal_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_thumb_proximal_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_thumb_proximal_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_thumb_distal_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_thumb_distal_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_thumb_distal_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_index_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_index_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_index_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_index_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_index_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_index_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_middle_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_middle_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_middle_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_middle_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_middle_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_middle_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_ring_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_ring_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_ring_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_ring_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_ring_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_ring_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_pinky_proximal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_pinky_proximal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_pinky_proximal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_pinky_distal_finger">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_pinky_distal_finger">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_pinky_distal_finger_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_leg_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_leg_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_leg_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_leg_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_leg_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_leg_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_leg_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_leg_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_leg_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_knee">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_knee">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_knee_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_foot_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_foot_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_foot_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_foot_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_foot_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_foot_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_l_bar">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_l_bar">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_l_bar_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_l_tendon">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_l_tendon">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_l_tendon_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_r_bar">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_r_bar">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_r_bar_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_l_r_tendon">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="l_r_tendon">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="l_r_tendon_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_leg_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_leg_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_leg_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_leg_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_leg_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_leg_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_leg_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_leg_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_leg_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_knee">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_knee">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_knee_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_foot_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_foot_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_foot_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_foot_roll">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_foot_roll">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_foot_roll_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_l_bar">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_l_bar">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_l_bar_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_l_tendon">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_l_tendon">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_l_tendon_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_r_bar">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_r_bar">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_r_bar_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_r_r_tendon">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="r_r_tendon">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="r_r_tendon_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_head_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_head_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <gazebo>
+        <plugin name="gazebo_ros_control">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+</robot>
+

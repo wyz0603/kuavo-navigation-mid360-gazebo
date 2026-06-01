@@ -1,0 +1,20 @@
+# ArUco marker configuration for pick and place task
+
+# Object marker configuration
+marker_object_frame:
+  frame_name: "marker_object_frame"  # TF frame name published by the camera node
+  marker_id: 777                      # ArUco marker ID
+  marker_size: 0.05                 # Size of the marker in meters (10cm)
+  description: "Marker attached to the object to pick"
+
+# Place location marker configuration
+marker_place_frame:
+  frame_name: "marker_place_frame"  # TF frame name published by the camera node
+  marker_id: 776                      # ArUco marker ID
+  marker_size: 0.10                 # Size of the marker in meters (10cm)
+  description: "Marker indicating the location to place the object"
+
+# General settings
+camera_frame: "head_camera_color_optical_frame"  # Camera frame used for detection
+base_frame: "base_link"                          # Robot base frame
+detection_rate: 10                          # Target detection rate in Hz 

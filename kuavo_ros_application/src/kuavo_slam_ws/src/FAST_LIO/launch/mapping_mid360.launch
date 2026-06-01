@@ -1,0 +1,27 @@
+<launch>
+<!-- Launch file for Livox MID360 LiDAR -->
+
+	<arg name="rviz" default="true" />
+	<arg name="pcd_save_en" default="true" />  <!-- 允许外部覆盖PCD保存设置，默认true保持向后兼容 -->
+
+	<rosparam command="load" file="$(find fast_lio)/config/mid360.yaml" />
+	<!-- 允许外部参数覆盖配置文件中的设置（修复load_map.launch的参数被YAML覆盖的问题） -->
+	<param name="/pcd_save/pcd_save_en" value="$(arg pcd_save_en)" />
+	<arg name="rviz_config" default="$(find fast_lio)/rviz_cfg/loam_livox.rviz" />
+
+	<param name="feature_extract_enable" type="bool" value="0"/>
+	<param name="point_filter_num" type="int" value="3"/>
+	<param name="max_iteration" type="int" value="3" />
+	<param name="filter_size_surf" type="double" value="0.5" />
+	<param name="filter_size_map" type="double" value="0.5" />
+	<param name="cube_side_length" type="double" value="1000" />
+	<param name="runtime_pos_log_enable" type="bool" value="0" />
+	<node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" required="true">
+		<remap from="/cloud_registered_body" to="/livox/cloud"/>
+	</node> 
+
+	<group if="$(arg rviz)">
+		<node launch-prefix="nice" pkg="rviz" type="rviz" name="fast_lio_rviz" args="-d $(arg rviz_config)" output="screen"/>
+	</group>
+
+</launch>

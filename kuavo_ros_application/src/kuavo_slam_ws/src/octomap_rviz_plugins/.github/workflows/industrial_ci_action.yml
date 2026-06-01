@@ -1,0 +1,25 @@
+name: ROS1-CI
+on: [push, pull_request] # on all pushes and PRs
+
+jobs:
+  CI:
+    strategy:
+      matrix:
+        env:
+          - {ROS_DISTRO: melodic}
+          - {ROS_DISTRO: noetic}
+          - {ROS_DISTRO: melodic, PRERELEASE: true}
+          - {ROS_DISTRO: noetic, PRERELEASE: true}
+    env:
+      CCACHE_DIR: /github/home/.ccache # Enable ccache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # This step will fetch/store the directory used by ccache before/after the ci run
+      - uses: actions/cache@v3
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+      # Run industrial_ci
+      - uses: 'ros-industrial/industrial_ci@6a8f546cbd31fbd5c9f77e3409265c8b39abc3d6'
+        env: ${{ matrix.env }}

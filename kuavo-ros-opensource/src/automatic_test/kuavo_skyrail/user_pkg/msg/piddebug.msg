@@ -1,0 +1,14 @@
+# 控制对象
+string objectname
+# 目标与反馈
+float32 target
+float32 rev
+# pid参数
+float32 kp
+float32 ki
+float32 kd
+# pid输出
+float32 p_out
+float32 i_out
+float32 d_out
+float32 pid_out

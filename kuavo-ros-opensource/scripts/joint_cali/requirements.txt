@@ -1,0 +1,10 @@
+pip==25.0.1
+wheel
+cython==0.29.36
+# cyipopt==1.1.0
+matplotlib
+nlopt==2.7.1
+# pinocchio==0.4.3
+PyYAML==6.0.2
+rospkg==1.5.1
+# pin==3.4.0

@@ -1,0 +1,4 @@
+[config]
+audio_input_device_index = 18
+audio_output_device_index = 14
+energy_threashold = 1700

@@ -1,0 +1,10 @@
+# Request: user query string and base64-encoded image
+string query
+string image_base64  # Base64-encoded image data (with or without data URI prefix)
+
+---
+# Response fields
+bool success        # Service call success status
+int32 error_code    # Error code (0 = success, 1 = empty query, 2 = service unavailable, 3 = invalid image)
+string message      # Status or error message
+string uuid         # UUID for tracking this query (empty if failed)

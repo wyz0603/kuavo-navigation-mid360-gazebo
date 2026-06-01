@@ -1,0 +1,11 @@
+<launch>
+  <node name="camera_publisher" pkg="usb_cam" type="usb_cam_node" output="screen">
+    <param name="video_device" value="/dev/video4"/>
+    <param name="image_width" value="1280"/>
+    <param name="image_height" value="480"/>
+    <param name="image_transport" value="raw"/>
+    <param name="pixel_format" value="yuyv"/>
+    <!-- 忽略会导致权限错误的控制参数 -->
+    <rosparam param="intrinsic_controls/ignore">[white_balance_temperature, exposure_time_absolute, camera_controls]</rosparam>
+  </node>
+</launch>

@@ -1,0 +1,22 @@
+<launch>
+    <rosparam command="load" file="$(find automatic_test)/config/params.yaml"/>
+
+    <arg name="log_level" default="INFO"/>
+    <arg name="sim" default="true"/>
+
+    <param name="/robot_manager/sim" type="bool" value="$(arg sim)"/>
+
+    <group if="$(arg sim)">
+        <param name="/test_single_step_control/world_frame" value="odom"/>
+        <param name="/test_single_step_control/robot_frame" value="base_link"/>
+        <param name="/test_single_step_control/home_frame" value="home"/>
+    </group>  
+
+    <node pkg="automatic_test" type="robot_manager.py" name="robot_manager" output="screen"/>
+
+    <node pkg="automatic_test" 
+          type="test_single_step_control.sh" 
+          name="single_step_control_test" 
+          output="screen"
+          args="--log-level $(arg log_level)"/>
+</launch>

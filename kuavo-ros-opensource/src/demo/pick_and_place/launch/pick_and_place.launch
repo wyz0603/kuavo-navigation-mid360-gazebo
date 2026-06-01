@@ -1,0 +1,126 @@
+<launch>
+    <arg name="marker_id1" default="777" />                                      <!-- TODO: Your marker id (Original ArUco) -->
+    <arg name="marker_id2" default="776" />                                      <!-- TODO: Your marker id (Original ArUco) -->
+    <arg name="marker_id3" default="775" />  
+    <arg name="marker_size1" default="0.05" />                                    <!-- TODO: Your marker side length in m -->
+    <arg name="marker_size2" default="0.10" />
+    <arg name="marker_size3" default="0.10" />
+    <arg name="marker_frame1" default="marker_object_frame" />                    <!-- Set marker frame name -->
+    <arg name="marker_frame2" default="marker_place_frame" />                    <!-- Set marker frame name -->
+    <arg name="wrist_marker_frame1" default="wrist_marker_object_frame" />
+    <arg name="wrist_marker_frame2" default="wrist_marker_place_frame" />
+    <arg name="handeye_cali_robot_base_frame" default="base_link" />                  <!-- TODO: Your robot base frame -->
+    <arg name="handeye_cali_robot_effector_frame" default="zarm_r7_end_effector" />   <!-- TODO: Your end effector frame -->
+    <arg name="calibration_file" value="~/.ros/easy_handeye/humanoid_eye_on_base.yaml" />
+    <arg name="mock" default="false" />
+    <arg name="control_hand_side" default="1" />  <!-- 0: left, 1: right, 2: both -->
+    <arg name="eef_z_bias" default="-0.17" />
+    <arg name="camera_type" default="realsense" />
+    <arg name="has_head" default="true" />
+    <arg name="has_wrist" default="true" />
+    <arg name="wrist_side" default="right" />
+    <arg name="ref_frame" default="$(eval 'head_camera_color_optical_frame' if arg('camera_type') == 'realsense' else 'zed_left_camera_optical_frame')" />
+    <arg name="image_topic" default="$(eval 'head_camera/color/image_raw' if arg('camera_type') == 'realsense' else '/zed/zed_node/rgb/image_rect_color')" />
+    <arg name="info_topic" default="$(eval 'head_camera/color/camera_info' if arg('camera_type') == 'realsense' else '/zed/zed_node/rgb/camera_info')" />
+
+    <arg name="wrist_camera_type" default="realsense" />
+    <arg name="wrist_ref_frame" default="$(arg wrist_side)_wrist_camera_color_optical_frame" />
+    <arg name="wrist_image_topic" default="$(arg wrist_side)_wrist_camera/color/image_raw" />
+    <arg name="wrist_info_topic" default="$(arg wrist_side)_wrist_camera/color/camera_info" />
+
+    <group if="$(arg mock)">
+        <node pkg="tf" type="static_transform_publisher" name="camera_link_to_camera_color_optical_frame" 
+            args="0 0 0 0 0 0 1 camera_link camera_color_optical_frame 100" />
+
+        <node pkg="tf" type="static_transform_publisher" name="marker_place_frame" 
+            args="0.65 -0.2 0.4 0.4 0.74 -0.32 -0.42  base_link marker_place_frame 100" />
+ 
+
+        <node pkg="tf" type="static_transform_publisher" name="wrist_marker_place_frame" 
+            args="0.65 -0.2 0.4 0.4 0.74 -0.32 -0.42  base_link wrist_marker_place_frame 100" />
+    
+
+        <node pkg="tf" type="static_transform_publisher" name="marker_object_frame" 
+            args="0.6 -0.36 0.3 0.4 0.74 -0.32 -0.42  base_link marker_object_frame 100" />
+ 
+        <node pkg="tf" type="static_transform_publisher" name="wrist_marker_object_frame" 
+            args="0.6  -0.36 0.3 0.4 0.74 -0.32 -0.42  base_link wrist_marker_object_frame 100" />
+    
+        
+        <group if="$(arg has_wrist)">
+            <node pkg="tf" type="static_transform_publisher" name="$(arg wrist_side)_wrist_camera_link_to_$(arg wrist_side)_wrist_camera_color_optical_frame" 
+            args="0 0 0 0 0 0 1  $(arg wrist_side)_wrist_camera_link $(arg wrist_side)_wrist_camera_color_optical_frame 100" />
+        </group>
+    </group>
+
+    <group if="$(arg has_head)">
+        <node pkg="kuavo_hand_eye_calibration" type="publish_calibration_tf.py" name="head_publish_calibration_tf" 
+            args="--camera_type $(arg camera_type) 
+                --namespace_prefix head 
+                --handeye_cali_eye_on_hand false
+                --parent_frame head_camera_link
+                --child_frame head_camera_color_optical_frame" output="log"/>
+    </group>
+
+    <group if="$(arg has_wrist)">
+        <node pkg="kuavo_hand_eye_calibration" type="publish_calibration_tf.py" name="$(arg wrist_side)_wrist_publish_calibration_tf" 
+            args="--camera_type $(arg wrist_camera_type) 
+                --namespace_prefix $(arg wrist_side)_wrist 
+                --handeye_cali_eye_on_hand true
+                --parent_frame $(arg wrist_side)_wrist_camera_link
+                --child_frame $(arg wrist_side)_wrist_camera_color_optical_frame" output="log"/>
+    </group>
+
+    <node pkg="tf" type="static_transform_publisher" name="dummy_link_to_base_link" 
+          args="0 0 0 0 0 0 1 base_link dummy_link 100" output="log"/>
+    
+    <arg name="use_remote_camera" default="true" />
+    
+    <group unless="$(arg use_remote_camera)">
+        <include file="$(find realsense2_camera)/launch/rs_camera.launch"> 
+          <arg name="color_width" value="1280" />
+          <arg name="color_height" value="720" />
+          <arg name="color_fps" value="30" />
+        </include>
+    </group>
+
+    <group >
+        <include file="$(find pick_and_place)/launch/aruco_detect_double.launch">
+            <arg name="marker1Id" value="$(arg marker_id3)" />
+            <arg name="marker1_frame" value="$(arg marker_frame1)" />
+            <arg name="marker2Id" value="$(arg marker_id2)" />
+            <arg name="marker2_frame" value="$(arg marker_frame2)" />
+            <arg name="markerSize" value="$(arg marker_size2)" />
+            <arg name="parent_name" value="$(arg ref_frame)" />
+            <arg name="image" value="$(arg image_topic)" />
+            <arg name="camera_info" value="$(arg info_topic)" />
+            <arg name="dct_normalization" value="False" />
+        </include>
+    </group>
+
+    <group >
+        <include file="$(find pick_and_place)/launch/aruco_detect_double.launch">
+            <arg name="marker1Id" value="$(arg marker_id1)" />
+            <arg name="marker1_frame" value="$(arg wrist_marker_frame1)" />
+            <arg name="marker2Id" value="$(arg marker_id3)" />
+            <arg name="marker2_frame" value="$(arg wrist_marker_frame2)" />
+            <arg name="markerSize" value="$(arg marker_size1)" />
+            <arg name="parent_name" value="$(arg wrist_ref_frame)" />
+            <arg name="image" value="$(arg wrist_image_topic)" />
+            <arg name="camera_info" value="$(arg wrist_info_topic)" />
+            <arg name="dct_normalization" value="False" />
+        </include>
+    </group>
+                      
+        <!-- Load the pick and place parameters -->
+    <rosparam command="load" file="$(find pick_and_place)/config/pick_and_place.yaml" />
+
+    <node pkg="pick_and_place" type="pick_and_place.py" name="pick_and_place" output="screen">
+        <param name="marker_config_file" value="$(find pick_and_place)/config/markers.yaml" />
+        <param name="control_hand_side" value="$(arg control_hand_side)" />
+        <param name="has_wrist" value="$(arg has_wrist)" />
+        <param name="wrist_marker_object_frame" value="$(arg wrist_marker_frame1)" />
+        <param name="wrist_marker_place_frame" value="$(arg wrist_marker_frame2)" />
+    </node> 
+
+</launch>

@@ -1,0 +1,11 @@
+[Unit]
+Description=Re-apply default EB03_LJ audio devices after user startup
+
+[Timer]
+OnBootSec=30s
+OnStartupSec=30s
+Unit=set-pulse-default-eb03.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target

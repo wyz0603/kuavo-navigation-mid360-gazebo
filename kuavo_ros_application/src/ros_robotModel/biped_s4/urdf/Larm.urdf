@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="biped_s4">
+ 
+  <link
+    name="l_hand_yaw">
+    <inertial>
+      <origin
+        xyz="0.000113131262875685 0.00969728110559553 0.0227960708688583"
+        rpy="0 0 0" />
+      <mass
+        value="0.380792" />
+      <inertia
+        ixx="7.64923971357921E-05"
+        ixy="8.51207618055666E-09"
+        ixz="-1.40676645868301E-08"
+        iyy="0.000122231121933325"
+        iyz="1.11226992393513E-06"
+        izz="8.44934959384744E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+    
+  <link
+    name="l_hand_pitch">
+    <inertial>
+      <origin
+        xyz="0.00810609772930763 0.00490163171050539 -0.0527751110917489"
+        rpy="0 0 0" />
+      <mass
+        value="0.376651" />
+      <inertia
+        ixx="4.77321490368476E-05"
+        ixy="3.05261917457108E-06"
+        ixz="4.77827164947653E-06"
+        iyy="3.43814769749137E-05"
+        iyz="-4.59311499587152E-06"
+        izz="2.49955336560133E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_hand_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_yaw" />
+    <child
+      link="l_hand_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_hand_pitch" />
+    <actuator name="l_hand_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="l_hand_roll">
+    <inertial>
+      <origin
+        xyz="0.00396050555698803 0.00946265387749012 -0.066602176591173"
+        rpy="0 0 0" />
+      <mass
+        value="0.704669" />
+      <inertia
+        ixx="9.13246737942629E-05"
+        ixy="3.25649345932988E-07"
+        ixz="-4.78728976781085E-06"
+        iyy="0.000139866613946359"
+        iyz="1.1925397914412E-05"
+        izz="0.000125082116428502" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_hand_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.058999997180792"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_pitch" />
+    <child
+      link="l_hand_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_hand_roll" />
+    <actuator name="l_hand_roll_motor" />
+  </transmission>
+  
+  
+</robot>

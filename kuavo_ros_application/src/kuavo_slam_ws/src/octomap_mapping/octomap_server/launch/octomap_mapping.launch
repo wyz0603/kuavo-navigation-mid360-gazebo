@@ -1,0 +1,49 @@
+<!-- 
+  Example launch file for octomap_server mapping: 
+  Listens to incoming PointCloud2 data and incrementally builds an octomap. 
+  The data is sent out in different representations. 
+
+  Copy this file into your workspace and adjust as needed, see
+  www.ros.org/wiki/octomap_server for details  
+-->
+<launch>
+	<!-- latch 是否采用“锁存”模式：true 表示地图更新一次就发布一次，false 表示实时刷新适合动态建图。 -->
+	<arg name="latch" default="true" /> 
+	<arg name="base_frame_id" default="livox_frame" />
+	<arg name="frame_id" default="odom" />
+	<!-- pointcloud_max_z 和 pointcloud_min_z 用于裁剪点云数据，避免天花板和地面干扰 -->
+	<arg name="pointcloud_min_z" default="-0.5" />
+	<arg name="pointcloud_max_z" default="0.5" />
+
+	<arg name="occupancy_min_z" default="-0.5" />
+	<arg name="occupancy_max_z" default="0.5" />
+
+	<arg name="cloud_in" default="/livox/cloud" />
+
+	<arg name="sensor_model/min_range" default="0.5" />
+	<arg name="sensor_model/max_range" default="10.0" />
+	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+		<param name="resolution" value="0.05" />
+		
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param name="frame_id" type="string" value="$(arg frame_id)" />
+
+		<!-- maximum range to integrate (speedup!) -->
+		<param name="sensor_model/min_range" value="$(arg sensor_model/min_range)" />
+		<param name="sensor_model/max_range" value="$(arg sensor_model/max_range)" />
+
+	  <!-- filter_ground 地面滤除 -->
+		<param name="filter_ground" type="bool" value="false" />
+		<param name="base_frame_id" type="string" value="$(arg base_frame_id)" />
+		<param name="latch" value="$(arg latch)" />
+		<param name="pointcloud_min_z" type="double" value="$(arg pointcloud_min_z)" />
+		<param name="pointcloud_max_z" type="double" value="$(arg pointcloud_max_z)" />
+		<param name="occupancy_min_z" type="double" value="$(arg occupancy_min_z)" />
+		<param name="occupancy_max_z" type="double" value="$(arg occupancy_max_z)" />
+		
+		<!-- data source to integrate (PointCloud2) -->
+		<remap from="cloud_in" to="$(arg cloud_in)" />
+		<remap from="projected_map" to="/map" />
+	
+	</node>
+</launch>

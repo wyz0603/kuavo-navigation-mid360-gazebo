@@ -1,0 +1,59 @@
+<launch>
+
+  <arg name="base_local_planner" default="mpc_local_planner" />
+  <arg name="map" default="" />
+  <arg name="foxglove" default="false"/>
+  <arg name="odom_source" default="lidar"/>
+  <arg name="crop_box" default="false"/>
+  <arg name="keep_localization" default="false"/>
+  <arg name="rviz" default="true" />
+  <arg name="use_sim_time" default="false"/>
+  <arg name="record_nav_data" default="false"/>
+
+  <param name="/use_sim_time" value="$(arg use_sim_time)"/>
+  
+  <!-- 启动 move_base -->
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" if="$(eval base_local_planner == 'dwa_local_planner')" />
+    <param name="base_local_planner" value="mpc_local_planner/MpcLocalPlannerROS" if="$(eval base_local_planner == 'mpc_local_planner')" />
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" if="$(eval base_local_planner == 'teb_local_planner')" />
+
+    <param name="DWAPlannerROS/odom_topic" value="/odom" if="$(eval arg('odom_source') == 'robot')" />
+    <param name="MpcLocalPlannerROS/odom_topic" value="/odom" if="$(eval arg('odom_source') == 'robot')" />
+    <param name="TebLocalPlannerROS/odom_topic" value="/odom" if="$(eval arg('odom_source') == 'robot')" />
+    <param name="global_costmap/robot_base_frame" value="base_link" if="$(eval arg('odom_source') == 'robot')" />
+    <param name="local_costmap/robot_base_frame" value="base_link" if="$(eval arg('odom_source') == 'robot')" />
+
+    <param name="DWAPlannerROS/odom_topic" value="/Odometry" unless="$(eval arg('odom_source') == 'robot')" />
+    <param name="MpcLocalPlannerROS/odom_topic" value="/Odometry" unless="$(eval arg('odom_source') == 'robot')" />
+    <param name="TebLocalPlannerROS/odom_topic" value="/Odometry" unless="$(eval arg('odom_source') == 'robot')" />
+    <param name="global_costmap/robot_base_frame" value="lio_base_link" unless="$(eval arg('odom_source') == 'robot')" />
+    <param name="local_costmap/robot_base_frame" value="lio_base_link" unless="$(eval arg('odom_source') == 'robot')" />
+
+
+    <rosparam file="$(find kuavo_navigation)/config/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find kuavo_navigation)/config/$(arg base_local_planner)_params.yaml" command="load" />
+    <rosparam file="$(find kuavo_navigation)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find kuavo_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find kuavo_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find kuavo_navigation)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find kuavo_navigation)/config/local_costmap_params.yaml" command="load" />
+  </node>
+
+  <node pkg="fast_lio" type="global_localization.py" name="global_localization" output="screen" args="--keep_localization $(arg keep_localization) --odom_source $(arg odom_source)" />
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 1 livox_frame lio_base_link 100" />
+  <include file="$(find kuavo_mapping)/launch/load_map.launch">
+    <arg name="map" value="$(arg map)" />
+    <arg name="crop_box" value="$(arg crop_box)" />
+    <arg name="rviz" value="$(arg rviz)" />
+  </include>
+  <group if="$(arg foxglove)">
+    <include file="$(find foxglove_bridge)/ros1_foxglove_bridge/launch/foxglove_bridge.launch"/>
+  </group>
+  <group if="$(arg record_nav_data)">
+    <node pkg="kuavo_navigation" type="record_nav_data.sh" name="record_nav_data" output="screen">
+      <rosparam file="$(find kuavo_navigation)/config/topic_whilelist.yaml" command="load" />
+    </node>
+  </group>
+</launch>

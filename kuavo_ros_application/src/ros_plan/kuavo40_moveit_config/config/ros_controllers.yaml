@@ -1,0 +1,92 @@
+l_arm_group_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - l_arm_pitch
+    - l_arm_roll
+    - l_arm_yaw
+    - l_forearm_pitch
+    - l_hand_yaw
+    - l_hand_pitch
+    - l_hand_roll
+  gains:
+    l_arm_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_arm_roll:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_arm_yaw:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_forearm_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_hand_yaw:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_hand_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    l_hand_roll:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+r_arm_group_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - r_arm_pitch
+    - r_arm_roll
+    - r_arm_yaw
+    - r_forearm_pitch
+    - r_hand_yaw
+    - r_hand_pitch
+    - r_hand_roll
+  gains:
+    r_arm_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_arm_roll:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_arm_yaw:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_forearm_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_hand_yaw:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_hand_pitch:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    r_hand_roll:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

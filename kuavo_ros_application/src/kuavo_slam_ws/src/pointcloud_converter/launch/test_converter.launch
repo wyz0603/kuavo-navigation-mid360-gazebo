@@ -1,0 +1,20 @@
+<launch>
+  <!-- 测试点云转换器的启动文件 -->
+  
+  <arg name="input_topic" default="/lidar_points" />
+  <arg name="output_topic" default="/velodyne_points" />
+  
+  <!-- 启动转换器 -->
+  <include file="$(find pointcloud_converter)/launch/hesai_converter.launch">
+    <arg name="input_topic" value="$(arg input_topic)" />
+    <arg name="output_topic" value="$(arg output_topic)" />
+  </include>
+  
+  <!-- 启动rviz用于可视化 -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pointcloud_converter)/config/converter_test.rviz" />
+  
+  <!-- 打印话题信息 -->
+  <node pkg="rostopic" type="rostopic" name="input_info" args="info $(arg input_topic)" output="screen" />
+  <node pkg="rostopic" type="rostopic" name="output_info" args="info $(arg output_topic)" output="screen" />
+  
+</launch>

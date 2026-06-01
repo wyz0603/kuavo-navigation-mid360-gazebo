@@ -1,0 +1,16 @@
+local_costmap:
+  global_frame: odom
+  # global_frame: map
+  robot_base_frame: lio_base_link
+  update_frequency: 20.0       # internal cost integration rate
+  publish_frequency: 10.0      # rate /move_base/local_costmap/costmap is published (was unset = 0 = never publishes the full grid for RViz)
+  rolling_window: true
+  width: 6.0                   # was 3.0 - the robot only saw 1.5 m around it, too short for any MPC reaction time
+  height: 6.0                  # same
+  resolution: 0.05
+  transform_tolerance: 1.0     # be a bit forgiving under low Real-Time-Factor
+
+  plugins:
+    - {name: static_layer,    type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer,  type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!-- Simulation-only mapping launch. Skips the real livox_ros_driver2 driver
+     and feeds FAST-LIO from the Gazebo Livox plugin via livox_sim_bridge. -->
+<launch>
+  <param name="/use_sim_time" value="true"/>
+
+  <arg name="rviz" default="true"/>
+  <arg name="foxglove" default="false"/>
+  <arg name="crop_box" default="false"/>
+
+  <!-- view_mode chooses between the two ways to handle the lidar's startup height:
+         visual    : cloud_z_offset=1.5, lidar_startup_height=0. Floor lands on the
+                     RViz grid with Fixed Frame=odom, BUT SLAM body frame ends up
+                     ~1.5 m below the URDF body so the two trees do not overlap.
+         geometry  : cloud_z_offset=0,   lidar_startup_height=1.5. Geometry is
+                     preserved end-to-end; URDF chain and SLAM frame OVERLAP, but
+                     you must set RViz Fixed Frame to `map` to see the floor on
+                     the grid (otherwise cloud appears 1.5 m below the grid in
+                     `odom` view).
+       Override the individual args below to fine-tune. -->
+  <arg name="view_mode" default="visual"
+       doc="visual = cloud height correct in odom view (TF trees offset by 1.5m); geometry = URDF and SLAM TF aligned (need Fixed Frame=map)"/>
+
+  <!-- Lidar/IMU mounting compensation. The kuavo URDF mounts the MID360
+       with rpy=(pi, ~0.23, 0) relative to an upright frame:
+         livox_lidar.xacro     (radar->livox_link)  rpy=(pi, 0, 0)        ← inversion
+         biped_s45_gazebo.urdf (zhead_2->radar)     rpy=(0, 0.22969, 0)   ← 13.16 deg pitch
+       Empirically pitch=0.11 (~6.3 deg) flattens the scan best in this sim;
+       the residual delta is presumably Gazebo settling pose vs. nominal URDF.
+       Pass correction_rpy:="[0,0,0]" to disable compensation (raw pass-through). -->
+  <arg name="correction_rpy" default="[3.14159, 0.11, 0.0]"
+       doc="[roll, pitch, yaw] rad that rotate lidar/IMU vectors from sim livox_link to an upright reference"/>
+
+  <!-- Two ways to deal with the fact that FAST-LIO sets its odom origin at the
+       lidar's startup position (~1.5 m above ground for a standing humanoid):
+
+       (1) lidar_startup_height: a static Z translation on map->odom. Geometrically
+           correct (data is untouched). REQUIRES RViz's Fixed Frame to be `map`
+           - the cloud's height in `map` will then be physically meaningful.
+
+       (2) cloud_z_offset: a constant Z added to every lidar point in the bridge,
+           BEFORE FAST-LIO sees them. Lifts the cloud directly so it appears at
+           the right height even with Fixed Frame=`odom`. WARNING: physically
+           translates the data so SLAM's vertical motion estimation gets a
+           constant bias (harmless for walking, bad if the robot jumps/falls).
+       Both default to 0; pick whichever fits your RViz setup. -->
+  <!-- visual: shift cloud only;  geometry: shift map↔odom only. -->
+  <arg name="lidar_startup_height" default="$(eval 1.5 if arg('view_mode') == 'geometry' else 0.0)"
+       doc="Static Z (m) added to map->odom TF; needs RViz Fixed Frame=map to show effect"/>
+  <arg name="cloud_z_offset"       default="$(eval 0.0 if arg('view_mode') == 'geometry' else 1.5)"
+       doc="Constant Z (m) added to every lidar point in the bridge; visible with any Fixed Frame."/>
+
+  <!-- Floor / ceiling band filter on the corrected lidar cloud. Drops the
+       ground "halo" the inverted MID360 scans around the robot's feet, and
+       optionally any ceiling clutter. Z values are in the rpy-corrected,
+       pre-offset frame: 0 = lidar height, negative = below. -->
+  <arg name="lidar_min_z"          default="-1.2"
+       doc="Drop points below this z in the pre-offset corrected frame. -1.2 catches ground halo + stray near-floor noise; lower to keep more low features."/>
+  <arg name="lidar_max_z"          default="1000.0"
+       doc="Drop points above this z. e.g. 1.0 filters the ceiling."/>
+
+  <!-- octomap Z thresholds. Depend on view_mode because cloud_z_offset shifts
+       where the floor lives in `odom` (visual: floor≈0, walls 0..3;
+       geometry: floor≈−1.5, walls −1.5..+1.5). Project only the wall band at
+       robot mid-height into the 2D occupancy grid for a clean map. -->
+  <arg name="pointcloud_min_z" default="$(eval -1.3 if arg('view_mode') == 'geometry' else 0.3)"/>
+  <arg name="pointcloud_max_z" default="$(eval  0.5 if arg('view_mode') == 'geometry' else 2.0)"/>
+  <arg name="occupancy_min_z"  default="$(eval -1.0 if arg('view_mode') == 'geometry' else 0.5)"/>
+  <arg name="occupancy_max_z"  default="$(eval  0.0 if arg('view_mode') == 'geometry' else 1.5)"/>
+  <arg name="sensor_model_min_range" default="0.5"/>
+  <arg name="sensor_model_max_range" default="10.0"/>
+
+  <!-- octomap probabilistic thresholds. Default 0.7 / 0.4 lets single noisy hits
+       paint salt-and-pepper occupied voxels. Tighter hit + higher miss + lower
+       clamping max means cells need many confirming hits to stick, and misses
+       (ray pass-through) clear noise faster. -->
+  <arg name="octomap_hit_prob"            default="0.62"
+       doc="Probability added per hit (default 0.7). Lower = slower commit to occupied."/>
+  <arg name="octomap_miss_prob"           default="0.45"
+       doc="Probability subtracted per miss (default 0.4). Higher = noise clears faster."/>
+  <arg name="octomap_clamping_thresh_max" default="0.92"
+       doc="Upper clamp on cell probability (default 0.97). Lower = stuck noise still clearable."/>
+  <arg name="octomap_clamping_thresh_min" default="0.12"/>
+
+  <!-- PCD save directory cleanup (same as build_map.launch) -->
+  <node pkg="kuavo_mapping" type="clear_pcd.sh" name="clear_pcd" output="screen"/>
+  <param name="/pcd_save/pcd_save_en" type="bool" value="true"/>
+
+  <!-- 1. Sim lidar bridge: /scan -> /livox/lidar(CustomMsg);
+          /livox/imu -> /livox/imu_corrected (rotated by correction_rpy to undo URDF mount).
+          /livox/cloud is published by FAST-LIO below (cloud_registered_body remap). -->
+  <include file="$(find pointcloud_converter)/launch/livox_sim_bridge.launch">
+    <arg name="correction_rpy" value="$(arg correction_rpy)"/>
+    <arg name="cloud_z_offset" value="$(arg cloud_z_offset)"/>
+    <arg name="min_z"          value="$(arg lidar_min_z)"/>
+    <arg name="max_z"          value="$(arg lidar_max_z)"/>
+  </include>
+
+  <!-- 2. FAST-LIO with sim-specific config (identity lidar<->imu extrinsic) -->
+  <rosparam command="load" file="$(find kuavo_mapping)/config/mid360_sim.yaml"/>
+  <param name="feature_extract_enable" type="bool" value="0"/>
+  <param name="point_filter_num" type="int" value="3"/>
+  <param name="max_iteration" type="int" value="3"/>
+  <param name="filter_size_surf" type="double" value="0.5"/>
+  <param name="filter_size_map" type="double" value="0.5"/>
+  <param name="cube_side_length" type="double" value="1000"/>
+  <param name="runtime_pos_log_enable" type="bool" value="0"/>
+  <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" required="true">
+    <remap from="/cloud_registered_body" to="/livox/cloud"/>
+  </node>
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="fast_lio_rviz"
+          args="-d $(find fast_lio)/rviz_cfg/loam_livox.rviz" output="screen"/>
+  </group>
+
+  <!-- 3. Crop-box filter config (same as build_map.launch) -->
+  <rosparam file="$(find kuavo_mapping)/config/mid360_filter.yaml" command="load"/>
+  <param name="crop_box/enable" value="$(arg crop_box)"/>
+
+  <!-- 4. octomap_server: PointCloud2 -> 2D projected map -->
+  <include file="$(find octomap_server)/launch/octomap_mapping.launch">
+    <arg name="pointcloud_min_z" value="$(arg pointcloud_min_z)"/>
+    <arg name="pointcloud_max_z" value="$(arg pointcloud_max_z)"/>
+    <arg name="occupancy_min_z" value="$(arg occupancy_min_z)"/>
+    <arg name="occupancy_max_z" value="$(arg occupancy_max_z)"/>
+    <arg name="sensor_model/min_range" value="$(arg sensor_model_min_range)"/>
+    <arg name="sensor_model/max_range" value="$(arg sensor_model_max_range)"/>
+    <arg name="cloud_in" value="/livox/cloud"/>
+  </include>
+  <!-- Override octomap_server's probabilistic thresholds for noise reduction.
+       The included launch above doesn't expose these as args, so we set them
+       on the octomap_server private namespace. -->
+  <param name="/octomap_server/sensor_model/hit"  value="$(arg octomap_hit_prob)"/>
+  <param name="/octomap_server/sensor_model/miss" value="$(arg octomap_miss_prob)"/>
+  <param name="/octomap_server/sensor_model/min"  value="$(arg octomap_clamping_thresh_min)"/>
+  <param name="/octomap_server/sensor_model/max"  value="$(arg octomap_clamping_thresh_max)"/>
+
+  <group if="$(arg foxglove)">
+    <include file="$(find foxglove_bridge)/ros1_foxglove_bridge/launch/foxglove_bridge.launch"/>
+  </group>
+
+  <!-- Use tf2_ros static_transform_publisher: publishes ONCE on /tf_static as a
+       latched topic instead of streaming on /tf at a wall-clock rate. This
+       avoids TF_OLD_DATA warnings under /use_sim_time and removes any chance
+       of two publishers fighting over timestamps. -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom"
+        args="0 0 $(arg lidar_startup_height) 0 0 0 map odom"/>
+
+  <!-- Bridge the URDF tree (rooted at `world` from Gazebo / robot_state_publisher)
+       to the SLAM tree (rooted at `map`). Identity is correct when the Gazebo
+       world plane aligns with the SLAM map plane (true once lidar_startup_height
+       is correct). -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map"
+        args="0 0 0 0 0 0 world map"/>
+
+  <node pkg="kuavo_mapping" type="map_manager.py" name="map_manager" output="screen"/>
+</launch>

@@ -1,0 +1,16 @@
+[Unit]
+Description=Ensure PulseAudio is running and set default audio device
+After=default.target sound.target pulseaudio.service pulseaudio.socket
+Wants=pulseaudio.socket
+
+[Service]
+Type=oneshot
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+Environment=WAIT_SECONDS=0
+ExecStartPre=/bin/sleep 15
+ExecStart=/bin/bash /REPLACED_BY_ONE_CLICK/audio/set_pulse_default_eb03.sh EB03_LJ
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

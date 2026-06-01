@@ -1,0 +1,5 @@
+<launch>
+  <!-- 启动 ex_hand_gesture.py 节点 -->
+  <node name="start_half_body_API_test" pkg="automatic_test" type="start_half_body.py" output="screen">
+  </node>
+</launch>

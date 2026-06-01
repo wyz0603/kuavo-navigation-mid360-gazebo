@@ -1,0 +1,6 @@
+<launch>
+  <!-- 启动 arm_target_pose.py 节点 -->
+  <node name="automatic_test_node" pkg="automatic_test" type="arm_target_pose.py" output="screen">
+
+  </node>
+</launch>

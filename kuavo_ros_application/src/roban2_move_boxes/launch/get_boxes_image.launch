@@ -1,0 +1,13 @@
+<launch>
+  <!-- 启动 Realsense 相机 -->
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+  <!-- 定义可覆盖的参数 -->
+  <arg name="output_folder" default="$(env HOME)/Desktop/yolo/images" />
+  <node name="get_boxes_image" pkg="roban_move_boxes" type="get_boxes_image.py" output="screen">
+
+      <!-- 使用参数值 -->
+      <param name="output_folder" value="$(arg output_folder)" />
+
+  </node>
+</launch>

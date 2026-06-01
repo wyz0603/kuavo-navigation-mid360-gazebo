@@ -1,0 +1,31 @@
+# IDE File
+.vscode/
+*.pyc
+
+# Mac File
+*.DS_Store
+
+# ROS File catkin_make_isolated
+build_isolated/
+devel_isolated/
+
+# ROS caktin build 
+build/
+devel/
+logs/
+.catkin_tools/
+.catkin_workspace
+scans.pcd
+# Ignore all content in the traj directory
+src/ros_plan/moveit_interface_plan/scripts/traj/*
+
+# Except for the base.json file
+!src/ros_plan/moveit_interface_plan/traj/base.json
+
+src/kuavo_slam_ws/LivoxViewer2
+
+__pycache__/
+
+# Aider files
+.aider*
+mise.toml

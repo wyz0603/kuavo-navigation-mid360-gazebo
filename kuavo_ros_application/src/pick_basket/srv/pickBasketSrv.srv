@@ -1,0 +1,5 @@
+uint8 action  # 0 - 抓取, 1 - 放置
+uint8 tag_id  
+---
+bool result   # true - 成功，false - 失败
+string message

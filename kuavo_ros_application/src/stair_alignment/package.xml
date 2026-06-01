@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>stair_alignment</name>
+  <version>0.0.0</version>
+  <description>The stair_alignment package - Align robot to specific AprilTag on stairs</description>
+
+  <maintainer email="root@todo.todo">root</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+  <build_depend>ocs2_msgs</build_depend>
+  <build_depend>kuavo_msgs</build_depend>
+  <build_depend>dynamic_biped</build_depend>
+  <build_depend>apriltag_ros</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>tf</build_export_depend>
+  <build_export_depend>trajectory_msgs</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>message_generation</build_export_depend>
+  <build_export_depend>ocs2_msgs</build_export_depend>
+  <build_export_depend>dynamic_biped</build_export_depend>
+  <build_export_depend>apriltag_ros</build_export_depend>
+
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>message_generation</exec_depend>
+  <exec_depend>ocs2_msgs</exec_depend>
+  <exec_depend>kuavo_msgs</exec_depend>
+  <exec_depend>dynamic_biped</exec_depend>
+  <exec_depend>apriltag_ros</exec_depend>
+
+  <export>
+  </export>
+</package>

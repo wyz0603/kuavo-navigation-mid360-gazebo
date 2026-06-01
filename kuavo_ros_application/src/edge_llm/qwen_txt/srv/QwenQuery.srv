@@ -1,0 +1,9 @@
+# Request: user query string
+string query
+
+---
+# Response fields
+bool success        # Service call success status
+int32 error_code    # Error code (0 = success, 1 = empty query, 2 = service unavailable)
+string message      # Status or error message
+string uuid         # UUID for tracking this query (empty if failed)

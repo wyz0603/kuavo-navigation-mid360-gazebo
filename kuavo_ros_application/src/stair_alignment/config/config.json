@@ -1,0 +1,24 @@
+{
+    "tag_id": 1,
+    "xyz_offset": [0.0, 0.0, 0.0],
+    "stand_params": {
+        "expected_offset": [-0.6, 0.0, 0],
+        "x_threshold": 0.02,
+        "y_threshold": 0.02, 
+        "yaw_deg_threshold": 8
+    },
+    "head_orientation": {
+        "yaw_deg": 0,
+        "pitch_deg": 20
+    },
+    "max_step_sizes": {
+        "max_x_step": 0.04,
+        "max_y_step": 0.03,
+        "max_yaw_step_deg": 25
+    },
+    "timing_params": {
+        "step_duration": 1.0,
+        "wait_buffer": 3.0,
+        "detection_timeout": 1.0
+    }
+}

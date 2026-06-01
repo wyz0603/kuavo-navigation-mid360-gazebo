@@ -1,0 +1,173 @@
+digraph G {
+node [shape=box];
+"torso" [label="torso"];
+"head_yaw" [label="head_yaw"];
+"head_pitch" [label="head_pitch"];
+"l_arm_pitch" [label="l_arm_pitch"];
+"l_arm_roll" [label="l_arm_roll"];
+"l_arm_yaw" [label="l_arm_yaw"];
+"l_forearm_pitch" [label="l_forearm_pitch"];
+"l_hand_yaw" [label="l_hand_yaw"];
+"l_hand_pitch" [label="l_hand_pitch"];
+"l_hand_roll" [label="l_hand_roll"];
+"l_index_proximal_finger" [label="l_index_proximal_finger"];
+"l_index_distal_finger" [label="l_index_distal_finger"];
+"l_middle_proximal_finger" [label="l_middle_proximal_finger"];
+"l_middle_distal_finger" [label="l_middle_distal_finger"];
+"l_pinky_proximal_finger" [label="l_pinky_proximal_finger"];
+"l_pinky_distal_finger" [label="l_pinky_distal_finger"];
+"l_ring_proximal_finger" [label="l_ring_proximal_finger"];
+"l_ring_distal_finger" [label="l_ring_distal_finger"];
+"l_thumb_proximal_yaw" [label="l_thumb_proximal_yaw"];
+"l_thumb_distal_pitch" [label="l_thumb_distal_pitch"];
+"l_leg_roll" [label="l_leg_roll"];
+"l_leg_yaw" [label="l_leg_yaw"];
+"l_leg_pitch" [label="l_leg_pitch"];
+"l_knee" [label="l_knee"];
+"l_foot_pitch" [label="l_foot_pitch"];
+"l_foot_roll" [label="l_foot_roll"];
+"l_l_bar" [label="l_l_bar"];
+"l_l_tendon" [label="l_l_tendon"];
+"l_r_bar" [label="l_r_bar"];
+"l_r_tendon" [label="l_r_tendon"];
+"r_arm_pitch" [label="r_arm_pitch"];
+"r_arm_roll" [label="r_arm_roll"];
+"r_arm_yaw" [label="r_arm_yaw"];
+"r_forearm_pitch" [label="r_forearm_pitch"];
+"r_hand_yaw" [label="r_hand_yaw"];
+"r_hand_pitch" [label="r_hand_pitch"];
+"r_hand_roll" [label="r_hand_roll"];
+"r_index_proximal_finger" [label="r_index_proximal_finger"];
+"r_index_distal_finger" [label="r_index_distal_finger"];
+"r_middle_proximal_finger" [label="r_middle_proximal_finger"];
+"r_middle_distal_finger" [label="r_middle_distal_finger"];
+"r_pinky_proximal_finger" [label="r_pinky_proximal_finger"];
+"r_pinky_distal_finger" [label="r_pinky_distal_finger"];
+"r_ring_proximal_finger" [label="r_ring_proximal_finger"];
+"r_ring_distal_finger" [label="r_ring_distal_finger"];
+"r_thumb_proximal_yaw" [label="r_thumb_proximal_yaw"];
+"r_thumb_distal_pitch" [label="r_thumb_distal_pitch"];
+"r_leg_roll" [label="r_leg_roll"];
+"r_leg_yaw" [label="r_leg_yaw"];
+"r_leg_pitch" [label="r_leg_pitch"];
+"r_knee" [label="r_knee"];
+"r_foot_pitch" [label="r_foot_pitch"];
+"r_foot_roll" [label="r_foot_roll"];
+"r_l_bar" [label="r_l_bar"];
+"r_l_tendon" [label="r_l_tendon"];
+"r_r_bar" [label="r_r_bar"];
+"r_r_tendon" [label="r_r_tendon"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"torso" -> "head_yaw" [label="xyz: -0.0175476 0 0.4994 \nrpy: 0 -0 0"]
+"head_yaw" -> "head_yaw"
+"head_yaw" -> "head_pitch" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"head_pitch" -> "head_pitch"
+"torso" -> "l_arm_pitch" [label="xyz: -0.0175476 0.2547 0.3245 \nrpy: 0 -0 0"]
+"l_arm_pitch" -> "l_arm_pitch"
+"l_arm_pitch" -> "l_arm_roll" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"l_arm_roll" -> "l_arm_roll"
+"l_arm_roll" -> "l_arm_yaw" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"l_arm_yaw" -> "l_arm_yaw"
+"l_arm_yaw" -> "l_forearm_pitch" [label="xyz: 0 0 -0.1636 \nrpy: 0 -0 0"]
+"l_forearm_pitch" -> "l_forearm_pitch"
+"l_forearm_pitch" -> "l_hand_yaw" [label="xyz: 0 0 -0.13205 \nrpy: 0 -0 0"]
+"l_hand_yaw" -> "l_hand_yaw"
+"l_hand_yaw" -> "l_hand_pitch" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"l_hand_pitch" -> "l_hand_pitch"
+"l_hand_pitch" -> "l_hand_roll" [label="xyz: 0 0 -0.059 \nrpy: 0 -0 0"]
+"l_hand_roll" -> "l_hand_roll"
+"l_hand_roll" -> "l_index_proximal_finger" [label="xyz: 0.0295025 0.00394879 -0.174731 \nrpy: 0 -0.0311676 0"]
+"l_index_proximal_finger" -> "l_index_proximal_finger"
+"l_index_proximal_finger" -> "l_index_distal_finger" [label="xyz: 0.000133519 0.00243999 -0.0349146 \nrpy: 0 -0 0"]
+"l_index_distal_finger" -> "l_index_distal_finger"
+"l_hand_roll" -> "l_middle_proximal_finger" [label="xyz: 0.0085 0.00820382 -0.178435 \nrpy: 0 -0 0"]
+"l_middle_proximal_finger" -> "l_middle_proximal_finger"
+"l_middle_proximal_finger" -> "l_middle_distal_finger" [label="xyz: 0 0.00292977 -0.0418977 \nrpy: 0 -0 0"]
+"l_middle_distal_finger" -> "l_middle_distal_finger"
+"l_hand_roll" -> "l_pinky_proximal_finger" [label="xyz: -0.0332309 0.00363387 -0.170227 \nrpy: 0 0.0659958 0"]
+"l_pinky_proximal_finger" -> "l_pinky_proximal_finger"
+"l_pinky_proximal_finger" -> "l_pinky_distal_finger" [label="xyz: -0.000139217 0.00243553 -0.0349149 \nrpy: 0 -0 0"]
+"l_pinky_distal_finger" -> "l_pinky_distal_finger"
+"l_hand_roll" -> "l_ring_proximal_finger" [label="xyz: -0.0126025 0.00807856 -0.176447 \nrpy: 0 0.0311676 0"]
+"l_ring_proximal_finger" -> "l_ring_proximal_finger"
+"l_ring_proximal_finger" -> "l_ring_distal_finger" [label="xyz: -0.000160223 0.00292799 -0.0418975 \nrpy: 0 -0 0"]
+"l_ring_distal_finger" -> "l_ring_distal_finger"
+"l_hand_roll" -> "l_thumb_proximal_yaw" [label="xyz: 0.025 -0.0216278 -0.1107 \nrpy: 0 -0 0"]
+"l_thumb_proximal_yaw" -> "l_thumb_proximal_yaw"
+"l_thumb_proximal_yaw" -> "l_thumb_distal_pitch" [label="xyz: 0.012 -0.0065 0 \nrpy: 0 -0 0"]
+"l_thumb_distal_pitch" -> "l_thumb_distal_pitch"
+"torso" -> "l_leg_roll" [label="xyz: -0.00254758 0.087 -0.066 \nrpy: 0 -0 0"]
+"l_leg_roll" -> "l_leg_roll"
+"l_leg_roll" -> "l_leg_yaw" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"l_leg_yaw" -> "l_leg_yaw"
+"l_leg_yaw" -> "l_leg_pitch" [label="xyz: 0 0.02545 -0.12345 \nrpy: 0 -0 0"]
+"l_leg_pitch" -> "l_leg_pitch"
+"l_leg_pitch" -> "l_knee" [label="xyz: -0.0103902 0 -0.249784 \nrpy: 0 -0 0"]
+"l_knee" -> "l_knee"
+"l_knee" -> "l_foot_pitch" [label="xyz: 0 0 -0.346 \nrpy: 0 -0 0"]
+"l_foot_pitch" -> "l_foot_pitch"
+"l_foot_pitch" -> "l_foot_roll" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"l_foot_roll" -> "l_foot_roll"
+"l_knee" -> "l_l_bar" [label="xyz: 0 0.026 -0.09 \nrpy: 0 -0 0"]
+"l_l_bar" -> "l_l_bar"
+"l_l_bar" -> "l_l_tendon" [label="xyz: -0.058 0 0 \nrpy: 0 -0 0"]
+"l_l_tendon" -> "l_l_tendon"
+"l_knee" -> "l_r_bar" [label="xyz: 0 -0.026 -0.153 \nrpy: 0 -0 0"]
+"l_r_bar" -> "l_r_bar"
+"l_r_bar" -> "l_r_tendon" [label="xyz: -0.058 0 -1.0363e-05 \nrpy: 0 -0 0"]
+"l_r_tendon" -> "l_r_tendon"
+"torso" -> "r_arm_pitch" [label="xyz: -0.0175476 -0.2547 0.3245 \nrpy: 0 -0 0"]
+"r_arm_pitch" -> "r_arm_pitch"
+"r_arm_pitch" -> "r_arm_roll" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"r_arm_roll" -> "r_arm_roll"
+"r_arm_roll" -> "r_arm_yaw" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"r_arm_yaw" -> "r_arm_yaw"
+"r_arm_yaw" -> "r_forearm_pitch" [label="xyz: 0 0 -0.1636 \nrpy: 0 -0 0"]
+"r_forearm_pitch" -> "r_forearm_pitch"
+"r_forearm_pitch" -> "r_hand_yaw" [label="xyz: 0 0 -0.13205 \nrpy: 0 -0 0"]
+"r_hand_yaw" -> "r_hand_yaw"
+"r_hand_yaw" -> "r_hand_pitch" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"r_hand_pitch" -> "r_hand_pitch"
+"r_hand_pitch" -> "r_hand_roll" [label="xyz: 0 0 -0.059 \nrpy: 0 -0 0"]
+"r_hand_roll" -> "r_hand_roll"
+"r_hand_roll" -> "r_index_proximal_finger" [label="xyz: 0.0285188 -0.00394879 -0.174731 \nrpy: 0 -0.0311676 0"]
+"r_index_proximal_finger" -> "r_index_proximal_finger"
+"r_index_proximal_finger" -> "r_index_distal_finger" [label="xyz: 0.000133519 -0.00243999 -0.0349146 \nrpy: 0 -0 0"]
+"r_index_distal_finger" -> "r_index_distal_finger"
+"r_hand_roll" -> "r_middle_proximal_finger" [label="xyz: 0.00751626 -0.00820382 -0.178435 \nrpy: 0 -0 0"]
+"r_middle_proximal_finger" -> "r_middle_proximal_finger"
+"r_middle_proximal_finger" -> "r_middle_distal_finger" [label="xyz: 0 -0.00292977 -0.0418977 \nrpy: 0 -0 0"]
+"r_middle_distal_finger" -> "r_middle_distal_finger"
+"r_hand_roll" -> "r_pinky_proximal_finger" [label="xyz: -0.0342147 -0.00363387 -0.170227 \nrpy: 0 0.0659958 0"]
+"r_pinky_proximal_finger" -> "r_pinky_proximal_finger"
+"r_pinky_proximal_finger" -> "r_pinky_distal_finger" [label="xyz: -0.000139217 -0.00243553 -0.0349149 \nrpy: 0 -0 0"]
+"r_pinky_distal_finger" -> "r_pinky_distal_finger"
+"r_hand_roll" -> "r_ring_proximal_finger" [label="xyz: -0.0135863 -0.00807856 -0.176447 \nrpy: 0 0.0311676 0"]
+"r_ring_proximal_finger" -> "r_ring_proximal_finger"
+"r_ring_proximal_finger" -> "r_ring_distal_finger" [label="xyz: -0.000160223 -0.00292799 -0.0418975 \nrpy: 0 -0 0"]
+"r_ring_distal_finger" -> "r_ring_distal_finger"
+"r_hand_roll" -> "r_thumb_proximal_yaw" [label="xyz: 0.0240163 0.0216278 -0.1107 \nrpy: 0 -0 0"]
+"r_thumb_proximal_yaw" -> "r_thumb_proximal_yaw"
+"r_thumb_proximal_yaw" -> "r_thumb_distal_pitch" [label="xyz: 0.012 0.0065 0.0004 \nrpy: 0 -0 0"]
+"r_thumb_distal_pitch" -> "r_thumb_distal_pitch"
+"torso" -> "r_leg_roll" [label="xyz: -0.00254758 -0.087 -0.066 \nrpy: 0 -0 0"]
+"r_leg_roll" -> "r_leg_roll"
+"r_leg_roll" -> "r_leg_yaw" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"r_leg_yaw" -> "r_leg_yaw"
+"r_leg_yaw" -> "r_leg_pitch" [label="xyz: 0 -0.02545 -0.12345 \nrpy: 0 -0 0"]
+"r_leg_pitch" -> "r_leg_pitch"
+"r_leg_pitch" -> "r_knee" [label="xyz: -0.0103902 0 -0.249784 \nrpy: 0 -0 0"]
+"r_knee" -> "r_knee"
+"r_knee" -> "r_foot_pitch" [label="xyz: 0 0 -0.346 \nrpy: 0 -0 0"]
+"r_foot_pitch" -> "r_foot_pitch"
+"r_foot_pitch" -> "r_foot_roll" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"r_foot_roll" -> "r_foot_roll"
+"r_knee" -> "r_l_bar" [label="xyz: 0 0.026 -0.153 \nrpy: 0 -0 0"]
+"r_l_bar" -> "r_l_bar"
+"r_l_bar" -> "r_l_tendon" [label="xyz: -0.058 0 -1.0363e-05 \nrpy: 0 -0 0"]
+"r_l_tendon" -> "r_l_tendon"
+"r_knee" -> "r_r_bar" [label="xyz: 0 -0.026 -0.09 \nrpy: 0 -0 0"]
+"r_r_bar" -> "r_r_bar"
+"r_r_bar" -> "r_r_tendon" [label="xyz: -0.058 0 0 \nrpy: 0 -0 0"]
+"r_r_tendon" -> "r_r_tendon"
+}

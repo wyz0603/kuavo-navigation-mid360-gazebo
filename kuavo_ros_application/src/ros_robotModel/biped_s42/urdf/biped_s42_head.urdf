@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="biped_s42">
+  
+  <link name="torso">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="0" />
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  </link>
+<joint name="torso" type="fixed">
+    <parent link="torso" />
+    <child link="base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.01779947 0.00029663 0.18176446"
+        rpy="0 0 0" />
+      <mass
+        value="24.6469" />
+      <inertia
+        ixx="0.84217451"
+        ixy="-0.00019450"
+        ixz="0.06746774"
+        iyy="0.73769958"
+        iyz="-0.00007935"
+        izz="0.24371683" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/torso.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuavo_assets/models/biped_s42/meshes/torso.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  
+
+  
+  <link
+    name="neck_motor">
+    <inertial>
+      <origin
+        xyz="0.00002150 0.00604876 -0.01052366"
+        rpy="0 0 0" />
+      <mass
+        value="0.35000000" />
+      <inertia
+        ixx="0.00006612"
+        ixy="-0.00000031"
+        ixz="0.00000013"
+        iyy="0.00005463"
+        iyz="0.00000339"
+        izz="0.00005351" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/head_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuavo_assets/models/biped_s42/meshes/head_yaw.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="head_yaw"
+    type="revolute">
+    <origin
+      xyz="-0.0185 0 0.6014"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="neck_motor" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <link
+    name="head">
+    <inertial>
+      <origin
+        xyz="0.02648 -0.00142 0.10674"
+        rpy="0 0 0" />
+      <mass
+        value="0.54920" />
+      <inertia
+        ixx="0.00346"
+        ixy="-0.00003"
+        ixz="0.00017"
+        iyy="0.00348"
+        iyz="-0.00007"
+        izz="0.00222" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/head_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuavo_assets/models/biped_s42/meshes/head_pitch.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="head_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="neck_motor" />
+    <child
+      link="head" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.532"
+      upper="0.532"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <link
+    name="camera">
+    <inertial>
+      <origin
+        xyz="-0.04257 -0.01736 -0.01161"
+        rpy="0 0 0" />
+      <mass
+        value="0.04700" />
+      <inertia
+        ixx="0.00065"
+        ixy="0"
+        ixz="0.00015"
+        iyy="0.00091"
+        iyz="0"
+        izz="0.00105" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/camera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuavo_assets/models/biped_s42/meshes/camera.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="camera"
+    type="fixed">
+    <origin
+      xyz="0.0967509784707853 0.0175003248712456 0.125953265112721"
+      rpy="0 0.488692190558413 0" />
+    <parent
+      link="head" />
+    <child
+      link="camera" />
+  </joint>
+
+  <link
+    name="radar">
+    <inertial>
+      <origin
+        xyz="-0.00018 0.00001 0.01777"
+        rpy="0 0 0" />
+      <mass
+        value="0.26880" />
+      <inertia
+        ixx="0.00013"
+        ixy="0"
+        ixz="0"
+        iyy="0.00014"
+        iyz="0"
+        izz="0.00014" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/radar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://biped_s42/meshes/radar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="radar"
+    type="fixed">
+    <origin
+      xyz="0.0217799337881943 0 0.105417258037133"
+      rpy="0 0.229686043245049 0" />
+    <parent
+      link="head" />
+    <child
+      link="radar" />
+  </joint>
+
+</robot>

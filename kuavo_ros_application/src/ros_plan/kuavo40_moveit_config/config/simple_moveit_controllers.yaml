@@ -1,0 +1,25 @@
+controller_list:
+  - name: l_arm_group_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - l_arm_pitch
+      - l_arm_roll
+      - l_arm_yaw
+      - l_forearm_pitch
+      - l_hand_yaw
+      - l_hand_pitch
+      - l_hand_roll
+  - name: r_arm_group_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - r_arm_pitch
+      - r_arm_roll
+      - r_arm_yaw
+      - r_forearm_pitch
+      - r_hand_yaw
+      - r_hand_pitch
+      - r_hand_roll

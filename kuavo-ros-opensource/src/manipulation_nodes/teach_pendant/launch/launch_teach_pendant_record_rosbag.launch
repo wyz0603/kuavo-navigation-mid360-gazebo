@@ -1,0 +1,7 @@
+<launch>
+    <!-- 定义命令行参数 -->
+    <arg name="save_bag" default="/home/user/teach_pendant_ros_bag" />
+
+    <node pkg="teach_pendant" type="teach_pendant.py" name="teach_pendant_node" args=" --record --save_bag $(arg save_bag)" output="screen">
+    </node>
+</launch>

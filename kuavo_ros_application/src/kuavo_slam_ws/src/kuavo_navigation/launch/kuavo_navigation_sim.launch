@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!-- Simulation-only navigation launch. Skips the real livox_ros_driver2 driver
+     and uses the Gazebo lidar via livox_sim_bridge + FAST-LIO localization. -->
+<launch>
+  <param name="/use_sim_time" value="true"/>
+
+  <arg name="base_local_planner" default="mpc_local_planner"/>
+  <arg name="map" default=""/>
+  <arg name="foxglove" default="false"/>
+  <arg name="odom_source" default="lidar"/>
+  <arg name="crop_box" default="false"/>
+  <arg name="keep_localization" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="record_nav_data" default="false"/>
+
+  <!-- Use global_plan_follower (pure pursuit) for actual robot motion instead
+       of letting MPC publish /cmd_vel. MPC keeps running for diagnostics; its
+       cmd_vel is remapped to /cmd_vel_mpc_unused. The follower also triggers
+       move_base clear+replan when the upcoming global plan segment is blocked.
+       Set false to fall back to MPC driving the robot. -->
+  <arg name="use_global_plan_follower" default="true"/>
+
+  <!-- View mode picks between two ways of dealing with the lidar's startup height.
+       Must match what was used at build_map_sim time so the saved PCD and the
+       live SLAM frame agree. See build_map_sim.launch for details. -->
+  <arg name="view_mode" default="visual"
+       doc="visual = cloud height correct in odom view (TF trees offset 1.5m); geometry = URDF and SLAM frames aligned (need Fixed Frame=map)"/>
+
+  <!-- Same lidar/IMU mounting compensation as build_map_sim.launch. -->
+  <arg name="correction_rpy" default="[3.14159, 0.11, 0.0]"
+       doc="[roll, pitch, yaw] rad that rotate lidar/IMU vectors from sim livox_link to an upright reference"/>
+  <arg name="cloud_z_offset" default="$(eval 0.0 if arg('view_mode') == 'geometry' else 1.5)"
+       doc="Constant Z (m) added to every lidar point in the bridge"/>
+  <arg name="lidar_startup_height" default="$(eval 1.5 if arg('view_mode') == 'geometry' else 0.0)"
+       doc="Static Z (m) seed for map->odom; in nav this is just an initial guess - global_localization overrides it once an initial pose is set"/>
+  <arg name="lidar_min_z" default="-1.2"
+       doc="Bridge Z filter (rpy-corrected pre-offset frame); drops the ground halo"/>
+  <arg name="lidar_max_z" default="1000.0"/>
+
+  <!-- 1. Sim lidar bridge: /scan -> /livox/lidar + /livox/imu_corrected -->
+  <include file="$(find pointcloud_converter)/launch/livox_sim_bridge.launch">
+    <arg name="correction_rpy" value="$(arg correction_rpy)"/>
+    <arg name="cloud_z_offset" value="$(arg cloud_z_offset)"/>
+    <arg name="min_z"          value="$(arg lidar_min_z)"/>
+    <arg name="max_z"          value="$(arg lidar_max_z)"/>
+  </include>
+
+  <!-- 2. FAST-LIO localization (uses sim-specific extrinsic config) -->
+  <param name="/pcd_save/pcd_save_en" type="bool" value="false"/>
+  <rosparam command="load" file="$(find kuavo_mapping)/config/mid360_sim.yaml"/>
+  <param name="/pcd_save/pcd_save_en" type="bool" value="false"/>
+  <param name="feature_extract_enable" type="bool" value="0"/>
+  <param name="point_filter_num" type="int" value="3"/>
+  <param name="max_iteration" type="int" value="3"/>
+  <param name="filter_size_surf" type="double" value="0.5"/>
+  <param name="filter_size_map" type="double" value="0.5"/>
+  <param name="cube_side_length" type="double" value="1000"/>
+  <param name="runtime_pos_log_enable" type="bool" value="0"/>
+  <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" required="true">
+    <remap from="/cloud_registered_body" to="/livox/cloud"/>
+  </node>
+
+  <rosparam file="$(find kuavo_mapping)/config/mid360_filter.yaml" command="load"/>
+  <param name="crop_box/enable" value="$(arg crop_box)"/>
+
+  <!-- 3. Map manager loads the saved PCD/YAML map -->
+  <node pkg="kuavo_mapping" type="map_manager.py" name="map_manager" output="screen"
+        args="--map $(arg map)"/>
+
+  <!-- 4. Global localization (matches current scan against loaded map) -->
+  <node pkg="fast_lio" type="global_localization.py" name="global_localization" output="screen"
+        args="--keep_localization $(arg keep_localization) --odom_source $(arg odom_source)"/>
+
+  <!-- 4b. Auto-send /initialpose from Gazebo ground truth (world -> base_link TF)
+       so global_localization initializes without RViz clicks. Set
+       auto_initialpose:=false to disable (e.g. when testing real-robot-like
+       startup). -->
+  <arg name="auto_initialpose" default="true"/>
+  <node if="$(arg auto_initialpose)"
+        pkg="kuavo_navigation" type="sim_auto_initialpose.py" name="sim_auto_initialpose"
+        output="screen">
+    <param name="source_frame" value="base_link"/>
+    <param name="target_frame" value="world"/>
+    <param name="delay" value="3.0"/>
+  </node>
+
+  <!-- 5. FAST-LIO body frame alias. Using tf2_ros (latched /tf_static) so it
+       doesn't fight /use_sim_time. -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="livox_frame_to_lio_base_link"
+        args="0 0 0 0 0 0 livox_frame lio_base_link"/>
+
+  <!-- 6. Connect URDF tree (rooted at `world`) to the SLAM tree (rooted at
+       `map`). global_localization continuously refreshes map->odom; this
+       just glues the two trees so RViz / move_base can do lookups across them. -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map"
+        args="0 0 0 0 0 0 world map"/>
+
+  <!-- 7. move_base with MPC local planner. NOTE on param ordering:
+       The yaml files (rosparam command="load") MUST be loaded BEFORE any
+       <param> overrides for the same key, otherwise the yaml wins and our
+       odom_topic / robot_base_frame remaps for sim get clobbered. -->
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <!-- Hide MPC's cmd_vel so the robot is driven by global_plan_follower instead.
+         No-op when use_global_plan_follower:=false (remap still fires but
+         /cmd_vel_mpc_unused is just an unused topic). -->
+    <remap from="/cmd_vel" to="/cmd_vel_mpc_unused" if="$(arg use_global_plan_follower)"/>
+    <!-- High-frequency replan so global plan stays responsive to dynamic obstacles. -->
+    <param name="planner_frequency" value="2.0"/>
+
+    <!-- 7a. Base planner choices (these don't conflict with yaml content). -->
+    <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" if="$(eval base_local_planner == 'dwa_local_planner')"/>
+    <param name="base_local_planner" value="mpc_local_planner/MpcLocalPlannerROS" if="$(eval base_local_planner == 'mpc_local_planner')"/>
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" if="$(eval base_local_planner == 'teb_local_planner')"/>
+
+    <!-- 7b. Load yaml configs FIRST so the param overrides below take effect. -->
+    <rosparam file="$(find kuavo_navigation)/config/global_planner_params.yaml" command="load"/>
+    <rosparam file="$(find kuavo_navigation)/config/$(arg base_local_planner)_params.yaml" command="load"/>
+    <rosparam file="$(find kuavo_navigation)/config/move_base_params.yaml" command="load"/>
+    <rosparam file="$(find kuavo_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find kuavo_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find kuavo_navigation)/config/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find kuavo_navigation)/config/local_costmap_params.yaml" command="load"/>
+
+    <!-- 7c. odom topic and base_frame overrides AFTER the yaml so they win. -->
+    <param name="DWAPlannerROS/odom_topic"          value="/odom" if="$(eval arg('odom_source') == 'robot')"/>
+    <param name="MpcLocalPlannerROS/odom_topic"     value="/odom" if="$(eval arg('odom_source') == 'robot')"/>
+    <param name="TebLocalPlannerROS/odom_topic"     value="/odom" if="$(eval arg('odom_source') == 'robot')"/>
+    <param name="global_costmap/robot_base_frame"   value="base_link" if="$(eval arg('odom_source') == 'robot')"/>
+    <param name="local_costmap/robot_base_frame"    value="base_link" if="$(eval arg('odom_source') == 'robot')"/>
+
+    <param name="DWAPlannerROS/odom_topic"          value="/Odometry"    unless="$(eval arg('odom_source') == 'robot')"/>
+    <param name="MpcLocalPlannerROS/odom_topic"     value="/Odometry"    unless="$(eval arg('odom_source') == 'robot')"/>
+    <param name="TebLocalPlannerROS/odom_topic"     value="/Odometry"    unless="$(eval arg('odom_source') == 'robot')"/>
+    <param name="global_costmap/robot_base_frame"   value="lio_base_link" unless="$(eval arg('odom_source') == 'robot')"/>
+    <param name="local_costmap/robot_base_frame"    value="lio_base_link" unless="$(eval arg('odom_source') == 'robot')"/>
+
+    <!-- 7d. MPC visualization: publish the predicted OCP trajectory so RViz can
+         draw it. Subscribe to /move_base/MpcLocalPlannerROS/teb_poses (Path)
+         and /move_base/MpcLocalPlannerROS/teb_markers in RViz. -->
+    <param name="MpcLocalPlannerROS/controller/publish_ocp_results" value="true"
+           if="$(eval base_local_planner == 'mpc_local_planner')"/>
+  </node>
+
+  <!-- 8. Global plan follower: pure pursuit on move_base's global plan + reactive
+       replan trigger when the upcoming plan is blocked. Owns /cmd_vel. -->
+  <node if="$(arg use_global_plan_follower)"
+        pkg="kuavo_navigation" type="global_plan_follower.py" name="global_plan_follower"
+        output="screen">
+    <param name="global_frame"   value="map"/>
+    <param name="base_frame"     value="$(eval 'base_link' if arg('odom_source') == 'robot' else 'lio_base_link')"/>
+    <param name="plan_topic"     value="/move_base/GlobalPlanner/plan"/>
+    <param name="costmap_topic"  value="/move_base/local_costmap/costmap"/>
+    <param name="cmd_vel_topic"  value="/cmd_vel"/>
+    <param name="linear_vel"     value="0.35"/>
+    <param name="max_angular_vel" value="0.8"/>
+    <param name="lookahead_dist"  value="0.6"/>
+    <param name="goal_tolerance_xy"  value="0.25"/>
+    <param name="goal_tolerance_yaw" value="0.20"/>
+    <param name="blocked_check_ahead" value="2.5"/>
+    <param name="blocked_check_step"  value="0.1"/>
+    <param name="replan_cooldown"     value="3.0"/>
+    <param name="control_rate"        value="20.0"/>
+  </node>
+
+  <group if="$(arg rviz)">
+    <node pkg="rviz" type="rviz" name="nav_rviz"
+          args="-d $(find kuavo_mapping)/rviz/load_map.rviz" output="screen"/>
+  </group>
+
+  <group if="$(arg foxglove)">
+    <include file="$(find foxglove_bridge)/ros1_foxglove_bridge/launch/foxglove_bridge.launch"/>
+  </group>
+
+  <group if="$(arg record_nav_data)">
+    <node pkg="kuavo_navigation" type="record_nav_data.sh" name="record_nav_data" output="screen">
+      <rosparam file="$(find kuavo_navigation)/config/topic_whilelist.yaml" command="load"/>
+    </node>
+  </group>
+</launch>

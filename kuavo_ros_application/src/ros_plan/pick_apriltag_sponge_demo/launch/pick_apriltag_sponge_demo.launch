@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 启动moveit服务器 -->
+  <include file="$(find kuavo30_moveit_config)/launch/demo_no_rviz.launch"/>
+   <!-- 模式选择 ros 或 cali -->
+   <arg name="mode" default="ros"/>
+
+  <!-- 启动 moveit_interface_plan 中的 pick_apriltag_sponge_demo.py 节点 -->
+  <node pkg="pick_apriltag_sponge_demo" type="pick_apriltag_sponge.py" name="pick_apriltag_sponge_demo" output="screen">
+    <param name="mode" value="$(arg mode)"/>
+  </node>
+</launch>

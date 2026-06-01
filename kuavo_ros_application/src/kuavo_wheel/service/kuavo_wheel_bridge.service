@@ -1,0 +1,18 @@
+[Unit]
+Description=Kuavo Wheel Bridge Service
+After=network.target
+
+[Service]
+Type=simple
+User=kuavo
+Environment=KUAVO_ROS_APPLICATION_WS_PATH=/home/user
+Environment="ROS_DISTRO=noetic"
+Environment=ROS_MASTER_URI=http://localhost:11311
+Environment=ROS_IP=127.0.0.1
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStart=
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target 

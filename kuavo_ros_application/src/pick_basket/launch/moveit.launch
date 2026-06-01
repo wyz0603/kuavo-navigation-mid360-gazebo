@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 启动moveit服务器 -->
+  <include file="$(find kuavo40_moveit_config)/launch/demo.launch"/>
+</launch>

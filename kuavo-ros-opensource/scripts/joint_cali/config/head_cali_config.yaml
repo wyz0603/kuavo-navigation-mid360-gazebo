@@ -1,0 +1,2 @@
+tag_id: 0 # 标定工具上贴的Apriltag的id编号
+tag_pose_in_base: [0.305, 0.0, 0.2] # 标定工具在base坐标系下的位置,x,y,z,其中x不参与计算

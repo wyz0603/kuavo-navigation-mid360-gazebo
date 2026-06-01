@@ -1,0 +1,9 @@
+<!-- ar_track.launch -->
+<launch>
+    <arg name="record" default="enable" />
+    <!-- 当 record 不为 disable 时启动录音服务 -->
+    <group unless="$(eval arg('record') == 'disable')">
+        <node pkg="kuavo_audio_recorder" type="musicRecord.py" name="record_music_node" output="screen" respawn="true" respawn_delay="5"/>
+    </group>
+
+</launch>

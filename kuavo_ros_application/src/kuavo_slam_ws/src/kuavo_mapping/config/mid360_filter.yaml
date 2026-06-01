@@ -1,0 +1,55 @@
+# CropBox Configuration for FAST-LIO
+# This configuration file shows how to set up cropbox filtering parameters
+
+# Enable or disable crop box filtering
+crop_box:
+  enable: true              # Set to true to enable cropbox filtering
+  negative: true
+  
+  # Define the bounding box in world coordinates (meters)
+  # The box is defined by min and max values for each axis
+  min_x: 1.5             # Minimum X coordinate
+  max_x: -1.5              # Maximum X coordinate
+  min_y: -1.5             # Minimum Y coordinate  
+  max_y: 1.5              # Maximum Y coordinate
+  min_z: -0.05             # Minimum Z coordinate (ground level)
+  max_z: 0.05             # Maximum Z coordinate (height limit)
+
+# Example configurations for different scenarios:
+
+# 1. Indoor navigation (small room):
+# crop_box:
+#   enable: true
+#   min_x: -10.0
+#   max_x: 10.0
+#   min_y: -10.0
+#   max_y: 10.0
+#   min_z: -1.0
+#   max_z: 3.0
+
+# 2. Outdoor navigation (large area):
+# crop_box:
+#   enable: true
+#   min_x: -100.0
+#   max_x: 100.0
+#   min_y: -100.0
+#   max_y: 100.0
+#   min_z: -10.0
+#   max_z: 20.0
+
+# 3. Vehicle navigation (road level):
+# crop_box:
+#   enable: true
+#   min_x: -50.0
+#   max_x: 50.0
+#   min_y: -25.0
+#   max_y: 25.0
+#   min_z: -3.0
+#   max_z: 8.0
+
+# Note: 
+# - All coordinates are in the world frame (odom frame)
+# - Points outside this box will be filtered out before publishing and saving
+# - Adjust the values based on your specific application and environment
+# - Smaller boxes improve performance but may remove useful information
+# - Larger boxes preserve more data but may include noise/irrelevant points 

@@ -1,0 +1,52 @@
+TebLocalPlannerROS:
+
+  odom_topic: odom
+    
+  max_vel_x: 0.6
+  max_vel_x_backwards: 0.2
+  max_vel_theta: 0.6
+  min_vel_theta: -0.6
+  acc_lim_x: 0.2
+  dec_lim_x: 0.3
+  acc_lim_theta: 0.3
+  
+  teb_autosize: true
+  dt_ref: 0.3
+  dt_hysteresis: 0.2
+  global_plan_overwrite_orientation: true
+  max_global_plan_lookahead_dist: 2.0
+
+  min_turning_radius: 0.0
+
+  footprint_model:
+    type: "circular"
+    radius: 0.2
+    is_footprint_dynamic: False
+  
+  xy_goal_tolerance: 0.05
+  yaw_goal_tolerance: 0.3
+
+  min_obstacle_dist: 0.2
+  include_costmap_obstacles: True
+  costmap_obstacles_behind_robot_dist: 0.5
+
+  no_inner_iterations: 3
+  no_outer_iterations: 3
+  penalty_epsilon: 0.05
+  weight_max_vel_x: 2
+  weight_max_vel_theta: 1
+  weight_acc_lim_x: 0.5
+  weight_acc_lim_theta: 0.5
+  weight_kinematics_nh: 1000
+  weight_kinematics_forward_drive: 1
+  weight_optimaltime: 1
+  weight_obstacle: 50
+
+  enable_homotopy_class_planning: true
+  enable_multithreading: true
+  max_number_classes: 2
+  selection_cost_hysteresis: 1.0
+  selection_obst_cost_scale: 1.0
+  selection_alternative_time_cost: False
+  roadmap_graph_no_samples: 5
+  roadmap_graph_area_width: 1.0

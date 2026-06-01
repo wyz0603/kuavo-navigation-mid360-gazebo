@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="left_leg">
+
+  <link
+    name="knee">
+    <inertial>
+      <origin
+        xyz="0.00837373211182327 1.48731646985867E-05 -0.140326343912049"
+        rpy="0 0 0" />
+      <mass
+        value="1.9" />
+      <inertia
+        ixx="0.0110283914420998"
+        ixy="-1.8192089906164E-05"
+        ixz="-0.000324488080960638"
+        iyy="0.0112832978117942"
+        iyz="-8.89800157972667E-05"
+        izz="0.000857552225943839" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_knee.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_knee.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <link
+    name="foot_pitch">
+    <inertial>
+      <origin
+        xyz="-1.81202915693068E-07 -1.8120290991297E-07 -1.11022302462516E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.0425174918720247" />
+      <inertia
+        ixx="5.1362719745605E-07"
+        ixy="2.23455634819957E-16"
+        ixz="2.94871513298561E-11"
+        iyy="5.13627197456048E-07"
+        iyz="-2.99517054444867E-11"
+        izz="9.09837232073047E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_foot_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_foot_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="foot_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.346000000000011"
+      rpy="0 0 0" />
+    <parent
+      link="knee" />
+    <child
+      link="foot_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>  
+  <link
+    name="foot_roll">
+    <inertial>
+      <origin
+        xyz="0.00986618796136205 -8.14593967402022E-06 -0.0323276518432604"
+        rpy="0 0 0" />
+      <mass
+        value="0.597055643310439" />
+      <inertia
+        ixx="0.000129574142254521"
+        ixy="1.87464121722709E-08"
+        ixz="3.66139740707072E-06"
+        iyy="0.000315194751113542"
+        iyz="3.63736673340889E-09"
+        izz="0.000418024913503948" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_foot_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_foot_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="foot_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="foot_pitch" />
+    <child
+      link="foot_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <frame link="foot_roll" name="l_foot_socket_frame" xyz="-0.056027 0.0255 0.015" />
+  <frame link="foot_roll" name="r_foot_socket_frame" xyz="-0.056027 -0.0255 0.015" />
+  
+  <link
+    name="l_bar">
+    <inertial>
+      <origin
+        xyz="-0.0172817197891674 0.00661593007898401 -2.62659521566011E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.024194868521807" />
+      <inertia
+        ixx="3.02750105000845E-06"
+        ixy="-1.660462011957E-06"
+        ixz="-2.26263763997994E-09"
+        iyy="1.63403563617254E-05"
+        iyz="-3.60623187499015E-10"
+        izz="1.40552690387785E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_l_bar.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_l_bar.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_bar"
+    type="continuous">
+    <origin
+      xyz="0 0.0260000000000006 -0.153"
+      rpy="0 0 0" />
+    <parent
+      link="knee" />
+    <child
+      link="l_bar" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_bar" />
+    <actuator name="l_bar_motor">
+      <drake:gear_ratio value="10.0" />
+      <drake:rotor_inertia value="0.0001002" />
+    </actuator>
+  </transmission>
+  
+  <link
+    name="l_tendon">
+    <inertial>
+      <origin
+        xyz="0.000886324976226871 -0.00109368357791272 -0.0855353050799796"
+        rpy="0 0 0" />
+      <mass
+        value="0.106425376742002" />
+      <inertia
+        ixx="0.000181298314199638"
+        ixy="1.27188417098493E-09"
+        ixz="1.85852673262209E-06"
+        iyy="0.000180444608806018"
+        iyz="-1.22244873486873E-07"
+        izz="1.97354797583381E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_l_tendon.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_l_tendon.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <drake:joint name="l_tendon" type="universal">
+    <origin xyz="-0.056027 -0.0085 0.015" rpy="0 0 0" />
+    <parent link="l_bar" />
+    <child link="l_tendon" />
+  </drake:joint>
+  <frame link="l_tendon" name="l_tendon_socket_frame" xyz="0 0 -0.193" />
+  <!-- <joint
+    name="r_l_tendon"
+    type="continuous">
+    <origin
+      xyz="-0.0579999990740259 0 -1.03629629334412E-05"
+      rpy="0 0 0" />
+    <parent
+      link="r_l_bar" />
+    <child
+      link="r_l_tendon" />
+    <axis
+      xyz="0 1 0" />
+  </joint> -->
+  
+  <link
+    name="r_bar">
+    <inertial>
+      <origin
+        xyz="-0.0172817197497915 -0.00661593008217129 -2.78900612493693E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.0413794348706216" />
+      <inertia
+        ixx="3.02750071689725E-06"
+        ixy="1.660462045007E-06"
+        ixz="-1.19315999207711E-09"
+        iyy="1.63403563701857E-05"
+        iyz="1.5971995906495E-10"
+        izz="1.40552693810574E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_r_bar.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_r_bar.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_bar"
+    type="continuous">
+    <origin
+      xyz="0 -0.0259999999999875 -0.09"
+      rpy="0 0 0" />
+    <parent
+      link="knee" />
+    <child
+      link="r_bar" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_bar" />
+    <actuator name="r_bar_motor">
+      <drake:gear_ratio value="10.0" />
+      <drake:rotor_inertia value="0.0001002" />
+    </actuator>
+  </transmission>
+  
+  <link
+    name="r_tendon">
+    <inertial>
+      <origin
+        xyz="0.000909568646152159 0.00107382567784425 -0.116411590425347"
+        rpy="0 0 0" />
+      <mass
+        value="0.0723258862757365" />
+      <inertia
+        ixx="0.000407040881611255"
+        ixy="-1.27054222067275E-09"
+        ixz="3.16090353002897E-06"
+        iyy="0.000405860825202462"
+        iyz="1.63249841460774E-07"
+        izz="2.48972853360267E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_r_tendon.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_r_tendon.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <drake:joint name="r_tendon" type="universal">
+    <origin xyz="-0.056027 0.0085 0.015" rpy="0 0 0" />
+    <parent link="r_bar" />
+    <child link="r_tendon" />
+  </drake:joint>
+  <frame link="r_tendon" name="r_tendon_socket_frame" xyz="0 0 -0.256" />
+  <!-- <joint
+    name="r_r_tendon"
+    type="continuous">
+    <origin
+      xyz="-0.0579999994737613 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_r_bar" />
+    <child
+      link="r_r_tendon" />
+    <axis
+      xyz="0 1 0" />
+  </joint> -->
+  
+  <!-- add drake linear_bushing_rpy -->
+  <drake:linear_bushing_rpy>
+    <drake:bushing_frameC name="l_tendon_socket_frame" />
+    <drake:bushing_frameA name="l_foot_socket_frame" />
+    <!-- <drake:bushing_force_stiffness value="1000 1000 100000"/>
+    <drake:bushing_force_damping value="10 10 200"/> -->
+    <drake:bushing_force_stiffness value="0 0 0" />
+    <drake:bushing_force_damping value="0 0 0" />
+    <drake:bushing_torque_stiffness value="0 0 0" />
+    <drake:bushing_torque_damping value="0 0 0" />
+  </drake:linear_bushing_rpy>
+  
+  <drake:linear_bushing_rpy>
+    <drake:bushing_frameA name="r_tendon_socket_frame" />
+    <drake:bushing_frameC name="r_foot_socket_frame" />
+    <!-- <drake:bushing_force_stiffness value="1000 1000 100000"/>
+    <drake:bushing_force_damping value="10 10 200"/> -->
+    <drake:bushing_force_stiffness value="0 0 0" />
+    <drake:bushing_force_damping value="0 0 0" />
+    <drake:bushing_torque_stiffness value="0 0 0" />
+    <drake:bushing_torque_damping value="0 0 0" />
+  </drake:linear_bushing_rpy>
+</robot>

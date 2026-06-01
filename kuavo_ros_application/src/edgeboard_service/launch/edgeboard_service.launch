@@ -1,0 +1,47 @@
+<launch>
+  <!-- 定义启动模式参数: lite 或 full -->
+  <arg name="mode" default="server"/>
+
+  <!-- 根据模式选择Python文件 -->
+  <arg 
+    name="node_script" 
+    value="edgeboard_server.py" 
+    if="$(eval mode == 'server')" 
+  />
+  <arg 
+    name="node_script" 
+    value="upper_client.py" 
+    if="$(eval mode == 'client')" 
+  />
+  
+  <!-- 验证模式参数合法性 -->
+  <param 
+    name="mode_validation" 
+    command="echo '错误：无效模式! 可选值: server/client'"
+    unless="$(eval mode in ['server', 'client'])" 
+  />
+  <group unless="$(eval mode in ['server', 'client'])">
+    <node pkg="roslib" type="kill" name="invalid_mode_error" args="/" />
+  </group>
+
+  <!-- 定义用户可配置参数 -->
+  <arg name="visualize" default="false" />
+  <arg name="with_profile" default="false" />
+  <!-- 在全局作用域中动态生成参数值 -->
+  <arg name="visualize_arg" value="--visualize" if="$(arg visualize)" />
+  <arg name="visualize_arg" value="" unless="$(arg visualize)" />
+  <arg name="profile_arg" value="--with_profile" if="$(arg with_profile)" />
+  <arg name="profile_arg" value="" unless="$(arg with_profile)" />
+
+  <!-- 启动节点（仅在模式合法时执行） -->
+  <group if="$(eval mode in ['server', 'client'])">
+    <node 
+      pkg="edgeboard_service" 
+      type="$(arg node_script)" 
+      name="edgeboard_service" 
+      output="screen"
+      args="$(arg visualize_arg) $(arg profile_arg)"
+    >
+    </node>
+  </group>
+</launch>

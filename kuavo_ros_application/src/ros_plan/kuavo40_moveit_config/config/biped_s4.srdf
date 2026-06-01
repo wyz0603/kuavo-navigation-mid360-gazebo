@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="biped_s4">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="l_arm_group">
+        <chain base_link="torso" tip_link="l_hand_end_virtual"/>
+    </group>
+    <group name="r_arm_group">
+        <chain base_link="torso" tip_link="r_hand_end_virtual"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="l_arm_zero" group="l_arm_group">
+        <joint name="l_arm_pitch" value="0"/>
+        <joint name="l_arm_roll" value="0"/>
+        <joint name="l_arm_yaw" value="0"/>
+        <joint name="l_forearm_pitch" value="0"/>
+        <joint name="l_hand_pitch" value="0"/>
+        <joint name="l_hand_roll" value="0"/>
+        <joint name="l_hand_yaw" value="0"/>
+    </group_state>
+    <group_state name="r_arm_zero" group="r_arm_group">
+        <joint name="r_arm_pitch" value="0"/>
+        <joint name="r_arm_roll" value="0"/>
+        <joint name="r_arm_yaw" value="0"/>
+        <joint name="r_forearm_pitch" value="0"/>
+        <joint name="r_hand_pitch" value="0"/>
+        <joint name="r_hand_roll" value="0"/>
+        <joint name="r_hand_yaw" value="0"/>
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="l_hand_eff" parent_link="l_hand_end_virtual" group="l_arm_group"/>
+    <end_effector name="r_hand_eff" parent_link="r_hand_end_virtual" group="r_arm_group"/>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="torso"/>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="head_pitch" link2="head_yaw" reason="Adjacent"/>
+    <disable_collisions link1="head_pitch" link2="l_arm_pitch" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="l_arm_roll" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="l_leg_pitch" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="l_leg_yaw" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="r_leg_pitch" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="head_pitch" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_arm_pitch" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_arm_roll" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_arm_yaw" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_l_bar" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_leg_pitch" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="l_leg_yaw" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_leg_pitch" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="head_yaw" link2="torso" reason="Adjacent"/>
+    <disable_collisions link1="l_arm_pitch" link2="l_arm_roll" reason="Adjacent"/>
+    <disable_collisions link1="l_arm_pitch" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="l_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_forearm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_hand_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_hand_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_leg_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_pitch" link2="torso" reason="Adjacent"/>
+    <disable_collisions link1="l_arm_roll" link2="l_arm_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_arm_roll" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="l_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_forearm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_hand_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_hand_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_leg_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_roll" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="l_forearm_pitch" reason="Adjacent"/>
+    <disable_collisions link1="l_arm_yaw" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="l_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_forearm_pitch" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_arm_yaw" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_foot_roll" reason="Adjacent"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_knee" reason="Adjacent"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_l_bar" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_leg_pitch" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_r_bar" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_thumb_distal_pitch" reason="Never"/>
+    <disable_collisions link1="l_foot_pitch" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_foot_roll" link2="l_l_bar" reason="Never"/>
+    <disable_collisions link1="l_foot_roll" link2="l_r_bar" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="l_hand_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_forearm_pitch" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_forearm_pitch" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_hand_roll" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_hand_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_roll" link2="l_index_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_roll" link2="l_leg_yaw" reason="Default"/>
+    <disable_collisions link1="l_hand_roll" link2="l_middle_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_roll" link2="l_pinky_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_roll" link2="l_ring_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_roll" link2="l_thumb_distal_pitch" reason="Default"/>
+    <disable_collisions link1="l_hand_roll" link2="l_thumb_proximal_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_hand_roll" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="l_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="l_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_hand_yaw" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_index_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_distal_finger" link2="r_thumb_distal_pitch" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_l_bar" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_index_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_knee" link2="l_l_bar" reason="Adjacent"/>
+    <disable_collisions link1="l_knee" link2="l_leg_pitch" reason="Adjacent"/>
+    <disable_collisions link1="l_knee" link2="l_r_bar" reason="Adjacent"/>
+    <disable_collisions link1="l_l_bar" link2="l_l_tendon" reason="Adjacent"/>
+    <disable_collisions link1="l_l_bar" link2="l_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_r_bar" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_r_tendon" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_l_bar" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_l_tendon" link2="l_r_bar" reason="Never"/>
+    <disable_collisions link1="l_l_tendon" link2="l_r_tendon" reason="Never"/>
+    <disable_collisions link1="l_leg_pitch" link2="l_leg_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_leg_pitch" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_pitch" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="l_leg_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_leg_roll" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_forearm_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_hand_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_hand_yaw" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_thumb_distal_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_leg_roll" link2="torso" reason="Adjacent"/>
+    <disable_collisions link1="l_leg_yaw" link2="r_arm_pitch" reason="Never"/>
+    <disable_collisions link1="l_leg_yaw" link2="r_arm_roll" reason="Never"/>
+    <disable_collisions link1="l_leg_yaw" link2="r_arm_yaw" reason="Never"/>
+    <disable_collisions link1="l_leg_yaw" link2="r_forearm_pitch" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="l_middle_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_distal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="l_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="l_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_middle_proximal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="l_pinky_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_hand_pitch" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="l_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="l_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_pinky_proximal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="l_r_tendon" reason="Adjacent"/>
+    <disable_collisions link1="l_r_bar" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_r_bar" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="l_ring_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_thumb_distal_pitch" reason="Never"/>
+    <disable_collisions link1="l_ring_distal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="l_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_ring_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="l_thumb_distal_pitch" link2="l_thumb_proximal_yaw" reason="Adjacent"/>
+    <disable_collisions link1="l_thumb_distal_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_foot_pitch" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_thumb_distal_pitch" reason="Never"/>
+    <disable_collisions link1="l_thumb_proximal_yaw" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_arm_pitch" link2="r_arm_roll" reason="Adjacent"/>
+    <disable_collisions link1="r_arm_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="r_arm_pitch" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="r_arm_pitch" link2="torso" reason="Adjacent"/>
+    <disable_collisions link1="r_arm_roll" link2="r_arm_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_arm_roll" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="r_arm_roll" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="r_arm_yaw" link2="r_forearm_pitch" reason="Adjacent"/>
+    <disable_collisions link1="r_arm_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="r_arm_yaw" link2="r_leg_yaw" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_foot_roll" reason="Adjacent"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_knee" reason="Adjacent"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_leg_pitch" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_foot_pitch" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_foot_roll" link2="r_l_bar" reason="Never"/>
+    <disable_collisions link1="r_foot_roll" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_forearm_pitch" link2="r_hand_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_forearm_pitch" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_hand_roll" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_hand_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_index_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_pitch" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_hand_roll" link2="r_index_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_roll" link2="r_leg_yaw" reason="Default"/>
+    <disable_collisions link1="r_hand_roll" link2="r_middle_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_roll" link2="r_pinky_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_roll" link2="r_ring_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_roll" link2="r_thumb_distal_pitch" reason="Default"/>
+    <disable_collisions link1="r_hand_roll" link2="r_thumb_proximal_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_hand_yaw" link2="r_index_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_hand_yaw" link2="r_leg_roll" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_index_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_middle_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_middle_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_index_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_knee" link2="r_l_bar" reason="Adjacent"/>
+    <disable_collisions link1="r_knee" link2="r_leg_pitch" reason="Adjacent"/>
+    <disable_collisions link1="r_knee" link2="r_r_bar" reason="Adjacent"/>
+    <disable_collisions link1="r_l_bar" link2="r_l_tendon" reason="Adjacent"/>
+    <disable_collisions link1="r_l_bar" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_l_bar" link2="r_r_tendon" reason="Never"/>
+    <disable_collisions link1="r_l_bar" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_l_bar" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_l_tendon" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_l_tendon" link2="r_r_tendon" reason="Never"/>
+    <disable_collisions link1="r_leg_pitch" link2="r_leg_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_leg_roll" link2="r_leg_yaw" reason="Adjacent"/>
+    <disable_collisions link1="r_leg_roll" link2="torso" reason="Adjacent"/>
+    <disable_collisions link1="r_middle_distal_finger" link2="r_middle_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_middle_distal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_distal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_distal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_pinky_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_pinky_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_middle_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_pinky_distal_finger" link2="r_pinky_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_pinky_distal_finger" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_pinky_distal_finger" link2="r_ring_distal_finger" reason="Never"/>
+    <disable_collisions link1="r_pinky_distal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_pinky_distal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_pinky_proximal_finger" link2="r_r_bar" reason="Never"/>
+    <disable_collisions link1="r_pinky_proximal_finger" link2="r_ring_proximal_finger" reason="Never"/>
+    <disable_collisions link1="r_pinky_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_r_bar" link2="r_r_tendon" reason="Adjacent"/>
+    <disable_collisions link1="r_ring_distal_finger" link2="r_ring_proximal_finger" reason="Adjacent"/>
+    <disable_collisions link1="r_ring_distal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_ring_proximal_finger" link2="r_thumb_proximal_yaw" reason="Never"/>
+    <disable_collisions link1="r_thumb_distal_pitch" link2="r_thumb_proximal_yaw" reason="Adjacent"/>
+</robot>

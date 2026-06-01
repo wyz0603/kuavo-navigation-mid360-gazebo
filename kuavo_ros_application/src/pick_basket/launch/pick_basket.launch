@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 启动节点 -->
+  <node pkg="pick_basket" type="pick_basket_node.py" name="pick_basket_node" output="screen"></node>
+</launch>

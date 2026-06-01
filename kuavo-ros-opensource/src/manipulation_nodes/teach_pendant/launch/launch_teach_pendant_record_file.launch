@@ -1,0 +1,7 @@
+<launch>
+    <!-- 定义命令行参数 -->
+    <arg name="save_file" default="/home/user/file" />
+    
+    <node pkg="teach_pendant" type="teach_pendant.py" name="teach_pendant_node" args=" --record --save_to_file $(arg save_file)" output="screen">
+    </node>
+</launch>

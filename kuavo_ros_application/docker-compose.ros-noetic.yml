@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  ros-noetic:
+    build:
+      context: .
+      dockerfile: Dockerfile.ros-noetic
+    image: ros-noetic-nvidia:latest
+    container_name: ros-noetic-dev
+    stdin_open: true
+    tty: true
+    network_mode: host
+    privileged: true
+
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # Environment variables
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+
+    volumes:
+      # X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # Mount workspace (current directory)
+      - ./:/catkin_ws/src
+
+    working_dir: /catkin_ws
+
+    command: /bin/bash

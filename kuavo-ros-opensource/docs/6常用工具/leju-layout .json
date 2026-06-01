@@ -1,0 +1,612 @@
+{
+  "configById": {
+    "Plot!16f1san": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[0]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[1]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[2]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[3]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[4]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[5]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[6]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[7]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[8]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[9]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[10]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[11]",
+          "enabled": false
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/motor_cmd/motor_cur.data[6]",
+          "enabled": true,
+          "color": "#96e39f"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "left",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "foxglovePanelTitle": "腿关节电流"
+    },
+    "Plot!of958o": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[0]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[1]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[2]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[3]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[4]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[5]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[6]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[7]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[8]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[9]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[10]",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensor_data_motor/motor_cur.data[11]",
+          "enabled": true
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "left",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "foxglovePanelTitle": "腿关节电流"
+    },
+    "Plot!2axjtjz": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensors_data_raw.imu_data.quat.w",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensors_data_raw.imu_data.quat.x",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensors_data_raw.imu_data.quat.y",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/sensors_data_raw.imu_data.quat.z",
+          "enabled": true
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "left",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "foxglovePanelTitle": "IMU数据"
+    },
+    "Plot!ghj78w": {
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/monitor/frequency/mpc.data",
+          "enabled": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/monitor/frequency/wbc.data",
+          "enabled": true
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "left",
+      "showPlotValuesInLegend": false,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "foxglovePanelTitle": "求解速度监控"
+    },
+    "3D!3h9x3cw": {
+      "cameraState": {
+        "perspective": true,
+        "distance": 3.316560232082488,
+        "phi": 69.63509379467662,
+        "thetaOffset": -145.18248175174082,
+        "targetOffset": [
+          1.7642807938009646,
+          0.8327405346740541,
+          -1.7359192874577764e-17
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-none",
+      "followTf": "odom",
+      "scene": {
+        "transforms": {
+          "showLabel": true,
+          "axisScale": 0.119,
+          "labelSize": 0.02
+        },
+        "meshUpAxis": "z_up"
+      },
+      "transforms": {},
+      "topics": {
+        "/elevator_map": {
+          "visible": true,
+          "colorMode": "map"
+        },
+        "/gate_map": {
+          "visible": true,
+          "colorMode": "map"
+        },
+        "/map": {
+          "visible": true,
+          "colorMode": "map",
+          "alpha": 0.8074
+        },
+        "/map/to_web": {
+          "visible": true
+        },
+        "/map/to_web/compressed": {
+          "visible": true
+        },
+        "/move_base/global_costmap/costmap/to_web": {
+          "visible": true
+        },
+        "/move_base/global_costmap/costmap/to_web/compressed": {
+          "visible": true
+        },
+        "/move_base/local_costmap/costmap/to_web": {
+          "visible": true
+        },
+        "/move_base/local_costmap/costmap/to_web/compressed": {
+          "visible": true
+        },
+        "/virtual_wall/to_web": {
+          "visible": true
+        },
+        "/virtual_wall/to_web/compressed": {
+          "visible": true
+        },
+        "/move_base/function_costmap/costmap": {
+          "visible": true,
+          "colorMode": "costmap"
+        },
+        "/move_base/global_costmap/costmap": {
+          "visible": true,
+          "colorMode": "costmap"
+        },
+        "/move_base/local_costmap/costmap": {
+          "visible": true,
+          "colorMode": "costmap"
+        },
+        "/vel_map": {
+          "visible": true
+        },
+        "/virtual_wall": {
+          "visible": true,
+          "colorMode": "costmap",
+          "alpha": 1
+        },
+        "/reference_pointcloud": {
+          "visible": true,
+          "colorField": "rgb",
+          "colorMode": "rgb",
+          "colorMap": "turbo"
+        },
+        "/label_pose": {
+          "visible": true
+        },
+        "/semantic_map/odom_space": {
+          "visible": true
+        },
+        "/occupancygridmap": {
+          "visible": true
+        },
+        "/sampled_trajectories": {
+          "visible": true
+        },
+        "/scan_down_left": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_down_right": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/local_costmap/published_footprint": {
+          "visible": true
+        },
+        "/scan_orig": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_front_orig": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/local_costmap": {
+          "visible": true,
+          "colorMode": "costmap"
+        },
+        "/ascamera_nuwa_1/depth0/image_raw": {
+          "visible": true,
+          "frameLocked": true,
+          "cameraInfoTopic": "/ascamera_nuwa_1/depth0/camera_info",
+          "distance": 1,
+          "planarProjectionFactor": 0,
+          "color": "#ffffff"
+        },
+        "/ascamera_nuwa_1/depth0/camera_info": {
+          "visible": true
+        },
+        "/footprint_marker": {
+          "visible": true
+        },
+        "/scan": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_back": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_filtered": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_left": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_middle_left": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_middle_right": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_right": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/activate_map": {
+          "visible": true
+        },
+        "/full_map": {
+          "visible": true
+        },
+        "/move_base/global_costmap/hd_costmap": {
+          "visible": true
+        },
+        "/ascamera_nuwa_1/depth0/points": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/fusion_pointcloud": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/point_cloud_back": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/point_cloud_left": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/point_cloud_middle_left": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/point_cloud_middle_right": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/point_cloud_right": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/scan_matched_points2": {
+          "visible": true,
+          "colorField": "z",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/move_base/global_costmap/footprint": {
+          "visible": true
+        },
+        "/move_base/global_costmap/footprint_exp": {
+          "visible": true
+        },
+        "/vb_footprint": {
+          "visible": true
+        },
+        "/view_polygon": {
+          "visible": true
+        },
+        "/cur_pos": {
+          "visible": true
+        },
+        "/move_base/EBandPlannerROS/local_plan": {
+          "visible": true
+        },
+        "/origin_trajectory": {
+          "visible": true
+        },
+        "/real_trajectory_2": {
+          "visible": true
+        },
+        "/aima/hal/lidar/neck/pointcloud": {
+          "visible": true,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/humanoid/currentState": {
+          "visible": true
+        },
+        "/humanoid/desiredBaseTrajectory": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_0": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_1": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_2": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_3": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_4": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_5": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_6": {
+          "visible": true
+        },
+        "/humanoid/desiredFeetTrajectory/contact_7": {
+          "visible": true
+        },
+        "/humanoid/optimizedStateTrajectory": {
+          "visible": true
+        },
+        "/humanoid/planedFootPositions": {
+          "visible": true
+        },
+        "/pose": {
+          "visible": true
+        }
+      },
+      "layers": {
+        "c614e20c-30c5-4cdd-81fe-9e292648fa90": {
+          "visible": true,
+          "frameLocked": true,
+          "label": "Grid",
+          "instanceId": "c614e20c-30c5-4cdd-81fe-9e292648fa90",
+          "layerId": "foxglove.Grid",
+          "size": 10,
+          "divisions": 10,
+          "lineWidth": 1,
+          "color": "#248eff",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "order": 1
+        },
+        "ea2c6c07-eadc-4289-9d9f-2aeee1f42579": {
+          "visible": true,
+          "frameLocked": true,
+          "label": "URDF",
+          "instanceId": "ea2c6c07-eadc-4289-9d9f-2aeee1f42579",
+          "layerId": "foxglove.Urdf",
+          "sourceType": "url",
+          "url": "https://customer-lejurobot.oss-cn-hangzhou.aliyuncs.com/urdf/42cd6a92-a333-4633-a462-cd09961d34a2/urdf/biped_s45.urdf",
+          "filePath": "",
+          "parameter": "",
+          "topic": "",
+          "framePrefix": "",
+          "displayMode": "auto",
+          "fallbackColor": "#ffffff",
+          "order": 2
+        }
+      },
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {}
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "layout": {
+    "first": {
+      "first": {
+        "first": "Plot!16f1san",
+        "second": {
+          "first": "Plot!of958o",
+          "second": "Plot!2axjtjz",
+          "direction": "column"
+        },
+        "direction": "column",
+        "splitPercentage": 97.01870173673287
+      },
+      "second": "Plot!ghj78w",
+      "direction": "column",
+      "splitPercentage": 74.36229039169649
+    },
+    "second": "3D!3h9x3cw",
+    "direction": "row",
+    "splitPercentage": 74.21472105016409
+  }
+}

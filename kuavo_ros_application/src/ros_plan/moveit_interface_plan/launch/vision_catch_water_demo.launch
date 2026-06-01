@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 启动moveit服务器 -->
+  <include file="$(find kuavo40_moveit_config)/launch/demo.launch"/>
+
+  <!-- 启动 moveit_interface_plan 中的 water_catch_vision_demo.py 节点 -->
+  <node pkg="moveit_interface_plan" type="open_water_catch.py" name="water_catch_vision_demo" output="screen"/>
+</launch>

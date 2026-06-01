@@ -1,0 +1,30 @@
+<launch>
+  <!-- Qwen Vision-Language (VL) Node Launch File -->
+
+  <!-- Configurable parameters -->
+  <arg name="api_url" default="http://localhost:9000/v1/chat/completions"
+       doc="URL of the Qwen VL HTTP API endpoint" />
+  <arg name="model" default="Qwen2.5-VL-7B-Instruct"
+       doc="Model name to use for VL inference" />
+  <arg name="temperature" default="0.7"
+       doc="Temperature parameter for model sampling (0.0-1.0)" />
+  <arg name="max_tokens" default="300"
+       doc="Maximum number of tokens in model response" />
+  <arg name="node_name" default="qwen_vl_node"
+       doc="Name of the ROS node" />
+
+  <!-- Launch the Qwen VL node -->
+  <node
+    pkg="qwen_vl"
+    type="main.py"
+    name="$(arg node_name)"
+    output="screen"
+  >
+    <!-- Set node parameters -->
+    <param name="api_url" value="$(arg api_url)" />
+    <param name="model" value="$(arg model)" />
+    <param name="temperature" value="$(arg temperature)" />
+    <param name="max_tokens" value="$(arg max_tokens)" />
+  </node>
+
+</launch>

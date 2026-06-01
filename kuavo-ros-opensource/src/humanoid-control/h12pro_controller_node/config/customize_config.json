@@ -1,0 +1,98 @@
+{
+  "customize_action_RR_A": {
+    "arm_pose_name": [
+      "抱拳_45"
+    ],
+    "music_name": [
+      "2_抱拳.wav"
+    ]
+  },
+  "customize_action_RR_B": {
+    "arm_pose_name": [
+      "打招呼_45"
+    ],
+    "music_name": [
+      "1_挥手.wav"
+    ]
+  },
+  "customize_action_RR_C": {
+    "arm_pose_name": [
+      "点赞_45"
+    ],
+    "music_name": [
+      "3_点赞.wav"
+    ]
+  },
+  "customize_action_RR_D": {
+    "arm_pose_name": [
+      ""
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "customize_action_LL_A": {
+    "arm_pose_name": [
+      ""
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "customize_action_LL_B": {
+    "arm_pose_name": [
+      ""
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "customize_action_LL_C": {
+    "arm_pose_name": [
+      ""
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "customize_action_LL_D": {
+    "arm_pose_name": [
+      ""
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "vmp_action_RL_A": {
+    "action_name": [
+      "yc_126_spec"
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "vmp_action_RL_B": {
+    "action_name": [
+      "yc_01_front_kick"
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "vmp_action_RL_C": {
+    "action_name": [
+      "yc_02_side_kick"
+    ],
+    "music_name": [
+      ""
+    ]
+  },
+  "vmp_action_RL_D": {
+    "action_name": [
+      "yc_06_straight_punch"
+    ],
+    "music_name": [
+      ""
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools >= 68.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nio"
+dynamic = ['version']
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gymnasium==0.29.1",
+    "prettytable==3.10.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff==0.4.8",
+    "flake8==7.0.0",
+    "pylint==3.2.3",
+    "pre-commit==3.7.1",
+]
+
+[tool.setuptools.packages.find]
+include = ["nio*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "nio.__version__" }
+
+
+[tool.distutils.egg_info]
+egg_base = "/tmp"
+
+
+[tool.ruff]
+lint.select = ["E", "F", "PL", "B", "N", "I"]
+lint.ignore = ["PLR0913"]
+extend-exclude = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.pylint]
+max-line-length = 88
+max-public-methods = 25
+disable = [
+    "C0114", "C0115", "C0116",
+    "R0801", "R0902", "R0903", "R0904", "R0913", "R0914",
+    "W0511",
+]
+ignored-modules = "omni,omni.isaac,omni.kit,pxr,torch,PIL,carb,numpy,scipy"
+variable-rgx = "[a-z_][a-z0-9_]*$"
+good-names = ['i', 'j', 'k', 'ex', 'Run', '_', 'dt', 'ip']
+
+[tool.pylint.MASTER]
+ignore-patterns = ".*_pb2.py,.*_grpc.py"
+
+[tool.isort]
+skip = ["nio/__init__.py"]
+
+[tool.black]
+exclude = '''
+(
+    | build
+)
+src_paths = ["nio"]
+add_imports = "from __future__ import annotations"
+'''

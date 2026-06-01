@@ -1,0 +1,6 @@
+<launch>
+  <!-- 启动 arm_traj_control.py 节点 -->
+  <node name="arm_traj_control" pkg="automatic_test" type="arm_traj_control.py" output="screen">
+
+  </node>
+</launch>

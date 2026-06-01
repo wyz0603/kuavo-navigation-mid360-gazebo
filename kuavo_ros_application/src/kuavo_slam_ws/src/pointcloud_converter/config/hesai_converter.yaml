@@ -1,0 +1,22 @@
+# Hesai to Velodyne Point Cloud Converter Configuration
+
+# 话题配置
+input_topic: "/lidar_points"          # Hesai激光雷达输入话题（原始Hesai驱动输出）
+output_topic: "/lidar_points_converted"      # 转换后的输出话题（FAST_LIO输入）
+imu_topic: "/lidar_imu"          # Hesai激光雷达输入话题（原始Hesai驱动输出）
+imu_output_topic: "/lidar_imu_converted"      # 转换后的输出话题（FAST_LIO输入）
+# 坐标系配置
+input_frame: "hesai_lidar"            # 输入点云的坐标系
+output_frame: "livox_frame"              # 输出点云的坐标系（留空则使用输入坐标系，octmap 使用 livox_frame）
+
+# 时间戳转换配置
+time_scale_factor: 1000.0             # 时间戳缩放因子（秒转毫秒）
+
+# 点云滤波配置
+use_range_filter: true                # 是否启用距离滤波
+min_range: 0.5                        # 最小距离（米）
+max_range: 100.0                      # 最大距离（米）
+
+use_intensity_filter: false           # 是否启用强度滤波
+min_intensity: 0.0                    # 最小强度值
+max_intensity: 255.0                  # 最大强度值

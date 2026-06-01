@@ -1,0 +1,17 @@
+[Unit]
+Description=Websocket Server Service
+After=network.target
+
+[Service]
+Type=simple
+User=kuavo  
+Environment=KUAVO_ROS_APPLICATION_WS_PATH=/home/kuavo/kuavo_ros_application
+Environment="ROS_DISTRO=noetic"
+Environment=ROS_MASTER_URI=http://localhost:11311
+Environment=ROS_IP=127.0.0.1
+ExecStart=/bin/bash /home/kuavo/kuavo_ros_application/tools/deploy_tools/humanoid_websocket_sdk_server/start_websocket_server.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

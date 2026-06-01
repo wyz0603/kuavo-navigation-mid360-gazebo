@@ -1,0 +1,39 @@
+# FAST-LIO config tuned for the Gazebo MID360 simulation.
+# Difference vs config/mid360.yaml in FAST_LIO: extrinsic is identity because
+# sim's livox_link and livox_imu_link are co-located (livox_lidar.xacro).
+common:
+    lid_topic:  "/livox/lidar"
+    # /livox/imu_corrected is the bridge's republished IMU, rotated 180 deg around
+    # X to undo the URDF's inverted lidar mount; without this FAST-LIO would set
+    # the world gravity direction wrong on init and the map would tilt/stack.
+    imu_topic:  "/livox/imu_corrected"
+    time_sync_en: false
+    time_offset_lidar_to_imu: 0.0
+
+preprocess:
+    lidar_type: 1                # 1 = Livox CustomMsg
+    scan_line: 4
+    blind: 0.2
+
+mapping:
+    acc_cov: 0.1
+    gyr_cov: 0.1
+    b_acc_cov: 0.0001
+    b_gyr_cov: 0.0001
+    fov_degree:    360
+    det_range:     100.0
+    extrinsic_est_en:  false
+    extrinsic_T: [ 0.0, 0.0, 0.0 ]
+    extrinsic_R: [ 1, 0, 0,
+                   0, 1, 0,
+                   0, 0, 1]
+
+publish:
+    path_en:  true
+    scan_publish_en:  true
+    dense_publish_en: true
+    scan_bodyframe_pub_en: true
+
+pcd_save:
+    pcd_save_en: true
+    interval: -1

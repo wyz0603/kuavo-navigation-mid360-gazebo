@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="nimservos_controller" type="motorcontrol.py" name="node1" output="screen">
+  </node>
+</launch>

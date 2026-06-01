@@ -1,0 +1,1999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="biped_s4">
+  <link
+    name="torso">
+    <inertial>
+      <origin
+        xyz="-0.0131642143292668 -0.00101855461920045 0.120968817067497"
+        rpy="0 0 0" />
+      <mass
+        value="26.62066" />
+      <inertia
+        ixx="0.109513413578877"
+        ixy="-3.84263402967609E-06"
+        ixz="0.002072229236261"
+        iyy="0.0639718644540955"
+        iyz="5.94596039793819E-06"
+        izz="0.0796086142464887" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/torso.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/torso.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <link
+    name="l_arm_pitch">
+    <inertial>
+      <origin
+        xyz="0.0146835191418715 -0.0166604103758634 -6.82857133369463E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.794" />
+      <inertia
+        ixx="0.0002674432873971"
+        ixy="-2.5654089149164E-05"
+        ixz="-1.72966133127557E-07"
+        iyy="0.000125796784291983"
+        iyz="-1.66717296343014E-06"
+        izz="0.000196186976742156" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_arm_pitch"
+    type="continuous">
+    <origin
+      xyz="-0.0175475823124921 0.254700000000031 0.324500000000024"
+      rpy="0 0 0" />
+    <parent
+      link="torso" />
+    <child
+      link="l_arm_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_arm_pitch" />
+    <actuator name="l_arm_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="l_arm_roll">
+    <inertial>
+      <origin
+        xyz="0.0222872651779294 0.0156945544195443 -0.0202262244341467"
+        rpy="0 0 0" />
+      <mass
+        value="0.20735" />
+      <inertia
+        ixx="0.000160370067223078"
+        ixy="6.30811840859276E-06"
+        ixz="-1.13259246453472E-05"
+        iyy="0.000262365778589952"
+        iyz="3.14941259087025E-05"
+        izz="0.000236014036281963" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_arm_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_arm_pitch" />
+    <child
+      link="l_arm_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_arm_roll" />
+    <actuator name="l_arm_roll_motor" />
+  </transmission>
+  
+  <link
+    name="l_arm_yaw">
+    <inertial>
+      <origin
+        xyz="6.16940440653045E-05 0.00525815062787316 -0.12882194485465"
+        rpy="0 0 0" />
+      <mass
+        value="1.120632" />
+      <inertia
+        ixx="7.00575957554695E-05"
+        ixy="-6.81658230071221E-10"
+        ixz="2.6942707856767E-10"
+        iyy="8.53612265336774E-05"
+        iyz="6.95899873075697E-06"
+        izz="8.82223899453282E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_arm_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_arm_yaw"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_arm_roll" />
+    <child
+      link="l_arm_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_arm_yaw" />
+    <actuator name="l_arm_yaw_motor" />
+  </transmission>
+  
+  <link
+    name="l_forearm_pitch">
+    <inertial>
+      <origin
+        xyz="-1.42819297162602E-05 0.00938313949963104 -0.0522687552263907"
+        rpy="0 0 0" />
+      <mass
+        value="0.395825" />
+      <inertia
+        ixx="9.55808447606964E-05"
+        ixy="-4.53863489155473E-08"
+        ixz="5.39342118114986E-08"
+        iyy="0.000126326373178401"
+        iyz="-9.58160032696802E-06"
+        izz="0.000121032474884244" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_forearm_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_forearm_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_forearm_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.163599999999996"
+      rpy="0 0 0" />
+    <parent
+      link="l_arm_yaw" />
+    <child
+      link="l_forearm_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_arm_yaw" />
+    <actuator name="l_arm_yaw_motor" />
+  </transmission>
+  
+  <link
+    name="l_hand_yaw">
+    <inertial>
+      <origin
+        xyz="0.000113131262875685 0.00969728110559553 0.0227960708688583"
+        rpy="0 0 0" />
+      <mass
+        value="0.380792" />
+      <inertia
+        ixx="7.64923971357921E-05"
+        ixy="8.51207618055666E-09"
+        ixz="-1.40676645868301E-08"
+        iyy="0.000122231121933325"
+        iyz="1.11226992393513E-06"
+        izz="8.44934959384744E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_hand_yaw"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.132050000118071"
+      rpy="0 0 0" />
+    <parent
+      link="l_forearm_pitch" />
+    <child
+      link="l_hand_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_hand_yaw" />
+    <actuator name="l_hand_yaw_motor" />
+  </transmission>
+  
+  <link
+    name="l_hand_pitch">
+    <inertial>
+      <origin
+        xyz="0.00810609772930763 0.00490163171050539 -0.0527751110917489"
+        rpy="0 0 0" />
+      <mass
+        value="0.376651" />
+      <inertia
+        ixx="4.77321490368476E-05"
+        ixy="3.05261917457108E-06"
+        ixz="4.77827164947653E-06"
+        iyy="3.43814769749137E-05"
+        iyz="-4.59311499587152E-06"
+        izz="2.49955336560133E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_hand_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_yaw" />
+    <child
+      link="l_hand_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_hand_pitch" />
+    <actuator name="l_hand_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="l_hand_roll">
+    <inertial>
+      <origin
+        xyz="0.00396050555698803 0.00946265387749012 -0.066602176591173"
+        rpy="0 0 0" />
+      <mass
+        value="0.704669" />
+      <inertia
+        ixx="9.13246737942629E-05"
+        ixy="3.25649345932988E-07"
+        ixz="-4.78728976781085E-06"
+        iyy="0.000139866613946359"
+        iyz="1.1925397914412E-05"
+        izz="0.000125082116428502" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_hand_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_hand_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.058999997180792"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_pitch" />
+    <child
+      link="l_hand_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_hand_roll" />
+    <actuator name="l_hand_roll_motor" />
+  </transmission>
+
+  <link
+    name="l_thumb_proximal_yaw">
+    <inertial>
+      <origin
+        xyz="0.00590166593878135 -0.00373751061980748 0.000119122170746666"
+        rpy="0 0 0" />
+      <mass
+        value="0.00177457706476174" />
+      <inertia
+        ixx="5.5194777085443E-08"
+        ixy="3.05430802968252E-08"
+        ixz="8.99312903596649E-10"
+        iyy="7.93062784538195E-08"
+        iyz="-4.09905263561327E-10"
+        izz="9.86616855273954E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_thumb_proximal_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.25" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_thumb_proximal_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_thumb_proximal_yaw"
+    type="continuous">
+    <origin
+      xyz="0.0250000027597683 -0.0216278329431251 -0.110700000402975"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_roll" />
+    <child
+      link="l_thumb_proximal_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_thumb_proximal_yaw" />
+    <actuator name="l_thumb_proximal_yaw_motor" />
+  </transmission>
+  <link
+    name="l_thumb_distal_pitch">
+    <inertial>
+      <origin
+        xyz="0.00835400575954671 -1.54980826169715E-06 -0.0372051471727699"
+        rpy="0 0 0" />
+      <mass
+        value="0.0143594964918226" />
+      <inertia
+        ixx="7.15388390483937E-06"
+        ixy="-6.69701976384447E-11"
+        ixz="-2.03395115704228E-07"
+        iyy="6.87910901050402E-06"
+        iyz="5.38324327216661E-12"
+        izz="9.1475596956079E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_thumb_distal_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_thumb_distal_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_thumb_distal_pitch"
+    type="continuous">
+    <origin
+      xyz="0.0120000000000023 -0.00649999999999773 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_thumb_proximal_yaw" />
+    <child
+      link="l_thumb_distal_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_thumb_distal_pitch" />
+    <actuator name="l_thumb_distal_pitch_motor" />
+  </transmission>
+  <link
+    name="l_index_proximal_finger">
+    <inertial>
+      <origin
+        xyz="0.000112677527646918 0.00210468432487104 -0.0171028451759692"
+        rpy="0 0 0" />
+      <mass
+        value="0.00213736998836043" />
+      <inertia
+        ixx="3.18607074297438E-07"
+        ixy="1.30056260562274E-09"
+        ixz="2.05323306383889E-09"
+        iyy="3.41865494200988E-07"
+        iyz="3.87251682723715E-08"
+        izz="9.68025640372966E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_index_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_index_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_index_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="0.0295025377507617 0.0039487923396046 -0.174730558860478"
+      rpy="0 -0.0311675978215656 0" />
+    <parent
+      link="l_hand_roll" />
+    <child
+      link="l_index_proximal_finger" />
+    <axis
+      xyz="-0.998506141360648 0.0546395979585239 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_index_proximal_finger" />
+    <actuator name="l_index_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="l_index_distal_finger">
+    <inertial>
+      <origin
+        xyz="-8.80400428074002E-05 -0.00161951020344181 -0.0254571889170825"
+        rpy="0 0 0" />
+      <mass
+        value="0.0050446595604151" />
+      <inertia
+        ixx="7.63510729443016E-07"
+        ixy="9.29795250634311E-10"
+        ixz="-1.77723934932869E-09"
+        iyy="7.80114728886836E-07"
+        iyz="-3.23075401001615E-08"
+        izz="1.15370765338784E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_index_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_index_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_index_distal_finger"
+    type="continuous">
+    <origin
+      xyz="0.00013351949359549 0.00243998929947531 -0.0349145904281216"
+      rpy="0 0 0" />
+    <parent
+      link="l_index_proximal_finger" />
+    <child
+      link="l_index_distal_finger" />
+    <axis
+      xyz="0.998506141360648 -0.0546395979585221 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_index_distal_finger" />
+    <actuator name="l_index_distal_finger_motor" />
+  </transmission>
+  <link
+    name="l_middle_proximal_finger">
+    <inertial>
+      <origin
+        xyz="-8.42681364791875E-08 0.00270210130078863 -0.0207829689336636"
+        rpy="0 0 0" />
+      <mass
+        value="0.00260456391453855" />
+      <inertia
+        ixx="5.09608185934252E-07"
+        ixy="-1.75213111801256E-12"
+        ixz="-1.78265353217213E-12"
+        iyy="5.36695797641851E-07"
+        iyz="5.70433108286832E-08"
+        izz="1.25808947550621E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_middle_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_middle_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_middle_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="0.00850000275976636 0.00820381922686209 -0.178435376742696"
+      rpy="0 0 0" />
+    <parent
+      link="l_hand_roll" />
+    <child
+      link="l_middle_proximal_finger" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_middle_proximal_finger" />
+    <actuator name="l_middle_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="l_middle_distal_finger">
+    <inertial>
+      <origin
+        xyz="6.04648922300846E-07 -0.00162350982455478 -0.0254571915129888"
+        rpy="0 0 0" />
+      <mass
+        value="0.00504466861649399" />
+      <inertia
+        ixx="7.63455312842206E-07"
+        ixy="1.85533672652204E-11"
+        ixz="-1.04806627113088E-11"
+        iyy="7.80159394341909E-07"
+        iyz="-3.23975147926483E-08"
+        izz="1.15374581207705E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_middle_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_middle_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_middle_distal_finger"
+    type="continuous">
+    <origin
+      xyz="0 0.00292977189725752 -0.0418976901109154"
+      rpy="0 0 0" />
+    <parent
+      link="l_middle_proximal_finger" />
+    <child
+      link="l_middle_distal_finger" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_middle_distal_finger" />
+    <actuator name="l_middle_distal_finger_motor" />
+  </transmission>
+  <link
+    name="l_ring_proximal_finger">
+    <inertial>
+      <origin
+        xyz="-0.000147796548979496 0.00269934539278621 -0.0207828033089016"
+        rpy="0 0 0" />
+      <mass
+        value="0.00260456483338844" />
+      <inertia
+        ixx="5.09689336813819E-07"
+        ixy="-1.47916431111907E-09"
+        ixz="-3.12001764447105E-09"
+        iyy="5.36607842012435E-07"
+        iyz="5.69834083724575E-08"
+        izz="1.25816049307563E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_ring_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_ring_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_ring_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.0126025322312212 0.0080785614881318 -0.176446661066021"
+      rpy="0 0.0311675978215913 0" />
+    <parent
+      link="l_hand_roll" />
+    <child
+      link="l_ring_proximal_finger" />
+    <axis
+      xyz="-0.998506141360648 -0.0546395979585319 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_ring_proximal_finger" />
+    <actuator name="l_ring_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="l_ring_distal_finger">
+    <inertial>
+      <origin
+        xyz="-2.97819768621012E-05 0.000551723183689734 -0.0145820959398313"
+        rpy="0 0 0" />
+      <mass
+        value="0.00182871318152307" />
+      <inertia
+        ixx="2.63516580484025E-07"
+        ixy="-6.83151710625831E-10"
+        ixz="3.36133845950725E-10"
+        iyy="2.75945893486764E-07"
+        iyz="-6.18248894827772E-09"
+        izz="4.69859277660983E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_ring_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_ring_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_ring_distal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.000160223392310654 0.0029279871592986 -0.0418975085137674"
+      rpy="0 0 0" />
+    <parent
+      link="l_ring_proximal_finger" />
+    <child
+      link="l_ring_distal_finger" />
+    <axis
+      xyz="0.998506141360637 0.0546395979587272 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_ring_distal_finger" />
+    <actuator name="l_ring_distal_finger_motor" />
+  </transmission>
+  <link
+    name="l_pinky_proximal_finger">
+    <inertial>
+      <origin
+        xyz="-0.000122637015400211 0.00210212976760699 -0.0171030805340099"
+        rpy="0 0 0" />
+      <mass
+        value="0.00213737962233864" />
+      <inertia
+        ixx="3.18608415490598E-07"
+        ixy="-1.31059762777735E-09"
+        ixz="-2.27735464077079E-09"
+        iyy="3.41873917256528E-07"
+        iyz="3.868353887277E-08"
+        izz="9.67938996220609E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_pinky_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_pinky_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_pinky_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.0332309186593585 0.00363387338808113 -0.170227008036839"
+      rpy="0 0.0659957839625552 0" />
+    <parent
+      link="l_hand_roll" />
+    <child
+      link="l_pinky_proximal_finger" />
+    <axis
+      xyz="-0.998370307122329 -0.0570677654763681 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_pinky_proximal_finger" />
+    <actuator name="l_pinky_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="l_pinky_distal_finger">
+    <inertial>
+      <origin
+        xyz="-2.37672426811816E-05 0.000794235285774603 -0.012715032786375"
+        rpy="0 0 0" />
+      <mass
+        value="0.0" />
+      <inertia
+        ixx="1.83851158692576E-07"
+        ixy="-6.07362102189367E-10"
+        ixz="5.80097994345134E-10"
+        iyy="1.94700163140648E-07"
+        iyz="-1.32219757688182E-09"
+        izz="3.94695919117445E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_pinky_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/l_pinky_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="l_pinky_distal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.000139217094110203 0.00243552926671115 -0.0349148795758059"
+      rpy="0 0 0" />
+    <parent
+      link="l_pinky_proximal_finger" />
+    <child
+      link="l_pinky_distal_finger" />
+    <axis
+      xyz="0.998370307122341 0.0570677654761637 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="l_pinky_distal_finger" />
+    <actuator name="l_pinky_distal_finger_motor" />
+  </transmission>
+  <link
+    name="r_arm_pitch">
+    <inertial>
+      <origin
+        xyz="0.0146743511434554 0.016829800822405 -8.16711977455475E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.794" />
+      <inertia
+        ixx="0.000267364314112701"
+        ixy="2.58822573731612E-05"
+        ixz="-1.74450019197639E-07"
+        iyy="0.000125724274127356"
+        iyz="1.71810516637517E-06"
+        izz="0.000196179895851995" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_arm_pitch"
+    type="continuous">
+    <origin
+      xyz="-0.0175475823119764 -0.254700000000003 0.324500000000024"
+      rpy="0 0 0" />
+    <parent
+      link="torso" />
+    <child
+      link="r_arm_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_arm_pitch" />
+    <actuator name="r_arm_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="r_arm_roll">
+    <inertial>
+      <origin
+        xyz="0.0223009070371899 -0.0156950170222252 -0.0202307747728591"
+        rpy="0 0 0" />
+      <mass
+        value="0.20735" />
+      <inertia
+        ixx="0.000160588534065391"
+        ixy="-6.25733640993197E-06"
+        ixz="-1.13236198591127E-05"
+        iyy="0.000262566981459999"
+        iyz="-3.1493041488675E-05"
+        izz="0.000236151535090871" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_arm_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_arm_pitch" />
+    <child
+      link="r_arm_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_arm_pitch" />
+    <actuator name="r_arm_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="r_arm_yaw">
+    <inertial>
+      <origin
+        xyz="-4.82749435399069E-05 -0.00525815062783946 -0.128821944854617"
+        rpy="0 0 0" />
+      <mass
+        value="1.120632" />
+      <inertia
+        ixx="7.005759575547E-05"
+        ixy="-6.81658260959138E-10"
+        ixz="-2.69427064536621E-10"
+        iyy="8.53612265336777E-05"
+        iyz="-6.95899873075701E-06"
+        izz="8.82223899453284E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_arm_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_arm_yaw"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_arm_roll" />
+    <child
+      link="r_arm_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_arm_yaw" />
+    <actuator name="r_arm_yaw_motor" />
+  </transmission>
+  
+  <link
+    name="r_forearm_pitch">
+    <inertial>
+      <origin
+        xyz="-0.000127232990745296 -0.00951602649232614 -0.052268755226349"
+        rpy="0 0 0" />
+      <mass
+        value="0.395825" />
+      <inertia
+        ixx="9.55808447606902E-05"
+        ixy="-4.53863489771543E-08"
+        ixz="-5.41060583435907E-08"
+        iyy="0.000126326373178393"
+        iyz="9.40982665987161E-06"
+        izz="0.000121032474884238" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_forearm_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_forearm_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_forearm_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.1636"
+      rpy="0 0 0" />
+    <parent
+      link="r_arm_yaw" />
+    <child
+      link="r_forearm_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_forearm_pitch" />
+    <actuator name="r_forearm_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="r_hand_yaw">
+    <inertial>
+      <origin
+        xyz="-0.000112955483967687 -0.00974449526683929 0.0227958280839014"
+        rpy="0 0 0" />
+      <mass
+        value="0.380792" />
+      <inertia
+        ixx="7.64922331363792E-05"
+        ixy="8.75195261100849E-09"
+        ixz="1.38703019538351E-08"
+        iyy="0.000122230542206117"
+        iyz="-1.1123944412365E-06"
+        izz="8.44929064837534E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_hand_yaw"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.132050000118069"
+      rpy="0 0 0" />
+    <parent
+      link="r_forearm_pitch" />
+    <child
+      link="r_hand_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_hand_yaw" />
+    <actuator name="r_hand_yaw_motor" />
+  </transmission>
+  
+  <link
+    name="r_hand_pitch">
+    <inertial>
+      <origin
+        xyz="0.00735986990228201 -0.00475238307648407 -0.0529411193942666"
+        rpy="0 0 0" />
+      <mass
+        value="0.376651" />
+      <inertia
+        ixx="4.77321358097823E-05"
+        ixy="-2.99709432812987E-06"
+        ixz="4.71488437974189E-06"
+        iyy="3.42470226388499E-05"
+        iyz="4.61094199971348E-06"
+        izz="2.51299600072389E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_hand_pitch"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_hand_yaw" />
+    <child
+      link="r_hand_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_hand_pitch" />
+    <actuator name="r_hand_pitch_motor" />
+  </transmission>
+  
+  <link
+    name="r_hand_roll">
+    <inertial>
+      <origin
+        xyz="0.00300067727381764 -0.00948299721849261 -0.0665274119439575"
+        rpy="0 0 0" />
+      <mass
+        value="0.704669" />
+      <inertia
+        ixx="9.14013694279149E-05"
+        ixy="-3.00635383669835E-07"
+        ixz="-4.88449841632957E-06"
+        iyy="0.000140002484811824"
+        iyz="-1.18898278478315E-05"
+        izz="0.000125153253041102" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_roll.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_hand_roll.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_hand_roll"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.0590000000076598"
+      rpy="0 0 0" />
+    <parent
+      link="r_hand_pitch" />
+    <child
+      link="r_hand_roll" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_hand_roll" />
+    <actuator name="r_hand_roll_motor" />
+  </transmission>
+  <link
+    name="r_thumb_proximal_yaw">
+    <inertial>
+      <origin
+        xyz="0.0059016659387813 0.00373751061983887 0.00028087782921854"
+        rpy="0 0 0" />
+      <mass
+        value="0.00177457706476174" />
+      <inertia
+        ixx="5.51947770854431E-08"
+        ixy="-3.05430802968252E-08"
+        ixz="-8.9931290359755E-10"
+        iyy="7.93062784538199E-08"
+        iyz="-4.09905263561892E-10"
+        izz="9.86616855273956E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_thumb_proximal_yaw.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.25" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_thumb_proximal_yaw.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_thumb_proximal_yaw"
+    type="continuous">
+    <origin
+      xyz="0.0240162583145044 0.0216278329431261 -0.110700000402968"
+      rpy="0 0 0" />
+    <parent
+      link="r_hand_roll" />
+    <child
+      link="r_thumb_proximal_yaw" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_thumb_proximal_yaw" />
+    <actuator name="r_thumb_proximal_yaw_motor" />
+  </transmission>
+  <link
+    name="r_thumb_distal_pitch">
+    <inertial>
+      <origin
+        xyz="0.00835400525904937 -1.55022040249087E-06 -0.037205152988654"
+        rpy="0 0 0" />
+      <mass
+        value="0.0143594976127551" />
+      <inertia
+        ixx="7.15388296788212E-06"
+        ixy="-6.69727355587774E-11"
+        ixz="-2.03395160081791E-07"
+        iyy="6.87910807838939E-06"
+        iyz="5.44431164399722E-12"
+        izz="9.14755969331916E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_thumb_distal_pitch.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_thumb_distal_pitch.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_thumb_distal_pitch"
+    type="continuous">
+    <origin
+      xyz="0.0120000000000024 0.00650000000000001 0.00039999999999929"
+      rpy="0 0 0" />
+    <parent
+      link="r_thumb_proximal_yaw" />
+    <child
+      link="r_thumb_distal_pitch" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_thumb_distal_pitch" />
+    <actuator name="r_thumb_distal_pitch_motor" />
+  </transmission>
+  <link
+    name="r_index_proximal_finger">
+    <inertial>
+      <origin
+        xyz="0.000117630091740083 -0.00210444255674574 -0.0171028308310166"
+        rpy="0 0 0" />
+      <mass
+        value="0.00213737899371432" />
+      <inertia
+        ixx="3.18602101869156E-07"
+        ixy="-1.25362698289955E-09"
+        ixz="2.18478331808027E-09"
+        iyy="3.41870944894183E-07"
+        iyz="-3.87179337852981E-08"
+        izz="9.68030538354866E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_index_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_index_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_index_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="0.0285187933054979 -0.0039487923396026 -0.174730558860479"
+      rpy="0 -0.0311675978215671 0" />
+    <parent
+      link="r_hand_roll" />
+    <child
+      link="r_index_proximal_finger" />
+    <axis
+      xyz="0.998506141360647 0.0546395979585406 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_index_proximal_finger" />
+    <actuator name="r_index_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="r_index_distal_finger">
+    <inertial>
+      <origin
+        xyz="-8.9232232394443E-05 0.00161946515080247 -0.0254573000709627"
+        rpy="0 0 0" />
+      <mass
+        value="0.00504466012184763" />
+      <inertia
+        ixx="7.63500198005666E-07"
+        ixy="-8.93025400014092E-10"
+        ixz="-1.75721366263703E-09"
+        iyy="7.80112979178675E-07"
+        iyz="3.23088054385963E-08"
+        izz="1.15370268537332E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_index_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_index_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_index_distal_finger"
+    type="continuous">
+    <origin
+      xyz="0.000133519493595612 -0.00243998929947775 -0.0349145904281185"
+      rpy="0 0 0" />
+    <parent
+      link="r_index_proximal_finger" />
+    <child
+      link="r_index_distal_finger" />
+    <axis
+      xyz="-0.998506141360649 -0.0546395979585212 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_index_distal_finger" />
+    <actuator name="r_index_distal_finger_motor" />
+  </transmission>
+  <link
+    name="r_middle_proximal_finger">
+    <inertial>
+      <origin
+        xyz="8.44813785091242E-08 -0.00270210141804927 -0.0207829698234612"
+        rpy="0 0 0" />
+      <mass
+        value="0.00260456401479316" />
+      <inertia
+        ixx="5.09608239447983E-07"
+        ixy="-1.75029152849441E-12"
+        ixz="1.79637389141395E-12"
+        iyy="5.36695856290199E-07"
+        iyz="-5.70433154945367E-08"
+        izz="1.25808948975584E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_middle_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_middle_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_middle_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="0.00751625831450465 -0.00820381922686125 -0.178435376742697"
+      rpy="0 0 0" />
+    <parent
+      link="r_hand_roll" />
+    <child
+      link="r_middle_proximal_finger" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_middle_proximal_finger" />
+    <actuator name="r_middle_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="r_middle_distal_finger">
+    <inertial>
+      <origin
+        xyz="-6.04521225378366E-07 0.00162350982710252 -0.025457191512641"
+        rpy="0 0 0" />
+      <mass
+        value="0.00504466863846282" />
+      <inertia
+        ixx="7.6345530976374E-07"
+        ixy="1.85475490772791E-11"
+        ixz="1.04892536633895E-11"
+        iyy="7.80159403477418E-07"
+        iyz="3.23975164550656E-08"
+        izz="1.15374581204344E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_middle_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_middle_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_middle_distal_finger"
+    type="continuous">
+    <origin
+      xyz="0 -0.00292977189725413 -0.0418976901109125"
+      rpy="0 0 0" />
+    <parent
+      link="r_middle_proximal_finger" />
+    <child
+      link="r_middle_distal_finger" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_middle_distal_finger" />
+    <actuator name="r_middle_distal_finger_motor" />
+  </transmission>
+  <link
+    name="r_ring_proximal_finger">
+    <inertial>
+      <origin
+        xyz="-0.000147627677307374 -0.00269935568307084 -0.0207828027334272"
+        rpy="0 0 0" />
+      <mass
+        value="0.00260456442916689" />
+      <inertia
+        ixx="5.09688869653555E-07"
+        ixy="1.47567826577373E-09"
+        ixz="-3.11642075126123E-09"
+        iyy="5.36608130664138E-07"
+        iyz="-5.69836124932145E-08"
+        izz="1.25816010690367E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_ring_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_ring_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_ring_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.0135862766764854 -0.00807856148813096 -0.176446661066022"
+      rpy="0 0.0311675978215922 0" />
+    <parent
+      link="r_hand_roll" />
+    <child
+      link="r_ring_proximal_finger" />
+    <axis
+      xyz="0.998506141360648 -0.0546395979585354 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_ring_proximal_finger" />
+    <actuator name="r_ring_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="r_ring_distal_finger">
+    <inertial>
+      <origin
+        xyz="-3.05447320099322E-05 -0.00055182982921842 -0.014581933967133"
+        rpy="0 0 0" />
+      <mass
+        value="0.00182869050551967" />
+      <inertia
+        ixx="2.6351019026747E-07"
+        ixy="6.80589443443767E-10"
+        ixz="3.40598850881854E-10"
+        iyy="2.75942607379873E-07"
+        iyz="6.18066814960194E-09"
+        izz="4.69846444924734E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_ring_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_ring_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_ring_distal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.000160223392313565 -0.00292798715935183 -0.0418975085136676"
+      rpy="0 0 0" />
+    <parent
+      link="r_ring_proximal_finger" />
+    <child
+      link="r_ring_distal_finger" />
+    <axis
+      xyz="-0.996566833460806 -0.0546395979585212 -0.0622017747402293" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_ring_distal_finger" />
+    <actuator name="r_ring_distal_finger_motor" />
+  </transmission>
+  <link
+    name="r_pinky_proximal_finger">
+    <inertial>
+      <origin
+        xyz="-0.000117692942698921 -0.00210238254136691 -0.0171031038120715"
+        rpy="0 0 0" />
+      <mass
+        value="0.00213737106866596" />
+      <inertia
+        ixx="3.18613658418781E-07"
+        ixy="1.35743663351377E-09"
+        ixz="-2.14595314636863E-09"
+        iyy="3.4186844347216E-07"
+        iyz="-3.86910999425676E-08"
+        izz="9.67934520226222E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_pinky_proximal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_pinky_proximal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_pinky_proximal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.0342146631046227 -0.0036338733880803 -0.17022700803684"
+      rpy="0 0.0659957839625563 0" />
+    <parent
+      link="r_hand_roll" />
+    <child
+      link="r_pinky_proximal_finger" />
+    <axis
+      xyz="0.998370307122331 -0.0570677654763477 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_pinky_proximal_finger" />
+    <actuator name="r_pinky_proximal_finger_motor" />
+  </transmission>
+  <link
+    name="r_pinky_distal_finger">
+    <inertial>
+      <origin
+        xyz="-6.68864174628164E-05 -0.00079192546781276 -0.0127151268014948"
+        rpy="0 0 0" />
+      <mass
+        value="0.00162993727561191" />
+      <inertia
+        ixx="1.83853268460625E-07"
+        ixy="6.36687597538947E-10"
+        ixz="-4.24280859276174E-10"
+        iyy="1.94697260253276E-07"
+        iyz="1.38051635062388E-09"
+        izz="3.94676279750627E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_pinky_distal_finger.obj" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="../meshes/r_pinky_distal_finger.obj" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="r_pinky_distal_finger"
+    type="continuous">
+    <origin
+      xyz="-0.00013921709411558 -0.0024355292668054 -0.0349148795757724"
+      rpy="0 0 0" />
+    <parent
+      link="r_pinky_proximal_finger" />
+    <child
+      link="r_pinky_distal_finger" />
+    <axis
+      xyz="-0.99837030712233 0.0570677654763578 0" />
+  </joint>
+  <transmission type="SimpleTransmission">
+    <joint name="r_pinky_distal_finger" />
+    <actuator name="r_pinky_distal_finger_motor" />
+  </transmission>
+  
+</robot>

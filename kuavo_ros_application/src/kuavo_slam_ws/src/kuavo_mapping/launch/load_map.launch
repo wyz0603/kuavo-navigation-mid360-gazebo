@@ -1,0 +1,49 @@
+<launch>
+  <arg name="map" default="" />
+  <arg name="crop_box" default="false"/>
+  <arg name="rviz" default="true" />
+  <arg name="lidar_type" default="livox" />
+
+  <group if="$(eval arg('lidar_type') == 'livox')">
+  
+    <!-- 不保存 fast_lio 算法生成的 pointcloud -->
+    <param name="/pcd_save/pcd_save_en" type="bool" value="false" />
+
+    <!-- 启动 livox_ros_driver2 -->
+    <arg name="lidar_model" default="$(optenv LIDAR_TYPE MID360)" />
+
+    <!-- 2. 根据环境变量的值，决定加载哪个驱动配置 -->
+    <!-- 当 LIDAR_TYPE 等于 MID360s 时加载 -->
+    <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360s.launch" if="$(eval arg('lidar_model') == 'MID360s')" />
+
+    <!-- 当 LIDAR_TYPE 等于 MID360 时加载 -->
+    <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch" if="$(eval arg('lidar_model') == 'MID360')" />
+
+ 
+    <!-- 启动 pointcloud_to_laserscan -->
+    <include file="$(find livox_ros_driver2)/launch_ROS1/pointcloud_to_laserscan_node.launch" />
+
+    <!-- 启动 fast_lio -->
+    <include file="$(find fast_lio)/launch/mapping_mid360.launch">
+      <arg name="rviz" value="$(arg rviz)" />
+      <arg name="rviz_config" value="$(find kuavo_mapping)/rviz/load_map.rviz" />
+      <arg name="pcd_save_en" value="false" />  <!-- 导航模式不保存PCD，避免内存累积崩溃 -->
+    </include>
+  </group>
+  <group if="$(eval arg('lidar_type') == 'hesai')">
+    <!-- 不保存 fast_lio 算法生成的 pointcloud -->
+    <param name="/pcd_save/pcd_save_en" type="bool" value="false" />
+
+    <!-- 启动 hesai_ros_driver -->
+    <include file="$(find hesai_ros_driver)/launch/start.launch" />
+    <include file="$(find pointcloud_converter)/launch/hesai_converter.launch" />
+    <include file="$(find fast_lio)/launch/mapping_other_lidar.launch">
+      <arg name="rviz" value="$(arg rviz)" />
+      <arg name="rviz_config" value="$(find kuavo_mapping)/rviz/load_map.rviz" />
+    </include>
+  </group>
+  <rosparam file="$(find kuavo_mapping)/config/mid360_filter.yaml" command="load" />
+  <param name="crop_box/enable" value="$(arg crop_box)" />
+  
+  <node pkg="kuavo_mapping" type="map_manager.py" name="map_manager" output="screen" args="--map $(arg map)" />
+</launch>

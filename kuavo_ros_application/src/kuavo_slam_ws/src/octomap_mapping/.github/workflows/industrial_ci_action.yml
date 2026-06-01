@@ -1,0 +1,20 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  CI:
+    strategy:
+      matrix:
+        env:
+          #- {ROS_DISTRO: melodic}
+          #- {ROS_DISTRO: melodic, PRERELEASE: true}
+          - {ROS_DISTRO: noetic}
+          - {ROS_DISTRO: noetic, PRERELEASE: true}
+          #- {ROS_DISTRO: noetic, OS_NAME: debian, OS_CODE_NAME: buster}
+    env:
+      PARALLEL_BUILDS: 4
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: 'ros-industrial/industrial_ci@master'
+        env: ${{ matrix.env }}

@@ -1,0 +1,26 @@
+<launch>
+  <!-- 简单的点云转换器启动文件 -->
+  
+  <!-- 启动转换器：Hesai -> Velodyne格式 -->
+  <node pkg="pointcloud_converter" type="hesai_to_velodyne_converter" name="hesai_to_velodyne_converter" output="screen">
+    <!-- 输入：Hesai驱动的原始输出 -->
+    <param name="input_topic" value="/lidar_points" />
+    <!-- 输出：FAST_LIO期望的格式 -->
+    <param name="output_topic" value="/lidar_points_converted" />
+    
+    <!-- 坐标系设置 -->
+    <param name="input_frame" value="hesai_lidar" />
+    <param name="output_frame" value="livox_frame" />
+    
+    <!-- 转换参数 -->
+    <param name="time_scale_factor" value="1000.0" />
+    <param name="use_range_filter" value="true" />
+    <param name="min_range" value="0.5" />
+    <param name="max_range" value="100.0" />
+    <param name="use_intensity_filter" value="false" />
+  </node>
+  
+  <!-- 重新映射：让FAST_LIO使用转换后的点云 -->
+  <remap from="/lidar_points" to="/lidar_points_converted" />
+  
+</launch>

@@ -1,0 +1,85 @@
+<launch>
+
+  <node pkg="kuavo_mapping" type="clear_pcd.sh" name="clear_pcd" output="screen" />
+
+  <arg name="lidar_type" default="livox" />
+
+  <param name="/pcd_save/pcd_save_en" type="bool" value="true" />
+  <arg name="rviz" default="true" />
+  <arg name="pointcloud_min_z" default="-1.5" />
+	<arg name="pointcloud_max_z" default="0.5" />
+  <arg name="cloud_in" default="/livox/cloud" />
+
+	<arg name="occupancy_min_z" default="-0.5" />
+	<arg name="occupancy_max_z" default="0.5" />
+
+  <arg name="sensor_model/min_range" default="1.5" />
+  <arg name="sensor_model/max_range" default="10.0" />
+
+  <arg name="crop_box" default="false" />
+
+  <arg name="foxglove" default="false" />
+
+  <group if="$(eval arg('lidar_type') == 'livox')">
+  
+      <arg name="lidar_model" default="$(optenv LIDAR_TYPE MID360)" />
+      
+     
+      <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360s.launch" 
+              if="$(eval arg('lidar_model') == 'MID360s')" />
+      <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch" 
+              if="$(eval arg('lidar_model') == 'MID360')" />
+
+      <include file="$(find livox_ros_driver2)/launch_ROS1/pointcloud_to_laserscan_node.launch" />
+      
+      <include file="$(find fast_lio)/launch/mapping_mid360.launch">
+          <arg name="rviz" value="$(arg rviz)" />
+          <arg name="pcd_save_en" value="true" />
+      </include>
+  </group>
+
+  <group if="$(eval arg('lidar_type') == 'hesai')">
+    <include file="$(find hesai_ros_driver)/launch/start.launch" />
+    <include file="$(find pointcloud_converter)/launch/hesai_converter.launch" />
+    <include file="$(find fast_lio)/launch/mapping_other_lidar.launch">
+      <arg name="rviz" value="$(arg rviz)" />
+    </include>
+  </group>
+
+  <group if="$(eval arg('lidar_type') == 'robosense')">
+    <!-- 启动 rslidar_sdk -->
+    <include file="$(find rslidar_sdk)/launch/start.launch" />
+
+    <!-- 启动 fast_lio -->
+    <include file="$(find fast_lio)/launch/mapping_robosense.launch">
+      <arg name="rviz" value="$(arg rviz)" />
+    </include>
+
+    <!-- 启动 rs_to_velodyne 转换点云格式-->
+    <include file="$(find rs_to_velodyne)/launch/rs_to_velodyne.launch" />
+  </group>
+
+  <rosparam file="$(find kuavo_mapping)/config/mid360_filter.yaml" command="load" />
+  <param name="crop_box/enable" value="$(arg crop_box)" />
+
+
+  <!-- 启动 octomap_server 将 pointcloud convert to 2D map -->
+  <include file="$(find octomap_server)/launch/octomap_mapping.launch">
+    <arg name="pointcloud_min_z" value="$(arg pointcloud_min_z)" />
+    <arg name="pointcloud_max_z" value="$(arg pointcloud_max_z)" />
+    <arg name="occupancy_min_z" value="$(arg occupancy_min_z)" />
+    <arg name="occupancy_max_z" value="$(arg occupancy_max_z)" />
+    <arg name="sensor_model/min_range" value="$(arg sensor_model/min_range)" />
+    <arg name="sensor_model/max_range" value="$(arg sensor_model/max_range)" />
+    <arg name="cloud_in" value="/livox/cloud" />
+  </include>
+
+  <group if="$(arg foxglove)">
+    <include file="$(find foxglove_bridge)/ros1_foxglove_bridge/launch/foxglove_bridge.launch"/>
+  </group>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom 100" />
+
+  <node pkg="kuavo_mapping" type="map_manager.py" name="map_manager" output="screen" />
+
+</launch>

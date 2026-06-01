@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 楼梯对齐参数 -->
+  <arg name="tag_id" default="0" doc="AprilTag ID for stair alignment"/>
+  <arg name="offset_x" default="-0.6" doc="Expected X offset from AprilTag (meters)"/>
+  <arg name="offset_y" default="0.0" doc="Expected Y offset from AprilTag (meters)"/>
+  <arg name="offset_yaw" default="0.0" doc="Expected Yaw offset from AprilTag (radians)"/>
+  
+  <!-- 启动楼梯对齐节点 -->
+  <node pkg="stair_alignment" type="stair_alignment_node.py" name="stair_alignment_node" output="screen">
+    <param name="config_file" value="$(find stair_alignment)/config/config.json" />
+    <param name="tag_id" value="$(arg tag_id)" />
+    <param name="offset_x" value="$(arg offset_x)" />
+    <param name="offset_y" value="$(arg offset_y)" />
+    <param name="offset_yaw" value="$(arg offset_yaw)" />
+  </node>
+</launch>

@@ -1,0 +1,79 @@
+{
+    "Inputs": {
+        "image_0": {
+            "name": "image",
+            "shape": [
+                1,
+                3,
+                320,
+                320
+            ],
+            "format": "nchw",
+            "quantizer": "asymmetric_affine",
+            "quantize": {
+                "qtype": "u8",
+                "max_value": 2.6399998664855957,
+                "min_value": -2.1179039478302,
+                "scale": 0.01865844614803791,
+                "zero_point": 114
+            }
+        }
+    },
+    "Outputs": {
+        "output_262": {
+            "name": "output",
+            "shape": [
+                1,
+                255,
+                10,
+                10
+            ],
+            "format": "nchw",
+            "quantizer": "asymmetric_affine",
+            "quantize": {
+                "qtype": "u8",
+                "max_value": 5.329463958740234,
+                "min_value": -19.2877140045166,
+                "scale": 0.09653795510530472,
+                "zero_point": 200
+            }
+        },
+        "output_263": {
+            "name": "output",
+            "shape": [
+                1,
+                255,
+                20,
+                20
+            ],
+            "format": "nchw",
+            "quantizer": "asymmetric_affine",
+            "quantize": {
+                "qtype": "u8",
+                "max_value": 3.7492423057556152,
+                "min_value": -20.12245750427246,
+                "scale": 0.09361451119184494,
+                "zero_point": 215
+            }
+        },
+        "output_264": {
+            "name": "output",
+            "shape": [
+                1,
+                255,
+                40,
+                40
+            ],
+            "format": "nchw",
+            "quantizer": "asymmetric_affine",
+            "quantize": {
+                "qtype": "u8",
+                "max_value": 6.244229316711426,
+                "min_value": -19.827377319335938,
+                "scale": 0.10224159806966782,
+                "zero_point": 194
+            }
+        }
+    },
+    "Recurrent_connections": {}
+}

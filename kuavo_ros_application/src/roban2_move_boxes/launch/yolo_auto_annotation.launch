@@ -1,0 +1,16 @@
+<launch>
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+    <!-- 定义可覆盖的参数 -->
+    <arg name="model_path" default="$(find roban_move_boxes)/src/scripts/yolov8n.pt" />
+    <arg name="base_dir" default="$(env HOME)/Desktop/yolo" />
+    <arg name="yolo_conf" default="0.6" />
+
+    <node name="yolo_auto_annotation" pkg="roban_move_boxes" type="yolo_auto_annotation.py" output="screen">
+        <!-- 使用参数值 -->
+        <param name="model_path" value="$(arg model_path)" />
+        <param name="base_dir" value="$(arg base_dir)" />
+        <param name="yolo_conf" value="$(arg yolo_conf)" />
+
+    </node>
+</launch>

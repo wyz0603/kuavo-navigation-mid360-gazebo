@@ -1,0 +1,5 @@
+<launch>
+  <!-- <include file="$(find realsense2_camera)/launch/rs_camera.launch"/> -->
+  <node pkg="roban2_move_boxes" type="move_boxes_demo.py" name="roban2_move_boxes" output="screen"/>
+
+</launch>

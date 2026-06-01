@@ -1,0 +1,7 @@
+**/build
+**/.vscode
+.idea/*
+cmake-build-debug/*
+**/devel
+**/logs
+**/.catkin_tools

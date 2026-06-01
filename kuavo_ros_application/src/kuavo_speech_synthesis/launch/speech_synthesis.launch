@@ -1,0 +1,10 @@
+<!-- ar_track.launch -->
+<launch>
+    <arg name="speech_synthesis" default="enable" />
+    <!-- 当 speech_synthesis 不为 disable 时启动语音合成服务 -->
+    <group unless="$(eval arg('speech_synthesis') == 'disable')">
+        <!-- 启动 语音合成服务 -->
+        <node pkg="kuavo_speech_synthesis" type="kuavo_speech_synthesis_node.py" name="speech_synthesis" output="screen"/>
+    </group>
+
+</launch>

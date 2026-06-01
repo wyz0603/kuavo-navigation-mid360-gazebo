@@ -1,0 +1,8 @@
+websockets
+asyncio
+numpy
+rich
+questionary
+opencv-python>=4.5.0
+ultralytics>=8.1.0
+rosmsg_dict_converter

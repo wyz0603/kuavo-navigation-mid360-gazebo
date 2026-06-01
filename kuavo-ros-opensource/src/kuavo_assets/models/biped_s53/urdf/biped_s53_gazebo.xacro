@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="biped_s53_with_realsense">
+
+  <xacro:arg name="use_livox" default="false"/>
+  <xacro:arg name="livox_parent_link" default="camera_base"/>
+  <xacro:arg name="livox_topic" default="/livox/points"/>
+  <xacro:arg name="livox_csv_file" default="package://livox_laser_simulation/scan_mode/mid360.csv"/>
+
+  <!-- 引入机器人主体 -->
+  <xacro:include filename="$(find kuavo_assets)/models/biped_s53/urdf/biped_s53_gazebo.urdf"/>
+
+  <!-- depth cam 设置 -->
+  <xacro:include filename="$(find realsense_ros_gazebo)/xacro/depthcam.xacro"/>
+
+  <!-- livox lidar 设置 -->
+  <xacro:include filename="$(find kuavo_assets)/models/sensors/livox_lidar.xacro"/>
+
+  <!-- d435 声明 -->
+  <xacro:realsense_d435 sensor_name="camera" parent_link="camera_base" rate="30">
+    <origin rpy="0 0 0 " xyz="0 0 0"/>
+  </xacro:realsense_d435>
+
+
+  <xacro:if value="$(arg use_livox)">
+    <xacro:livox_lidar sensor_name="livox" parent_link="$(arg livox_parent_link)" topic="$(arg livox_topic)" csv_file="$(arg livox_csv_file)">
+      <origin rpy="0 0 0" xyz="0 0 0.08"/>
+    </xacro:livox_lidar>
+  </xacro:if>
+
+</robot>

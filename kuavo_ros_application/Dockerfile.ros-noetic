@@ -1,0 +1,67 @@
+# Base on NVIDIA CUDA image with Ubuntu 20.04
+# Using nvcr.io to avoid Docker Hub timeout
+FROM nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV ROS_DISTRO=noetic
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# Setup timezone
+RUN ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# Update apt and configure retry
+RUN echo "Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries && \
+    echo "Acquire::http::Timeout \"30\";" >> /etc/apt/apt.conf.d/80-retries && \
+    apt-get update
+
+# Install basic dependencies - each package separately for better caching
+RUN apt-get install -y lsb-release && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y gnupg2 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y software-properties-common && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y vim && rm -rf /var/lib/apt/lists/*
+
+# Setup ROS repository
+RUN sh -c "echo \"deb http://packages.ros.org/ros/ubuntu \$(lsb_release -sc) main\" > /etc/apt/sources.list.d/ros-latest.list"
+
+# Add ROS GPG key
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+# Update apt cache for ROS packages
+RUN apt-get update
+
+# Install ROS Noetic Desktop Full (this is a large meta-package)
+RUN apt-get install -y ros-noetic-desktop-full && rm -rf /var/lib/apt/lists/*
+
+# Install Python tools - each separately
+RUN apt-get update && apt-get install -y python3-rosdep && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3-rosinstall && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3-rosinstall-generator && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3-wstool && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3-catkin-tools && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+
+# Initialize rosdep
+RUN rosdep init && rosdep update
+
+# Install additional useful ROS packages
+RUN apt-get update && apt-get install -y ros-noetic-rqt && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ros-noetic-rqt-common-plugins && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ros-noetic-rviz && rm -rf /var/lib/apt/lists/*
+
+# Setup catkin workspace
+RUN mkdir -p /catkin_ws/src
+WORKDIR /catkin_ws
+
+# Source ROS setup in bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
+RUN echo "if [ -f /catkin_ws/devel/setup.bash ]; then source /catkin_ws/devel/setup.bash; fi" >> /root/.bashrc
+
+# Set the default command to bash
+CMD ["/bin/bash"]

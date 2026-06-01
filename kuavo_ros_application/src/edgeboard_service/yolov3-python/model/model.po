@@ -1,0 +1,26 @@
+{
+    "size":[320, 320],
+    "input_names": [
+        "conv2d_147.tmp_0",
+        "conv2d_148.tmp_0",
+        "conv2d_149.tmp_0"
+    ],
+    "output_names": [
+        "concat_1.tmp_0",
+        "concat_0.tmp_0"
+    ],
+    "order": [
+        0,
+        1,
+        2
+    ],
+    "nms": {
+        "background_label": 80,
+        "keep_top_k": 100,
+        "nms_eta": 1,
+        "nms_threshold": 0.44999998807907104,
+        "nms_top_k": 1000,
+        "normalized": true,
+        "score_threshold": 0.009999999776482582
+    }
+}

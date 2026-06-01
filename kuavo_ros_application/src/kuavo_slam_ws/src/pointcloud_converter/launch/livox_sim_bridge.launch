@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- Bridge Gazebo Livox simulation plugin -> FAST-LIO inputs.
+
+     Coordinate correction is applied to lidar points + IMU vectors so FAST-LIO
+     sees a virtually upright sensor.
+
+     Defaults match the kuavo s45 URDF chain:
+       biped_s45_gazebo.urdf   radar joint:  rpy=(0,    0.22969, 0)
+       livox_lidar.xacro       livox joint:  rpy=(pi,   0,       0)
+     -> correction rpy = (pi, 0.22969, 0) takes a vector from livox_link to an
+        upright reference frame attached to zhead_2_link.
+
+     Override correction_rpy in the launch include if you change the URDF mount.
+     Setting upright_frame non-empty switches to TF lookup mode (which requires
+     a working base_link -> livox_link TF chain at startup). -->
+<launch>
+  <arg name="scan_topic"       default="/scan"/>
+  <arg name="lidar_topic"      default="/livox/lidar"/>
+  <arg name="imu_in_topic"     default="/livox/imu"/>
+  <arg name="imu_out_topic"    default="/livox/imu_corrected"/>
+  <arg name="output_frame"     default="livox_frame"/>
+
+  <!-- Explicit rotation (used when upright_frame is empty OR TF lookup fails). -->
+  <arg name="correction_rpy"   default="[3.14159, 0.11, 0.0]"
+       doc="Roll/Pitch/Yaw in rad that rotate a vector from the sim lidar frame to an upright reference frame"/>
+
+  <!-- Optional TF lookup mode. Set upright_frame=base_link (or similar) to use TF. -->
+  <arg name="upright_frame"     default=""
+       doc="If non-empty, look up the rotation from lidar_frame to this TF frame and use it instead of correction_rpy"/>
+  <arg name="lidar_frame"       default="livox_link"/>
+  <arg name="tf_lookup_timeout" default="10.0"/>
+
+  <arg name="scan_line"         default="4"/>
+  <arg name="frame_duration_ms" default="100.0"/>
+  <arg name="cloud_z_offset"    default="1.5"
+       doc="Constant Z (m) added to every lidar point AFTER rpy correction; lifts the displayed cloud directly. 0 = no shift."/>
+  <arg name="min_z"             default="-1000.0"
+       doc="Drop points with z below this (in the rpy-corrected, pre-offset 'upright' frame). e.g. -1.3 filters the ground halo for a 1.5 m tall robot."/>
+  <arg name="max_z"             default="1000.0"
+       doc="Drop points with z above this in the corrected frame. Set to e.g. 1.5 to filter the ceiling."/>
+
+  <node pkg="pointcloud_converter" type="livox_sim_bridge" name="livox_sim_bridge" output="screen">
+    <param name="scan_topic"        value="$(arg scan_topic)"/>
+    <param name="lidar_topic"       value="$(arg lidar_topic)"/>
+    <param name="imu_in_topic"      value="$(arg imu_in_topic)"/>
+    <param name="imu_out_topic"     value="$(arg imu_out_topic)"/>
+    <param name="output_frame"      value="$(arg output_frame)"/>
+    <rosparam param="correction_rpy" subst_value="True">$(arg correction_rpy)</rosparam>
+    <param name="upright_frame"     value="$(arg upright_frame)"/>
+    <param name="lidar_frame"       value="$(arg lidar_frame)"/>
+    <param name="tf_lookup_timeout" value="$(arg tf_lookup_timeout)"/>
+    <param name="scan_line"         value="$(arg scan_line)"/>
+    <param name="frame_duration_ms" value="$(arg frame_duration_ms)"/>
+    <param name="cloud_z_offset"    value="$(arg cloud_z_offset)"/>
+    <param name="min_z"             value="$(arg min_z)"/>
+    <param name="max_z"             value="$(arg max_z)"/>
+  </node>
+</launch>

@@ -1,0 +1,20 @@
+{
+    "move_group_name"           :"l_arm_group",
+    "gripper_name"              :"l_hand_eff",
+    "joint_name"                :["l_arm_pitch", "l_arm_roll", "l_arm_yaw", "l_forearm_pitch", "l_hand_yaw", "l_hand_pitch", "l_hand_roll"],
+
+    "planner_id"                :"RRTstar",
+    "num_planning"              :3,
+    "planning_time"             :0.2,
+    "planning_frame"            :"base_link",
+
+    "max_vel_scaling_factor"    :1,
+    "max_acc_scaling_factor"    :1,
+
+    "joint_tolerance"           :0.1,
+    "orientation_tolerance"     :0.1,
+    "position_tolerance"        :0.1,
+    
+    "publish_rate"              :10,
+    "gripper_motion_time"       :1
+}

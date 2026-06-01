@@ -1,0 +1,19 @@
+<launch>
+  <!--
+  This launch file sets up common parameters for the robot.
+  It reads the ROBOT_VERSION environment variable and sets it as a ROS parameter.
+  -->
+
+  <arg name="robot_name" default="my_robot"/>
+
+  <!-- Set the robot_version parameter from the ROBOT_VERSION environment variable -->
+  <!-- This parameter can then be accessed by ROS nodes using nh.getParam("robot_version", ...) -->
+  <param name="robot_version" type="string" value="$(env ROBOT_VERSION)" />
+
+  <node pkg="robot_description" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find robot_description)/urdf/$(arg robot_name).urdf.xacro" />
+  </node>
+
+  <!-- Other nodes and parameters can be included here -->
+
+</launch>

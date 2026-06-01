@@ -1,0 +1,35 @@
+<launch>
+      <rosparam command="load" file="$(find automatic_test)/config/params.yaml"/>
+
+      <arg name="walk" default="true"/>
+      <arg name="single_step_control" default="true"/>
+      <arg name="log_level" default="INFO"/>
+      <arg name="sim" default="true"/>
+
+      <param name="/robot_manager/sim" type="bool" value="$(arg sim)"/>
+
+      <group if="$(arg sim)">
+        <param name="/mpc_path_tracer_node/world_frame" value="odom"/>
+        <param name="/mpc_path_tracer_node/robot_frame" value="base_link"/>
+        <param name="/mpc_path_tracer_node/home_frame" value="home"/>
+        <param name="/test_single_step_control/world_frame" value="odom"/>
+        <param name="/test_single_step_control/robot_frame" value="base_link"/>
+        <param name="/test_single_step_control/home_frame" value="home"/>
+      </group>  
+
+      <param name="/test_robot_walk/test_cmd_vel" type="bool" value="true"/>
+      <param name="/test_robot_walk/test_cmd_pose" type="bool" value="true"/>
+      <param name="/test_robot_walk/test_cmd_pose_world" type="bool" value="true"/>
+
+      <node pkg="automatic_test" type="mocap_tf_pub.py" name="mocap_tf_pub" output="screen"/>
+
+      <node pkg="automatic_test" type="robot_manager.py" name="robot_manager" output="screen"/>
+
+      <arg name="walk_arg" value="--walk" if="$(arg walk)"/>
+      <arg name="walk_arg" value="--no-walk" unless="$(arg walk)"/>
+      <arg name="single_step_control_arg" value="--single-step-control" if="$(arg single_step_control)"/>
+      <arg name="single_step_control_arg" value="--no-single-step-control" unless="$(arg single_step_control)"/>
+
+      <node pkg="automatic_test" type="test_robot.sh" name="robot_test" output="screen"
+            args="--log-level $(arg log_level) $(arg walk_arg) $(arg single_step_control_arg)"/>
+</launch>

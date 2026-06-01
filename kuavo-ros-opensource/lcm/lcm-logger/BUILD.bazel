@@ -1,0 +1,33 @@
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("//lcm-bazel/private:copts.bzl", "WARNINGS_COPTS")
+
+package(
+    default_applicable_licenses = ["//:license"],
+    default_visibility = ["//visibility:private"],
+)
+
+cc_binary(
+    name = "lcm-logger",
+    srcs = [
+        "glib_util.c",
+        "glib_util.h",
+        "lcm_logger.c",
+    ],
+    copts = WARNINGS_COPTS,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lcm:lcm-static",
+    ],
+)
+
+cc_binary(
+    name = "lcm-logplayer",
+    srcs = [
+        "lcm_logplayer.c",
+    ],
+    copts = WARNINGS_COPTS,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lcm:lcm-static",
+    ],
+)

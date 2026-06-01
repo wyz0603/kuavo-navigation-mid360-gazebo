@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+  <!--
+    导航建图服务管理器 - 简化版
+
+    设计思路：
+    1. 只启动服务管理器，不启动具体的导航/建图节点
+    2. 服务管理器通过启动/停止 launch 文件来切换模式
+    3. 默认启动导航模式
+
+    模式切换：
+    - 启动建图：停止导航launch → 启动建图launch
+    - 停止建图：停止建图launch → 启动导航launch
+  -->
+
+  <arg name="map" default="" doc="地图文件路径（用于导航模式）"/>
+  <arg name="base_local_planner" default="mpc_local_planner" doc="局部规划器类型"/>
+  <arg name="odom_source" default="lidar" doc="里程计数据源"/>
+  <arg name="crop_box" default="false" doc="是否启用裁剪框"/>
+  <arg name="keep_localization" default="false" doc="是否保持定位"/>
+  <arg name="rviz" default="false" doc="是否启动RViz"/>
+
+  <!-- 启动导航建图服务管理器 -->
+  <node pkg="kuavo_mapping" type="navigation_service.py" name="navigation_service_manager" output="screen">
+    <!-- 传递参数给服务管理器，用于启动导航launch -->
+    <param name="default_map" value="$(arg map)"/>
+    <param name="default_base_local_planner" value="$(arg base_local_planner)"/>
+    <param name="default_odom_source" value="$(arg odom_source)"/>
+    <param name="default_crop_box" value="$(arg crop_box)"/>
+    <param name="default_keep_localization" value="$(arg keep_localization)"/>
+    <param name="default_rviz" value="$(arg rviz)"/>
+  </node>
+
+  <!-- 启动基础TF发布（始终运行，不随模式切换） -->
+  <node pkg="tf" type="static_transform_publisher" name="livox_to_base"
+        args="0 0 0 0 0 0 1 livox_frame lio_base_link 100" />
+
+</launch>

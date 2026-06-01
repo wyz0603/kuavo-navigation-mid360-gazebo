@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="biped_s4">
+    <link name="torso">
+        <inertial>
+            <origin xyz="-0.0131642143292668 -0.00101855461920045 0.120968817067497" rpy="0 0 0" />
+            <mass value="17.7538790248349" />
+            <inertia ixx="0.109513413578877" ixy="-3.84263402967609E-06" ixz="0.002072229236261" iyy="0.0639718644540955" iyz="5.94596039793819E-06" izz="0.0796086142464887" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/torso.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/torso.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="torso_camera">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.001"/>
+                <!-- <box size="0.1 0.051 0.051"/> -->
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+    </link>
+    <joint name="torso_camera" type="fixed">
+        <origin xyz="0.11416 0.0175 0.28459" rpy="0 0.71522222 0" />
+        <parent link="torso" />
+        <child link="torso_camera" />
+    </joint>
+
+
+    <link name="head_yaw">
+        <inertial>
+            <origin xyz="-0.000116065796709811 0.00341283230689319 -0.00762227943283844" rpy="0 0 0" />
+            <mass value="0.0876587232040551" />
+            <inertia ixx="5.29184226374934E-05" ixy="-5.55749298909931E-08" ixz="2.93674313773846E-07" iyy="7.69981959753033E-05" iyz="-9.22993448844536E-06" izz="5.31017800814282E-05" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_yaw.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_yaw.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="head_yaw" type="continuous">
+        <origin xyz="-0.0175475823124929 0 0.499400000000373" rpy="0 0 0" />
+        <parent link="torso" />
+        <child link="head_yaw" />
+        <axis xyz="0 0 -1" />
+    </joint>
+    <link name="head_pitch">
+        <inertial>
+            <origin xyz="0.0108076765997382 -0.00100494759438114 0.0523165975702757" rpy="0 0 0" />
+            <mass value="0.348142076778321" />
+            <inertia ixx="0.000904070873567589" ixy="1.57558780381555E-06" ixz="0.000295083531658369" iyy="0.000957585537827452" iyz="-9.61289176090918E-06" izz="0.00114051835139601" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_pitch.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://biped_s4/meshes/head_pitch.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="head_pitch" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="head_yaw" />
+        <child link="head_pitch" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="head_camera">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.001"/>
+                <!-- <box size="0.1 0.051 0.051"/> -->
+            </geometry>
+            <material name="">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+    </link>
+    <joint name="head_camera" type="fixed">
+        <origin xyz="0.082 0.0175 0.05449" rpy="0 0.6105555 0" />
+        <parent link="head_pitch" />
+        <child link="head_camera" />
+    </joint>
+
+
+    <transmission name="trans_head_yaw">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_yaw">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_yaw_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_head_pitch">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_pitch">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_pitch_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <gazebo>
+        <plugin name="gazebo_ros_control">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+</robot>
+

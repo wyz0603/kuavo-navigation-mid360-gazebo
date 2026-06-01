@@ -1,0 +1,21 @@
+<launch>
+  <!-- Qwen Text LLM Node Launch File -->
+
+  <!-- Configurable parameters -->
+  <arg name="api_url" default="http://localhost:9000/v1/chat/completions"
+       doc="URL of the Qwen LLM HTTP API endpoint" />
+  <arg name="node_name" default="qwen_text_node"
+       doc="Name of the ROS node" />
+
+  <!-- Launch the Qwen text node -->
+  <node
+    pkg="qwen_txt"
+    type="main.py"
+    name="$(arg node_name)"
+    output="screen"
+  >
+    <!-- Set node parameters -->
+    <param name="api_url" value="$(arg api_url)" />
+  </node>
+
+</launch>

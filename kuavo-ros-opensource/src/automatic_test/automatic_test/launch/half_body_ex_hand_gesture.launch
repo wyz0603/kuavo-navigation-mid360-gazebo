@@ -1,0 +1,5 @@
+<launch>
+  <!-- 启动 ex_hand_gesture.py 节点 -->
+  <node name="ex_hand_gesture" pkg="automatic_test" type="ex_hand_gesture.py" output="screen">
+  </node>
+</launch>

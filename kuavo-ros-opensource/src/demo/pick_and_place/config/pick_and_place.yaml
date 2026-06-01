@@ -1,0 +1,50 @@
+# Pick and place configuration parameters
+
+home_to_transition_path_poses:
+  joint_state1: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  joint_state2: [0.1499, -1.3059, -0.0001, -0.4000, 0.0001, 0.0004, -0.0002]
+  joint_state3: [0.1501, -1.0891, 0.0002, -1.5712, 0.0005, 0.0005, 0.0006]
+  # joint_state4: [0.0005, -0.8039, 0.0002, -1.5711, 0.0007, 0.0004, 0.0009]
+  # joint_state4: [0.00, -0.57, 0.523, -2.12, 1.169, -0.005, 0.003]
+  joint_state4: [-0.6280390324846503, -0.5695730484459524, 0.9600590756054971, -1.9348558110673044, 0.4190863983125501, 0.0831636597288115, -0.34845959887516303]
+     
+# Distance offsets for approach/retreat
+offsets:
+  # Offsets for pick operation
+  pick:
+    # Grasp position
+    grasp_x: 0.06
+    grasp_y: 0.06
+    grasp_z: -0.04        # Distance from object for grasping
+
+  # Offsets for place operation  
+  place:
+   
+    # Place position
+    place_x: -0.04
+    place_y: -0.03
+    place_z: 0.0        # Distance from placement location
+    
+# Orientation for pick and place operations (RPY - Roll, Pitch, Yaw in degrees)
+orientation:
+  pick:
+    roll: -90
+    pitch: 0
+    yaw:  90
+  place:
+    roll: -90
+    pitch: 0
+    yaw: 90
+
+# Path planning parameters
+path:
+  points: 200            # Number of points to generate for trajectory
+  arc_height_factor: 0.25 # Arc height as proportion of movement distance
+  max_arc_height: 0.15   # Maximum arc height in meters
+
+# Hand/gripper parameters
+gripper:
+  open_hand: [0, 0, 0, 0, 0, 0]        # Open hand joint positions
+  close_hand: [100, 100, 80, 75, 75, 75] # Closed hand joint positions
+
+

@@ -1,0 +1,103 @@
+mpc_path_tracer_node:
+  # 全局帧参数
+  world_frame: "mocap_frame"
+  robot_frame: "mocap_robot"
+  home_frame: "mocap_base"
+  motion_interface: "/cmd_vel"
+
+  # the global motion parameters
+  dt: 0.1     # s
+  v_max_linear: 0.6   # m/s
+  v_max_angular: 0.4  # rad/s
+
+  # the max linear velocity of different path types
+  path_velocities:
+    line: 0.6    # m/s
+    circle: 0.4  # m/s
+    square: 0.4   # m/s
+    triangle: 0.4 # m/s
+    scurve: 0.4  # m/s
+
+  # 路径生成器参数
+  path_generators:
+    # 圆形路径参数
+    circle:
+      radius: 2.0  # m
+
+    # 方形路径参数
+    square:
+      side_length: 2.0  # m
+      yaw_offset: -45.0
+
+    # S形路径参数
+    scurve:
+      length: 10.0      # m
+      amplitude: 1.5    # m
+
+    line:
+      length: 5.0       
+      yaw_offset: 0.0
+    
+    triangle:
+      length: 3.0      
+      yaw_offset: -30.0
+
+robot_manager_node:
+  sim: true
+  robot_ready: false
+
+test_robot_walk:
+  round: 2
+  path_types: [triangle, line, circle, square, scurve]
+  test_cmd_vel: true
+  test_cmd_pose: true
+
+test_single_step_control:
+  world_frame: "mocap_frame"
+  robot_frame: "mocap_robot"
+  home_frame: "mocap_base"
+  round: 10
+  forward_step_size: 0.08
+  backward_step_size: -0.08
+  left_move_step_size: 0.05
+  right_move_step_size: -0.05
+  rotate_left_step_size: 45
+  rotate_right_step_size: -45
+
+# AprilTag识别配置
+april_tag_recognition:
+  # 识别超时时间（秒）
+  recognition_timeout: 10.0
+  
+  # 机器人低头动作持续时间（秒）
+  head_down_duration: 3.0
+  
+  # 识别重试次数
+  recognition_retries: 3
+  
+  # 机器人头部控制参数
+  head_down_pitch: 20      # 低头角度（度，负值表示低头）
+  head_up_pitch: 0         # 抬头角度（度，正值表示抬头）
+  head_motion_timeout: 3.0  # 头部动作超时时间（秒）
+  
+  # AprilTag识别参数
+  required_frames: 5         # 需要的检测帧数
+  frame_timeout: 1.0        # 帧获取超时时间（秒）
+  
+  # AprilTag标签真值位置（在tag_x坐标系下，只包含x和y坐标）
+  tag_ground_truth:
+    "0": [1, -1]
+    "1": [1, 0]
+    "2": [1, 1]
+    "3": [0, 1]
+    "4": [-1, 1]
+    "5": [-1, 0]
+    "6": [-1, -1]
+    "7": [0, -1]
+  
+  # 位置偏差评估参数
+  position_evaluation:
+    max_position_error: 0.1      # 最大位置误差（米）
+    min_detection_frames: 3      # 最少检测帧数要求
+    position_std_threshold: 0.05 # 位置标准差阈值（米）
+  
