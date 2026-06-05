@@ -107,7 +107,7 @@ source ~/.bashrc
 本仓库为 **monorepo**，已将两个工作空间作为子目录一并收录：
 
 ```bash
-git clone https://github.com/wuyangzhi03-dev/kuavo-navigation-mid360-gazebo.git
+git clone https://github.com/wyz0603/kuavo-navigation-mid360-gazebo.git
 cd kuavo-navigation-mid360-gazebo
 # 子目录：
 #   kuavo-ros-opensource/    机器人本体 + Gazebo 仿真

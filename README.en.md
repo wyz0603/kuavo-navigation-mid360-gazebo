@@ -114,7 +114,7 @@ source ~/.bashrc
 This is a **monorepo** — both workspaces are bundled as subdirectories:
 
 ```bash
-git clone https://github.com/wuyangzhi03-dev/kuavo-navigation-mid360-gazebo.git
+git clone https://github.com/wyz0603/kuavo-navigation-mid360-gazebo.git
 cd kuavo-navigation-mid360-gazebo
 # Subdirectories:
 #   kuavo-ros-opensource/    robot body + Gazebo simulation
